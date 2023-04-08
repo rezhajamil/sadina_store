@@ -37,30 +37,58 @@ class UserController extends Controller
     {
         $user = User::where('email', Auth::user()->email)->with('address')->first();
         // ddd($user);
-        $url = 'https://api.rajaongkir.com/starter/province';
+        $url_province = 'https://api.rajaongkir.com/starter/province';
+
         // $proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         // $fullUrl = $proxyUrl . $url;
 
         $ch = curl_init();
         $api_key = env('RAJAONGKIR_API_KEY');
 
-        try {
-            curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $url_province);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'X-Requested-With: XMLHttpRequest',
+            "key: $api_key"
+        ));
+        $province = curl_exec($ch);
+        $province = json_decode($province);
+        curl_close($ch);
+
+        $province = $province->rajaongkir->results;
+
+        // ddd($province);
+
+        if ($user->address) {
+            $provinceId = null;
+
+            foreach ($province as $item) {
+                if ($item->province === $user->address->province) {
+                    $provinceId = $item->province_id;
+                    break;
+                }
+            }
+
+            $url_city = "https://api.rajaongkir.com/starter/city?province=$provinceId";
+            // ddd($url_city);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url_city);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'X-Requested-With: XMLHttpRequest',
                 "key: $api_key"
             ));
-            $response = curl_exec($ch);
-            $response = json_decode($response);
+            $city = curl_exec($ch);
+            $city = json_decode($city);
             curl_close($ch);
-        } catch (\Throwable $th) {
-            // ddd($th);
-        }
-        // ddd($response);
 
-        $province = $response->rajaongkir->results;
-        return view('profile', compact('user', 'province'));
+            $city = $city->rajaongkir->results;
+        } else {
+            $city = [];
+        }
+
+
+        return view('profile', compact('user', 'province', 'city'));
     }
 
     public function update_profile(Request $request)

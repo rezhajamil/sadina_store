@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ([HomeController::class, 'index']))->name('home');
 Route::get('login', ([UserController::class, 'login']))->name('login');
 Route::get('login/callback', ([UserController::class, 'login_callback']))->name('login_callback');
+Route::get('browse', [BrowseController::class, 'index'])->name('browse');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

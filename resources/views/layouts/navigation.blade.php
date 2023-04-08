@@ -15,12 +15,12 @@
         </button>
         <div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
             id="navbarSupportedContent4" data-te-collapse-item>
-            <a class="pr-2 text-xl font-semibold text-white" href="#">SADINA STORE</a>
+            <a class="pr-2 text-xl font-semibold text-white" href="{{ route('home') }}">SADINA STORE</a>
             <!-- Left links -->
             <ul class="flex flex-col pl-0 mr-auto list-style-none lg:flex-row" data-te-navbar-nav-ref>
                 <li class="p-2" data-te-nav-item-ref>
                     <a class="text-white disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-                        href="#" data-te-nav-link-ref>Browse</a>
+                        href="{{ route('browse') }}" data-te-nav-link-ref>Cari Busana</a>
                 </li>
             </ul>
             <!-- Left links -->
