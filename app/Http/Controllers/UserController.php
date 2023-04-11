@@ -60,14 +60,7 @@ class UserController extends Controller
         // ddd($province);
 
         if ($user->address) {
-            $provinceId = null;
-
-            foreach ($province as $item) {
-                if ($item->province === $user->address->province) {
-                    $provinceId = $item->province_id;
-                    break;
-                }
-            }
+            $provinceId = $user->address->province_id;
 
             $url_city = "https://api.rajaongkir.com/starter/city?province=$provinceId";
             // ddd($url_city);
@@ -100,10 +93,13 @@ class UserController extends Controller
             'name' => ['required', 'string'],
             'address' => ['required', 'string'],
             'province' => ['required', 'string'],
+            'province_id' => ['required', 'numeric'],
             'city' => ['required', 'string'],
+            'city_id' => ['required', 'numeric'],
             'address' => ['required', 'string'],
         ]);
 
+        // ddd($request);
         // ddd($user);
 
         if ($user->address) {
@@ -116,7 +112,9 @@ class UserController extends Controller
             // ]);
 
             $address->province = $request->province;
+            $address->province_id = $request->province_id;
             $address->city = $request->city;
+            $address->city_id = $request->city_id;
             $address->address = $request->address;
             $address->save();
 
@@ -125,7 +123,9 @@ class UserController extends Controller
         } else {
             $address = UserAddress::create([
                 'province' => $request->province,
+                'province_id' => $request->province_id,
                 'city' => $request->city,
+                'city_id' => $request->city_id,
                 'address' => $request->address,
             ]);
 

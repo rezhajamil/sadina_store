@@ -109,7 +109,7 @@
                             </div>
                             <div class="flex flex-col">
                                 <label for="province" class="pb-2 text-sm font-bold text-gray-800 ">Provinsi</label>
-                                <select name="province" id="province" province_id
+                                <select name="province" id="province"
                                     class="flex text-sm text-black border rounded shadow-sm border-primary-600 " required>
                                     <option value="" province_id selected disabled>
                                         Pilih Provinsi
@@ -124,7 +124,11 @@
                                 @error('province')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
+                                @error('province_id')
+                                    <span class="block text-sm text-red-600">{{ $message }}</span>
+                                @enderror
                             </div>
+                            <input type="hidden" name="province_id" id="province_id">
                             <div class="flex flex-col">
                                 <label for="city" class="pb-2 text-sm font-bold text-gray-800 ">Kota</label>
                                 <select name="city" id="city"
@@ -144,13 +148,17 @@
                                 @error('city')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
-                            </div>
-                            {{-- <div class="flex flex-col"><label for="zip_code"
+                                @error('city_id')
+                                    <span class="block text-sm text-red-600">{{ $message }}</span>
+                                @enderror
+                                <input type="hidden" name="city_id" id="city_id">
+                                {{-- <div class="flex flex-col"><label for="zip_code"
                                     class="pb-2 text-sm font-bold text-gray-800 ">Kode Pos</label>
                                 <input tabindex="0" type="text" name="zip_code" required id="zip_code" readonly
                                     class="py-3 pl-3 text-sm text-black placeholder-gray-500 bg-transparent border border-red-400 rounded shadow-sm focus:outline-none focus:border-secondary-300"
                                     placeholder="Kode Pos" />
                             </div> --}}
+                            </div>
                             <div class="flex flex-col col-span-full lg:col-span-1">
                                 <label for="address" class="pb-2 text-sm font-bold text-gray-800 ">Alamat
                                     Lengkap</label>
@@ -188,12 +196,16 @@
             })
 
 
-            $("#province").on('input', function() {
+            $("#province").change(function() {
                 let province_id = $(this).find('option:selected').attr('province_id');
                 const url = 'https://api.rajaongkir.com/starter/city';
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const fullUrl = proxyUrl + url;
                 // console.log(fullUrl);
+
+                console.log(province_id);
+                $("#province_id").val(province_id);
+                console.log($("#province_id").val());
                 $.ajax({
                     method: 'GET',
                     url: fullUrl,
@@ -231,6 +243,7 @@
                 let city_id = $(this).find('option:selected').attr('city_id');
                 let zip_code = $(this).find('option:selected').attr('zip_code');
 
+                $("#city_id").val(city_id);
                 $("#zip_code").val(zip_code);
             })
         });
