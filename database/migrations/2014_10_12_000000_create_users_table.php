@@ -23,9 +23,10 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('address_id')->nullable();
             $table->string('avatar')->nullable();
             $table->string('role')->default('admin');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->timestamp('registered_at')->nullable();
         });
     }
 

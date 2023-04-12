@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\HomeController;
@@ -35,6 +37,8 @@ Route::middleware(['auth'])->group(
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('product', ProductController::class);
+            Route::resource('category', ProductCategoryController::class);
+            Route::resource('color', ColorController::class);
         });
     }
 );

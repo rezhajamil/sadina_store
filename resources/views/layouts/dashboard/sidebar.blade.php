@@ -4,7 +4,7 @@
 <div x-cloak :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
     class="fixed inset-y-0 left-0 z-30 overflow-y-auto transition duration-300 transform w-fit bg-sekunder lg:translate-x-0 lg:static lg:inset-0">
     <div class="flex items-center mt-8">
-        <div class="flex items-center">
+        <div class="flex items-center px-8">
             <span class="mx-2 text-xl font-semibold text-white">Sadina Store <br /> Dashboard</span>
         </div>
     </div>
@@ -33,8 +33,17 @@
         <div class="flex flex-col w-3/4 mx-6 mt-2 ml-auto overflow-hidden bg-opacity-25 rounded-md bg-slate-800"
             x-show="product" x-transition>
             <a href="{{ route('admin.product.index') }}"
-                class="text-white transition-all border-b hover:bg-white hover:text-slate-800 border-b-slate-400"><span
-                    class="inline-block px-2 py-3">Daftar Produk</span></a>
+                class="text-white transition-all border-b whitespace-nowrap hover:bg-white hover:text-slate-800 border-b-slate-400">
+                <span class="inline-block px-2 py-3">Daftar Produk</span>
+            </a>
+            <a href="{{ route('admin.category.index') }}"
+                class="text-white transition-all border-b whitespace-nowrap hover:bg-white hover:text-slate-800 border-b-slate-400">
+                <span class="inline-block px-2 py-3">Kategori Produk</span>
+            </a>
+            <a href="{{ route('admin.color.index') }}"
+                class="text-white transition-all border-b whitespace-nowrap hover:bg-white hover:text-slate-800 border-b-slate-400">
+                <span class="inline-block px-2 py-3">Warna Produk</span>
+            </a>
         </div>
     </nav>
 </div>
