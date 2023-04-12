@@ -13,19 +13,15 @@ class CreateColorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_colors', function (Blueprint $table) {
+        Schema::create('colors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('color');
-            $table->integer('quantity');
+            $table->string('name');
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('product_colors');
+        Schema::dropIfExists('colors');
     }
 }

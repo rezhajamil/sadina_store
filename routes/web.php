@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -21,14 +23,19 @@ Route::get('login', ([UserController::class, 'login']))->name('login');
 Route::get('login/callback', ([UserController::class, 'login_callback']))->name('login_callback');
 Route::get('browse', [BrowseController::class, 'index'])->name('browse');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(
     function () {
         Route::get('profile', ([UserController::class, 'profile']))->name('profile');
         Route::put('profile', ([UserController::class, 'update_profile']))->name('update_profile');
+
+        Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::resource('product', ProductController::class);
+        });
     }
 );
 

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('material');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
