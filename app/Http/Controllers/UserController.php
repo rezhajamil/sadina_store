@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Laravel\Socialite\Facades\Socialite;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class UserController extends Controller
 {
@@ -24,19 +25,26 @@ class UserController extends Controller
             'email' => $callback->getEmail(),
             'name' => $callback->getName(),
             'avatar' => $callback->getAvatar(),
+            'role' => 'member',
             'email_verified_at' => date('Y-m-d H:i:s')
         ];
 
         $user = User::firstOrCreate(['email' => $data['email']], $data);
         Auth::login($user, true);
 
-        return redirect(route('home'));
+        if ($user->phone && $user->whatsapp && $user->address_id) {
+            return redirect(route('home'));
+        } else {
+            return redirect(route('profile'));
+        }
     }
 
     public function profile()
     {
         $user = User::where('email', Auth::user()->email)->with('address')->first();
-        // ddd($user);
+        $none = ['address' => '', 'province' => '', 'province_id' => '', 'city' => '', 'city_id' => ''];
+        if (!$user->address) $user->address = json_decode(json_encode($none), false);
+        // ddd($user->address);
         $url_province = 'https://api.rajaongkir.com/starter/province';
 
         // $proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -59,7 +67,7 @@ class UserController extends Controller
 
         // ddd($province);
 
-        if ($user->address) {
+        if ($user->address->city && $user->address->city != '') {
             $provinceId = $user->address->province_id;
 
             $url_city = "https://api.rajaongkir.com/starter/city?province=$provinceId";

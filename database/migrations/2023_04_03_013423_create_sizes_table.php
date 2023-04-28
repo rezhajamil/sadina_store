@@ -13,19 +13,16 @@ class CreateSizesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_sizes', function (Blueprint $table) {
+        Schema::create('sizes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('size');
-            $table->integer('quantity');
+            $table->string('name');
+            $table->string('category')->nullable();
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('product_sizes');
+        Schema::dropIfExists('sizes');
     }
 }
