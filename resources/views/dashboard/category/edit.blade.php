@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('body')
-    <div class="w-full mx-4">
+    <div class="w-full sm:mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
                 <h4 class="text-xl font-bold text-gray-600 align-baseline">Edit Data Kategori ({{ $category->name }})</h4>

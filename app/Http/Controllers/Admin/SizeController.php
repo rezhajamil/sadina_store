@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class SizeController extends Controller
@@ -14,7 +15,8 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $sizes = Size::orderBy('category')->orderBy('name')->get();
+        return view('dashboard.size.index', compact('sizes'));
     }
 
     /**
@@ -24,7 +26,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.size.create');
     }
 
     /**
@@ -35,7 +37,18 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => ['required', 'string'],
+                'category' => ['string'],
+            ]
+        );
+        $request->name = ucwords($request->name);
+        $request->category = ucwords($request->category);
+
+        $size = Size::create($request->all());
+
+        return redirect()->route('admin.size.index');
     }
 
     /**
@@ -44,7 +57,7 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Size $size)
     {
         //
     }
@@ -55,9 +68,9 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Size $size)
     {
-        //
+        return view('dashboard.size.edit', compact('size'));
     }
 
     /**
@@ -67,9 +80,20 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Size $size)
     {
-        //
+        $request->validate(
+            [
+                'name' => ['required', 'string'],
+                'category' => ['string'],
+            ]
+        );
+
+        $size->name = ucwords($request->name);
+        $size->category = ucwords($request->category);
+        $size->update();
+
+        return redirect()->route('admin.size.index');
     }
 
     /**
@@ -78,8 +102,10 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Size $size)
     {
-        //
+        $size->delete();
+
+        return back();
     }
 }

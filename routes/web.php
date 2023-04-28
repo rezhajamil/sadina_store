@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -34,11 +36,21 @@ Route::middleware(['auth'])->group(
         Route::get('profile', ([UserController::class, 'profile']))->name('profile');
         Route::put('profile', ([UserController::class, 'update_profile']))->name('update_profile');
 
+        Route::get('/admin', function () {
+            redirect()->route('admin.dashboard');
+        });
+
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+
+
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('product', ProductController::class);
             Route::resource('category', ProductCategoryController::class);
             Route::resource('color', ColorController::class);
+            Route::resource('size', SizeController::class);
+            Route::resource('tag', TagController::class);
+
+            Route::put('change_cover/product/{id}', [ProductController::class, 'changeCover'])->name('product.change_cover');
         });
     }
 );

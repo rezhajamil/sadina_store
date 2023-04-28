@@ -44,6 +44,14 @@
                 class="text-white transition-all border-b whitespace-nowrap hover:bg-white hover:text-slate-800 border-b-slate-400">
                 <span class="inline-block px-2 py-3">Warna Produk</span>
             </a>
+            <a href="{{ route('admin.size.index') }}"
+                class="text-white transition-all border-b whitespace-nowrap hover:bg-white hover:text-slate-800 border-b-slate-400">
+                <span class="inline-block px-2 py-3">Ukuran Produk</span>
+            </a>
+            <a href="{{ route('admin.tag.index') }}"
+                class="text-white transition-all border-b whitespace-nowrap hover:bg-white hover:text-slate-800 border-b-slate-400">
+                <span class="inline-block px-2 py-3">Tag Produk</span>
+            </a>
         </div>
     </nav>
 </div>

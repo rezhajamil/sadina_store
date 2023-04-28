@@ -10,4 +10,9 @@ class Color extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function colors()
+    {
+        return $this->hasMany(ProductColor::class);
+    }
 }

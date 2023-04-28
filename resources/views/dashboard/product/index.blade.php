@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('body')
-    <div class="w-full mx-4">
+    <div class="w-full sm:mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
                 <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Produk</h4>
@@ -47,7 +47,44 @@
                         </thead>
                         <tbody>
                             <tr class="hover:bg-gray-200">
-                                <td class="p-3 font-bold text-gray-700 border-b"></td>
+                                @foreach ($products as $key => $product)
+                                    <td class="p-3 font-bold text-gray-700 border-b">{{ $key + 1 }}</td>
+                                    <td class="p-3 font-bold text-gray-700 nama">{{ $product->name }}</td>
+                                    <td class="p-3 font-bold text-gray-700 kategori">{{ $product->category->name }}</td>
+                                    <td class="p-3 font-bold text-gray-700 harga">
+                                        {{ number_format($product->price, 0, '.', '.') }}
+                                    </td>
+                                    <td class="p-3 font-bold text-gray-700 bahan">{{ $product->material }}</td>
+                                    <td class="p-3 text-gray-700 deskripsi">{!! $product->description !!}</td>
+                                    <td class="p-3 font-bold text-gray-700 status">
+                                        @if ($product->status)
+                                            <div
+                                                class="flex items-center justify-center px-3 py-1 rounded-full bg-green-200/50">
+                                                <span class="text-sm font-semibold text-green-900 status">Aktif</span>
+                                            </div>
+                                        @else
+                                            <div
+                                                class="flex items-center justify-center px-3 py-1 rounded-full bg-red-200/50">
+                                                <span
+                                                    class="text-sm font-semibold text-red-900 whitespace-nowrap status">Tidak
+                                                    Aktif</span>
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td class="p-3 text-gray-700">
+                                        <a href="{{ route('admin.product.show', $product->id) }}"
+                                            class="block my-1 text-base font-semibold text-teal-600 transition hover:text-teal-800">Lihat
+                                            Detail</a>
+                                        <a href="{{ route('admin.product.edit', $product->id) }}"
+                                            class="block my-1 text-base font-semibold text-indigo-600 transition hover:text-indigo-800">Edit</a>
+                                        <form action="{{ route('admin.product.destroy', $product->id) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button
+                                                class="block my-1 text-base font-semibold text-left text-red-600 transition hover:text-red-800 whitespace-nowrap">Hapus</button>
+                                        </form>
+                                    </td>
+                                @endforeach
                             </tr>
                         </tbody>
                     </table>

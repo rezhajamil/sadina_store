@@ -3,12 +3,12 @@
     <div class="w-full sm:mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
-                <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Kategori Produk</h4>
+                <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Tag Produk</h4>
 
 
-                <a href="{{ route('admin.category.create') }}"
+                <a href="{{ route('admin.tag.create') }}"
                     class="inline-block px-4 py-2 my-2 font-bold text-white transition-all rounded-md bg-secondary-500 hover:bg-secondary-700"><i
-                        class="mr-2 fa-solid fa-plus"></i> Data Kategori Produk Baru</a>
+                        class="mr-2 fa-solid fa-plus"></i> Data Tag Baru</a>
 
                 <div class="flex flex-wrap items-end mb-2 gap-x-4">
                     <input type="text" name="search" id="search" placeholder="Search..." class="px-4 rounded-lg">
@@ -30,14 +30,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $category)
+                            @foreach ($tags as $key => $tag)
                                 <tr class="hover:bg-gray-200">
                                     <td class="px-4 py-3 font-bold text-gray-700 border-b">{{ ++$key }}</td>
-                                    <td class="px-4 py-3 font-bold text-gray-700 nama">{{ $category->name }}</td>
+                                    <td class="px-4 py-3 font-bold text-gray-700 nama">{{ $tag->name }}</td>
                                     <td class="px-4 py-3 text-gray-700 border-b">
-                                        <a href="{{ route('admin.category.edit', $category->id) }}"
+                                        <a href="{{ route('admin.tag.edit', $tag->id) }}"
                                             class="block my-1 text-base font-semibold transition text-y_premier hover:text-indigo-800">Edit</a>
-                                        <form action="{{ route('admin.category.destroy', $category->id) }}" method="post">
+                                        <form action="{{ route('admin.tag.destroy', $tag->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button

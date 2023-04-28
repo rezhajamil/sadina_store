@@ -10,4 +10,9 @@ class Tag extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function tags()
+    {
+        return $this->hasMany(ProductTag::class);
+    }
 }

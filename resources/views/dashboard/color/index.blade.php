@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 @section('body')
-    <div class="w-full mx-4">
+    <div class="w-full sm:mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
                 <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Warna Produk</h4>
@@ -26,8 +26,8 @@
                         <thead class="border-b">
                             <tr>
                                 <th class="p-3 text-sm font-bold text-gray-100 uppercase bg-primary-600">No</th>
-                                <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Nama</th>
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Hex</th>
+                                <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Nama</th>
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Action</th>
                             </tr>
                         </thead>
@@ -35,8 +35,14 @@
                             @foreach ($colors as $key => $color)
                                 <tr class="hover:bg-gray-200">
                                     <td class="px-4 py-3 font-bold text-gray-700 border-b">{{ ++$key }}</td>
+                                    <td class="px-4 py-3 font-bold hex">
+                                        <div class="flex h-full gap-x-2">
+                                            <span>{{ $color->hex }}</span>
+                                            <div class="inline-block w-5 h-5 my-auto border-2 shadow-sm"
+                                                style="background-color: {{ $color->hex }}"></div>
+                                        </div>
+                                    </td>
                                     <td class="px-4 py-3 font-bold text-gray-700 nama">{{ $color->name }}</td>
-                                    <td class="px-4 py-3 font-bold text-[{{ $color->hex }}] hex">{{ $color->hex }}</td>
                                     <td class="px-4 py-3 text-gray-700 border-b">
                                         <a href="{{ route('admin.color.edit', $color->id) }}"
                                             class="block my-1 text-base font-semibold transition text-y_premier hover:text-indigo-800">Edit</a>

@@ -3,24 +3,26 @@
     <div class="w-full sm:mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
-                <h4 class="text-xl font-bold text-gray-600 align-baseline">Tambah Data Warna</h4>
+                <h4 class="text-xl font-bold text-gray-600 align-baseline">Edit Data Ukuran ({{ $size->name }})</h4>
 
                 <div class="px-6 py-4 mx-auto mt-4 overflow-auto bg-white rounded-md shadow sm:mx-0 w-fit">
-                    <form action="{{ route('admin.color.store') }}" method="POST" class="">
+                    <form action="{{ route('admin.size.update', $size->id) }}" method="POST" class="">
                         @csrf
+                        @method('put')
                         <div class="grid grid-cols-1 gap-6 mt-4">
                             <div class="flex flex-col">
-                                <label class="block text-gray-700" for="hex">Pilih Warna</label>
-                                <input type="color" name="hex" id="hex" value="{{ old('hex') }}">
-                                @error('hex')
+                                <label class="block text-gray-700" for="name">Nama Ukuran</label>
+                                <input type="text" name="name" id="name" value="{{ old('name', $size->name) }}"
+                                    placeholder="Nama">
+                                @error('name')
                                     <span class="block text-sm italic text-red-600">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="flex flex-col">
-                                <label class="block text-gray-700" for="name">Nama Warna</label>
-                                <input type="text" name="name" id="name" value="{{ old('name') }}"
-                                    placeholder="Nama">
-                                @error('name')
+                                <label class="block text-gray-700" for="name">Kategori Ukuran</label>
+                                <input type="text" name="category" id="category"
+                                    value="{{ old('category', $size->category) }}" placeholder="Kategori">
+                                @error('category')
                                     <span class="block text-sm italic text-red-600">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -64,7 +66,6 @@
                 getColorName($(this).val())
             });
 
-            getColorName($("#hex").val())
         })
     </script>
 @endsection

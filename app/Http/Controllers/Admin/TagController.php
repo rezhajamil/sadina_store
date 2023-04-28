@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Color;
+use App\Models\Tag;
+// use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule as ValidationRule;
 
-class ColorController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class ColorController extends Controller
      */
     public function index()
     {
-        $colors = Color::orderBy('hex')->orderBy('name')->get();
-        return view('dashboard.color.index', compact('colors'));
+        $tags = Tag::orderBy('name')->get();
+        return view('dashboard.tag.index', compact('tags'));
     }
 
     /**
@@ -26,7 +28,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('dashboard.color.create');
+        return view('dashboard.tag.create');
     }
 
     /**
@@ -39,25 +41,23 @@ class ColorController extends Controller
     {
         $request->validate(
             [
-                'name' => ['required', 'string'],
-                'hex' => ['string'],
+                'name' => ['required', 'string', 'unique:tags,name'],
             ]
         );
-        $request->name = ucwords($request->name);
-        $request->hex = strtoupper($request->hex);
+        $request->name = strtolower($request->name);
 
-        $color = Color::create($request->all());
+        $tag = Tag::create($request->all());
 
-        return redirect()->route('admin.color.index');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Color  $color
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Color $color)
+    public function show(Tag $tag)
     {
         //
     }
@@ -65,46 +65,44 @@ class ColorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Color  $color
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Color $color)
+    public function edit(Tag $tag)
     {
-        return view('dashboard.color.edit', compact('color'));
+        return view('dashboard.tag.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Color  $color
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Color $color)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate(
             [
-                'name' => ['required', 'string'],
-                'hex' => ['string'],
+                'name' => ['required', 'string', 'unique:tags,name'],
             ]
         );
 
-        $color->name = ucwords($request->name);
-        $color->hex = strtoupper($request->hex);
-        $color->update();
+        $tag->name = strtolower($request->name);
+        $tag->update();
 
-        return redirect()->route('admin.color.index');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Color  $color
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Color $color)
+    public function destroy(Tag $tag)
     {
-        $color->delete();
+        $tag->delete();
 
         return back();
     }

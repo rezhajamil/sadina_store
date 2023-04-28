@@ -3,12 +3,12 @@
     <div class="w-full sm:mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
-                <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Kategori Produk</h4>
+                <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Ukuran Produk</h4>
 
 
-                <a href="{{ route('admin.category.create') }}"
+                <a href="{{ route('admin.size.create') }}"
                     class="inline-block px-4 py-2 my-2 font-bold text-white transition-all rounded-md bg-secondary-500 hover:bg-secondary-700"><i
-                        class="mr-2 fa-solid fa-plus"></i> Data Kategori Produk Baru</a>
+                        class="mr-2 fa-solid fa-plus"></i> Data Ukuran Baru</a>
 
                 <div class="flex flex-wrap items-end mb-2 gap-x-4">
                     <input type="text" name="search" id="search" placeholder="Search..." class="px-4 rounded-lg">
@@ -16,6 +16,7 @@
                         <span class="font-bold text-gray-600">Berdasarkan</span>
                         <select name="search_by" id="search_by" class="rounded-lg">
                             <option value="nama">Nama</option>
+                            <option value="kategori">Kategori</option>
                         </select>
                     </div>
                 </div>
@@ -25,19 +26,23 @@
                         <thead class="border-b">
                             <tr>
                                 <th class="p-3 text-sm font-bold text-gray-100 uppercase bg-primary-600">No</th>
+                                <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Kategori</th>
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Nama</th>
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $category)
+                            @foreach ($sizes as $key => $size)
                                 <tr class="hover:bg-gray-200">
                                     <td class="px-4 py-3 font-bold text-gray-700 border-b">{{ ++$key }}</td>
-                                    <td class="px-4 py-3 font-bold text-gray-700 nama">{{ $category->name }}</td>
+                                    <td class="px-4 py-3 font-bold kategori">
+                                        {{ $size->category }}
+                                    </td>
+                                    <td class="px-4 py-3 font-bold text-gray-700 nama">{{ $size->name }}</td>
                                     <td class="px-4 py-3 text-gray-700 border-b">
-                                        <a href="{{ route('admin.category.edit', $category->id) }}"
+                                        <a href="{{ route('admin.size.edit', $size->id) }}"
                                             class="block my-1 text-base font-semibold transition text-y_premier hover:text-indigo-800">Edit</a>
-                                        <form action="{{ route('admin.category.destroy', $category->id) }}" method="post">
+                                        <form action="{{ route('admin.size.destroy', $size->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button
