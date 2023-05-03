@@ -17,7 +17,7 @@ class UserController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function login_callback()
+    public function login_callback(Request $request)
     {
         $callback = Socialite::driver('google')->stateless()->user();
         // ddd($callback);
@@ -33,7 +33,7 @@ class UserController extends Controller
         Auth::login($user, true);
 
         if ($user->phone && $user->whatsapp && $user->address_id) {
-            return redirect(route('home'));
+            return redirect()->intended();
         } else {
             return redirect(route('profile'));
         }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ([HomeController::class, 'index']))->name('home');
 Route::get('login', ([UserController::class, 'login']))->name('login');
 Route::get('login/callback', ([UserController::class, 'login_callback']))->name('login_callback');
-Route::get('browse', [BrowseController::class, 'index'])->name('browse');
+Route::get('browse', [BrowseController::class, 'index'])->name('browse.index');
+Route::get('show/browse/{id}', [BrowseController::class, 'show'])->name('browse.show');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -40,9 +42,9 @@ Route::middleware(['auth'])->group(
             redirect()->route('admin.dashboard');
         });
 
+        Route::post('add_to_cart', [CartController::class, 'store'])->name('add_cart');
+
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
-
-
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('product', ProductController::class);
             Route::resource('category', ProductCategoryController::class);

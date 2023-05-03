@@ -15,4 +15,9 @@ class Size extends Model
     {
         return $this->hasMany(ProductSize::class);
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
