@@ -9,7 +9,15 @@ class BrowseController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::with(['colors.color', 'sizes.size', 'tags.tag', 'images'])->get();
+        if ($request->tag) {
+            $products =
+                Product::with(['colors.color', 'sizes.size', 'tags.tag', 'images'])
+                ->whereHas('tags.tag', function ($query) use ($request) {
+                    $query->where('name', $request->name);
+                })->get();
+        } else {
+            $products = Product::with(['colors.color', 'sizes.size', 'tags.tag', 'images'])->get();
+        }
 
         return view('browse.index', compact('products'));
     }

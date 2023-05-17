@@ -11,11 +11,16 @@
             id="form-cart">
             @csrf
             <input type="hidden" name="product" value="{{ $product->id }}">
-            <div class="pb-6 border-b border-gray-200">
-                <p class="text-sm leading-none text-gray-600 ">{{ $product->category->name }}</p>
-                <h1 class="mt-2 text-xl font-semibold leading-7 text-gray-800 lg:text-2xl lg:leading-6">
-                    {{ $product->name }}
-                </h1>
+            <div class="flex justify-between pb-3 space-x-3 border-b border-gray-200">
+                <div>
+                    <p class="text-sm leading-none text-gray-600 ">{{ $product->category->name }}</p>
+                    <h1 class="mt-2 text-xl font-semibold leading-7 text-gray-800 lg:text-2xl lg:leading-6">
+                        {{ $product->name }}
+                    </h1>
+                </div>
+                <div class="flex items-end">
+                    <span class="text-xl font-bold">Rp.{{ number_format($product->price, 0, ',', '.') }}</span>
+                </div>
             </div>
             <div class="flex items-center justify-between py-4 border-b border-gray-200 gap-x-2">
                 <p class="text-base leading-4 text-gray-800 ">Warna</p>
@@ -89,9 +94,10 @@
                     </div>
                     <div class="hidden gap-3 pt-4 mt-4 text-base leading-normal text-gray-600 " id="sect">
                         @foreach ($product->tags as $tag)
-                            <div class="px-3 py-2 font-semibold text-white rounded-sm select-none bg-secondary-600">
+                            <a href="{{ route('browse.index', ['tag' => $tag->tag->name]) }}"
+                                class="px-3 py-2 font-semibold text-white transition-all rounded-sm select-none bg-secondary-600 hover:bg-secondary-400">
                                 {{ $tag->tag->name }}
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>

@@ -30,16 +30,24 @@
             </p>
         </div>
         <x-filter></x-filter>
-        @foreach ($products as $key => $product)
-            <x-product-card :product="$product"></x-product-card>
-        @endforeach
-
-        <div class="flex items-center justify-center">
-            <button
-                class="w-full py-5 mt-10 text-base font-medium leading-4 text-white bg-primary-800 hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-800 md:px-16 md:w-auto lg:mt-28 md:mt-12">
-                Load More
-            </button>
+        <div
+            class="grid grid-cols-1 mt-10 lg:grid-cols-4 sm:grid-cols-2 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12">
+            @foreach ($products as $key => $product)
+                <x-product-card :product="$product"></x-product-card>
+                <x-product-card :product="$product"></x-product-card>
+                <x-product-card :product="$product"></x-product-card>
+                <x-product-card :product="$product"></x-product-card>
+            @endforeach
         </div>
+
+        @if (count($products) >= 20)
+            <div class="flex items-center justify-center">
+                <button
+                    class="w-full py-5 mt-10 text-base font-medium leading-4 text-white bg-primary-800 hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-800 md:px-16 md:w-auto lg:mt-28 md:mt-12">
+                    Load More
+                </button>
+            </div>
+        @endif
     </div>
 @endsection
 @section('script')

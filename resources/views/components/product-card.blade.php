@@ -1,5 +1,4 @@
-<div
-    class="grid grid-cols-1 mt-10 lg:grid-cols-4 sm:grid-cols-2 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12">
+<div class="p-2 rounded shadow-md">
     <div class="relative">
         <div class="relative transition-all group">
             <div
@@ -8,13 +7,14 @@
             @foreach ($product->images as $key => $image)
                 @php $no_cover = true @endphp
                 @if ($image->is_cover)
-                    <img class="w-full" src="{{ asset("storage/$image->image_url") }}" alt="{{ $product->name }}" />
+                    <img class="object-cover h-96" src="{{ asset("storage/$image->image_url") }}"
+                        alt="{{ $product->name }}" />
                     @php $no_cover = false @endphp
                 @break
             @endif
         @endforeach
         @if ($no_cover)
-            <img class="w-full" src="{{ asset('storage/' . $product->images[0]->image_url) }}"
+            <img class="object-cover h-96" src="{{ asset('storage/' . $product->images[0]->image_url) }}"
                 alt="{{ $product->name }}" />
         @endif
         <div class="absolute bottom-0 w-full p-8 opacity-0 group-hover:opacity-100">
