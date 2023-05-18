@@ -2,7 +2,7 @@
 @section('body')
     <div class="px-4 py-6 lg:px-20 md:px-6">
         <p class="text-sm font-normal leading-3 text-gray-600">
-            Browse
+            Cari Busana
         </p>
         <hr class="w-full my-6 bg-gray-200" />
 

@@ -1,8 +1,8 @@
 <nav class="relative flex flex-wrap items-center justify-between w-full py-3 shadow-lg bg-neutral-900 text-neutral-200 lg:flex-wrap lg:justify-start"
     data-te-navbar-ref>
-    <div class="flex flex-wrap items-center justify-between w-full px-6">
+    <div class="flex flex-wrap items-center justify-between w-full px-6 gap-y-2">
         <button
-            class="block border-0 bg-transparent py-2 px-2.5 text-neutral-200 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 lg:hidden"
+            class="block py-2 bg-transparent border-0 text-neutral-200 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 lg:hidden"
             type="button" data-te-collapse-init data-te-target="#navbarSupportedContent4"
             aria-controls="navbarSupportedContent4" aria-expanded="false" aria-label="Toggle navigation">
             <span class="[&>svg]:w-7">
@@ -15,11 +15,11 @@
         </button>
         <div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
             id="navbarSupportedContent4" data-te-collapse-item>
-            <a class="pr-2 text-xl font-semibold text-white" href="{{ route('home') }}">SADINA STORE</a>
+            <a class="pr-2 mr-4 text-xl font-semibold text-white" href="{{ route('home') }}">SADINA STORE</a>
             <!-- Left links -->
             <ul class="flex flex-col pl-0 mr-auto list-style-none lg:flex-row" data-te-navbar-nav-ref>
-                <li class="p-2" data-te-nav-item-ref>
-                    <a class="text-white disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                <li class="w-full py-2 underline" data-te-nav-item-ref>
+                    <a class="text-white disabled:text-black/30 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
                         href="{{ route('browse.index') }}" data-te-nav-link-ref>Cari Busana</a>
                 </li>
             </ul>
@@ -134,7 +134,7 @@
                 </div>
             @else
                 <a href="{{ route('login') }}"
-                    class="px-3 py-2 overflow-hidden text-xs font-semibold text-white rounded-md transition-allcursor-pointer hover:bg-secondary-600 sm:font-bold sm:text-sm bg-secondary-400">
+                    class="w-full px-3 py-2 overflow-hidden text-xs font-semibold text-white rounded-md transition-allcursor-pointer hover:bg-secondary-600 sm:font-bold sm:text-sm bg-secondary-400">
                     <i class="mr-2 fa-brands fa-google"></i>
                     SIGN IN</a>
             @endauth
