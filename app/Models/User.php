@@ -21,8 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'whatsapp',
+        'address_id',
         'avatar',
+        'role',
         'email_verified_at',
+        'registered_at',
     ];
 
     /**
