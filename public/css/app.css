@@ -4159,6 +4159,10 @@ select {
     background-color: rgb(255 255 255 / 0.1);
   }
 
+  .dark\:hover\:bg-white\/30:hover {
+    background-color: rgb(255 255 255 / 0.3);
+  }
+
   .dark\:hover\:fill-gray-100:hover {
     fill: #f3f4f6;
   }
@@ -4573,6 +4577,11 @@ select {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .lg\:text-2xl {
