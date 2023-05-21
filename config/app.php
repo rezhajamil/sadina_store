@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // MarcioJunior\UmlGenerator\Providers\UmlGeneratorServiceProvider::class
+        App\Providers\CartServiceProvider::class,
 
     ],
 

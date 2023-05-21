@@ -4,6 +4,23 @@
         <x-alert type='success'>{{ session('success') }}</x-alert>
     @endif
     <div class="px-6 py-4 bg-primary-200 ">
+        <div class="flex items-center justify-center px-4 sm:px-0">
+            <div role="alert" id="alert"
+                class="top-0 items-center justify-between px-4 py-4 mt-12 mb-8 transition duration-150 ease-in-out bg-yellow-100 rounded-md shadow lg:w-10/12 md:flex">
+                <div class="items-center sm:flex">
+                    <div class="flex items-end">
+                        <div class="mr-2 mt-0.5 sm:mt-0 text-yellow-700">
+                            <img class="focus:outline-none"
+                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/color-coded-with-icon-warning-svg1.svg"
+                                alt="warning" />
+                        </div>
+                        <p class="mr-2 text-base font-bold text-yellow-700">Perhatian</p>
+                    </div>
+                    <div class="hidden w-1 h-1 mr-2 bg-yellow-700 rounded-full xl:block"></div>
+                    <p class="text-base text-yellow-700">Harap melengkapi data diri anda</p>
+                </div>
+            </div>
+        </div>
         <form id="profile" action="{{ route('profile') }}" method="POST">
             @method('PUT')
             @csrf
@@ -200,15 +217,16 @@
                 let province_id = $(this).find('option:selected').attr('province_id');
                 const url = 'https://api.rajaongkir.com/starter/city';
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-                const fullUrl = proxyUrl + url;
-                // console.log(fullUrl);
+                const corsUrl = proxyUrl + url;
+                // console.log(corsUrl);
 
                 console.log(province_id);
                 $("#province_id").val(province_id);
                 console.log($("#province_id").val());
                 $.ajax({
                     method: 'GET',
-                    url: fullUrl,
+                    // url: corsUrl,
+                    url: url,
                     data: {
                         province: province_id
                     },

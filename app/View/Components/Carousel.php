@@ -4,23 +4,22 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Filter extends Component
+class Carousel extends Component
 {
+
+    public $images;
+    public $name;
+    public $category;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-
-    public $colors;
-    public $sizes;
-    public $categories;
-
-    public function __construct($colors, $sizes, $categories)
+    public function __construct($images, $name = '', $category = '')
     {
-        $this->colors = $colors;
-        $this->sizes = $sizes;
-        $this->categories = $categories;
+        $this->images = $images;
+        $this->name = $name;
+        $this->category = $category;
     }
 
     /**
@@ -30,6 +29,6 @@ class Filter extends Component
      */
     public function render()
     {
-        return view('components.filter');
+        return view('components.carousel');
     }
 }

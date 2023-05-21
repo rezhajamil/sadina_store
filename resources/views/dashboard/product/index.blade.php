@@ -46,8 +46,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="hover:bg-gray-200">
-                                @foreach ($products as $key => $product)
+                            @foreach ($products as $key => $product)
+                                <tr class="hover:bg-gray-200">
                                     <td class="p-3 font-bold text-gray-700 border-b">{{ $key + 1 }}</td>
                                     <td class="p-3 font-bold text-gray-700 nama">{{ $product->name }}</td>
                                     <td class="p-3 font-bold text-gray-700 kategori">{{ $product->category->name }}</td>
@@ -84,8 +84,8 @@
                                                 class="block my-1 text-base font-semibold text-left text-red-600 transition hover:text-red-800 whitespace-nowrap">Hapus</button>
                                         </form>
                                     </td>
-                                @endforeach
-                            </tr>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
