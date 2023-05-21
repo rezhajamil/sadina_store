@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Laravel\Socialite\Facades\Socialite;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function login_callback()
+    public function login_callback(Request $request)
     {
         $callback = Socialite::driver('google')->stateless()->user();
         // ddd($callback);
@@ -24,43 +25,71 @@ class UserController extends Controller
             'email' => $callback->getEmail(),
             'name' => $callback->getName(),
             'avatar' => $callback->getAvatar(),
+            'role' => 'member',
             'email_verified_at' => date('Y-m-d H:i:s')
         ];
 
         $user = User::firstOrCreate(['email' => $data['email']], $data);
         Auth::login($user, true);
 
-        return redirect(route('home'));
+        if ($user->phone && $user->whatsapp && $user->address_id) {
+            return redirect()->intended();
+        } else {
+            return redirect(route('profile'));
+        }
     }
 
     public function profile()
     {
         $user = User::where('email', Auth::user()->email)->with('address')->first();
-        // ddd($user);
-        $url = 'https://api.rajaongkir.com/starter/province';
+        $none = ['address' => '', 'province' => '', 'province_id' => '', 'city' => '', 'city_id' => ''];
+        if (!$user->address) $user->address = json_decode(json_encode($none), false);
+        // ddd($user->address);
+        $url_province = 'https://api.rajaongkir.com/starter/province';
+
         // $proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         // $fullUrl = $proxyUrl . $url;
 
         $ch = curl_init();
         $api_key = env('RAJAONGKIR_API_KEY');
 
-        try {
-            curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $url_province);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'X-Requested-With: XMLHttpRequest',
+            "key: $api_key"
+        ));
+        $province = curl_exec($ch);
+        $province = json_decode($province);
+        curl_close($ch);
+
+        $province = $province->rajaongkir->results;
+
+        // ddd($province);
+
+        if ($user->address->city && $user->address->city != '') {
+            $provinceId = $user->address->province_id;
+
+            $url_city = "https://api.rajaongkir.com/starter/city?province=$provinceId";
+            // ddd($url_city);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url_city);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'X-Requested-With: XMLHttpRequest',
                 "key: $api_key"
             ));
-            $response = curl_exec($ch);
-            $response = json_decode($response);
+            $city = curl_exec($ch);
+            $city = json_decode($city);
             curl_close($ch);
-        } catch (\Throwable $th) {
-            // ddd($th);
-        }
-        // ddd($response);
 
-        $province = $response->rajaongkir->results;
-        return view('profile', compact('user', 'province'));
+            $city = $city->rajaongkir->results;
+        } else {
+            $city = [];
+        }
+
+
+        return view('profile', compact('user', 'province', 'city'));
     }
 
     public function update_profile(Request $request)
@@ -72,10 +101,13 @@ class UserController extends Controller
             'name' => ['required', 'string'],
             'address' => ['required', 'string'],
             'province' => ['required', 'string'],
+            'province_id' => ['required', 'numeric'],
             'city' => ['required', 'string'],
+            'city_id' => ['required', 'numeric'],
             'address' => ['required', 'string'],
         ]);
 
+        // ddd($request);
         // ddd($user);
 
         if ($user->address) {
@@ -88,7 +120,9 @@ class UserController extends Controller
             // ]);
 
             $address->province = $request->province;
+            $address->province_id = $request->province_id;
             $address->city = $request->city;
+            $address->city_id = $request->city_id;
             $address->address = $request->address;
             $address->save();
 
@@ -97,7 +131,9 @@ class UserController extends Controller
         } else {
             $address = UserAddress::create([
                 'province' => $request->province,
+                'province_id' => $request->province_id,
                 'city' => $request->city,
+                'city_id' => $request->city_id,
                 'address' => $request->address,
             ]);
 

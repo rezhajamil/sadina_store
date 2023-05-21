@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Cart;
 use Illuminate\View\Component;
 
 class AppLayout extends Component
@@ -13,6 +14,7 @@ class AppLayout extends Component
      */
     public function render()
     {
-        return view('layouts.app');
+        $carts = Cart::with(['user', 'product', 'size', 'color'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        return view('layouts.app', compact('carts'));
     }
 }
