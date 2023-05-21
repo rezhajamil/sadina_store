@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('body')
+
     <div class="px-4 py-6 lg:px-20 md:px-6">
         <p class="text-sm font-normal leading-3 text-gray-600">
             Cari Busana
@@ -26,19 +27,23 @@
             </div>
             <p
                 class="text-base font-normal leading-4 text-gray-600 transition-all duration-100 cursor-pointer hover:underline hover:text-primary-500">
-                Showing 18 products
+                Showing {{ count($products) }} products
             </p>
         </div>
-        <x-filter></x-filter>
-        <div
-            class="grid grid-cols-1 mt-10 lg:grid-cols-4 sm:grid-cols-2 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12">
-            @foreach ($products as $key => $product)
-                <x-product-card :product="$product"></x-product-card>
-                <x-product-card :product="$product"></x-product-card>
-                <x-product-card :product="$product"></x-product-card>
-                <x-product-card :product="$product"></x-product-card>
-            @endforeach
-        </div>
+        <x-filter :colors="$colors" :sizes="$sizes" :categories="$categories" />
+        @if (count($products))
+            <div class="grid grid-cols-1 mt-10 lg:grid-cols-4 sm:grid-cols-2 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12"
+                id="browse-container">
+                @foreach ($products as $key => $product)
+                    <x-product-card :product="$product"></x-product-card>
+                    {{-- <x-product-card :product="$product"></x-product-card>
+                    <x-product-card :product="$product"></x-product-card>
+                    <x-product-card :product="$product"></x-product-card> --}}
+                @endforeach
+            </div>
+        @else
+            <h1 class="w-full mx-auto mt-4 text-xl font-bold text-center text-gray-500">Tidak Ada Produk Tersedia</h1>
+        @endif
 
         @if (count($products) >= 20)
             <div class="flex items-center justify-center">
@@ -71,6 +76,28 @@
                 fSection.addClass("hidden");
             }
 
+            function sortPriceAsc() {
+                // Sort cards in ascending order based on price
+                $('.card').sort(function(a, b) {
+                    var priceA = parseFloat($(a).find('.price').attr('price'));
+                    var priceB = parseFloat($(b).find('.price').attr('price'));
+                    return priceA - priceB;
+                }).appendTo(
+                    '#browse-container'
+                ); // Replace '#browse-container' with the appropriate parent element selector
+            }
+
+            function sortPriceDesc() {
+                // Sort cards in descending order based on price
+                $('.card').sort(function(a, b) {
+                    var priceA = parseFloat($(a).find('.price').attr('price'));
+                    var priceB = parseFloat($(b).find('.price').attr('price'));
+                    return priceB - priceA;
+                }).appendTo(
+                    '#browse-container'
+                ); // Replace '#browse-container' with the appropriate parent element selector
+            }
+
             function sortPrice() {
                 var sort = $("#btn-sort").attr('sort');
                 console.log({
@@ -81,12 +108,15 @@
                 if (sort == 'default') {
                     $("#btn-sort i").removeClass('fa-sort').addClass('fa-arrow-up-1-9');
                     $("#btn-sort").removeClass('text-gray-800').addClass('text-primary-500').attr('sort', 'asc');
+                    sortPriceAsc()
                 } else if (sort == 'asc') {
                     $("#btn-sort i").removeClass('fa-arrow-up-1-9').addClass('fa-arrow-down-9-1');
                     $("#btn-sort").attr('sort', 'desc');
+                    sortPriceDesc()
                 } else if (sort == 'desc') {
                     $("#btn-sort i").addClass('fa-arrow-up-1-9').removeClass('fa-arrow-down-9-1');
                     $("#btn-sort").attr('sort', 'asc');
+                    sortPriceAsc()
                 }
             }
 
@@ -102,6 +132,7 @@
             $("#btn-sort").click(function() {
                 sortPrice()
             });
+
         })
     </script>
 @endsection

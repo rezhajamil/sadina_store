@@ -11,9 +11,16 @@ class Filter extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $colors;
+    public $sizes;
+    public $categories;
+
+    public function __construct($colors, $sizes, $categories)
     {
-        //
+        $this->colors = $colors;
+        $this->sizes = $sizes;
+        $this->categories = $categories;
     }
 
     /**
