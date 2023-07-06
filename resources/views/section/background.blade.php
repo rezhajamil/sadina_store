@@ -1,7 +1,7 @@
-<section id="hero" class="relative bg-white pt-[30px] sm:pt-[80px] pb-[110px] px-6">
+<section id="hero" class="relative bg-white pt-[30px] sm:pt-[80px] pb-[110px] sm:px-6">
     <div class="container mx-auto">
         <div class="flex flex-wrap -mx-4">
-            <div class="w-full px-4 lg:w-6/12">
+            <div class="w-full sm:px-4 lg:w-6/12">
                 <div class="hero-content">
                     <h1
                         class="mb-3 mx-4 text-2xl sm:text-3xl font-bold leading-snug text-neutral-700 sm:text-[42px] lg:text-[40px] xl:text-[42px]">
