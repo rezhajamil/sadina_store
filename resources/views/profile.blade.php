@@ -4,23 +4,25 @@
         <x-alert type='success'>{{ session('success') }}</x-alert>
     @endif
     <div class="px-6 py-4 bg-primary-200 ">
-        <div class="flex items-center justify-center px-4 sm:px-0">
-            <div role="alert" id="alert"
-                class="top-0 items-center justify-between px-4 py-4 mt-12 mb-8 transition duration-150 ease-in-out bg-yellow-100 rounded-md shadow lg:w-10/12 md:flex">
-                <div class="items-center sm:flex">
-                    <div class="flex items-end">
-                        <div class="mr-2 mt-0.5 sm:mt-0 text-yellow-700">
-                            <img class="focus:outline-none"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/color-coded-with-icon-warning-svg1.svg"
-                                alt="warning" />
+        @if (session('warning'))
+            <div class="flex items-center justify-center px-4 sm:px-0">
+                <div role="alert" id="alert"
+                    class="top-0 items-center justify-between px-4 py-4 mt-12 mb-8 transition duration-150 ease-in-out bg-yellow-100 rounded-md shadow lg:w-10/12 md:flex">
+                    <div class="items-center sm:flex">
+                        <div class="flex items-end">
+                            <div class="mr-2 mt-0.5 sm:mt-0 text-yellow-700">
+                                <img class="focus:outline-none"
+                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/color-coded-with-icon-warning-svg1.svg"
+                                    alt="warning" />
+                            </div>
+                            <p class="mr-2 text-base font-bold text-yellow-700">Perhatian</p>
                         </div>
-                        <p class="mr-2 text-base font-bold text-yellow-700">Perhatian</p>
+                        <div class="hidden w-1 h-1 mr-2 bg-yellow-700 rounded-full xl:block"></div>
+                        <p class="text-base text-yellow-700">Harap melengkapi data diri anda</p>
                     </div>
-                    <div class="hidden w-1 h-1 mr-2 bg-yellow-700 rounded-full xl:block"></div>
-                    <p class="text-base text-yellow-700">Harap melengkapi data diri anda</p>
                 </div>
             </div>
-        </div>
+        @endif
         <form id="profile" action="{{ route('profile') }}" method="POST">
             @method('PUT')
             @csrf
@@ -77,6 +79,7 @@
                                             <span class="font-semibold text-black">+62</span>
                                         </div>
                                         <input tabindex="0" type="text" id="whatsapp" name="whatsapp" required
+                                            readonly
                                             class="w-full py-3 pl-3 text-sm text-black placeholder-gray-500 bg-transparent border rounded rounded-l-none shadow-sm border-primary-600 focus:outline-none focus:border-secondary-300"
                                             placeholder="81234567890" value="{{ old('whatsapp', $user->whatsapp) }}" />
                                     </div>
@@ -225,21 +228,16 @@
                 console.log($("#province_id").val());
                 $.ajax({
                     method: 'GET',
-                    // url: corsUrl,
-                    url: url,
+                    url: '{{ route('get_list_city') }}',
                     data: {
-                        province: province_id
-                    },
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'key': "{{ env('RAJAONGKIR_API_KEY') }}"
+                        provinceId: province_id
                     },
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         $('#city').html(
                             "<option value='' city_id selected disabled> Pilih Kota </option>"
                         );
-                        $.each(response.rajaongkir.results, function(index, city) {
+                        $.each(response, function(index, city) {
                             // Create an option element and set the value and province_id attributes
                             var option = $('<option>').val(city.city_name).attr(
                                 'city_id', city.city_id).attr(

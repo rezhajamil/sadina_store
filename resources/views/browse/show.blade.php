@@ -4,7 +4,7 @@
         <x-alert type='success'>{{ session('success') }}</x-alert>
     @endif
     <div class="items-start justify-center px-4 py-12 md:flex 2xl:px-20 md:px-6">
-        <div class="xl:w-2/6 lg:w-2/5">
+        <div class="lg:w-3/5">
             <x-carousel :images="$product->images" :name="$product->name" :category="$product->category->name" />
         </div>
         <form class="mt-6 xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0" method="POST" action="{{ route('add_cart') }}"
@@ -47,7 +47,7 @@
                 <span class="hidden sm:block"><i class="text-gray-800 fa-solid fa-palette"></i></span>
             </div>
             <div class="flex items-center justify-between py-2 border-b border-gray-200">
-                <p class="text-base leading-4 text-gray-800 ">Ukuran</p>
+                <p class="text-base leading-4 text-gray-800">Ukuran</p>
                 <div class="flex justify-center w-full gap-3">
                     @foreach ($product->sizes as $size)
                         <div class="w-fit">
@@ -66,10 +66,9 @@
                     @endforeach
                 </div>
                 <span class="hidden sm:block"><i class="text-gray-800 fa-solid fa-ruler-combined"></i></span>
-
             </div>
             <button type="submit" id="submit-cart"
-                class="flex items-center justify-center w-full py-4 text-base font-bold leading-none text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
+                class="flex items-center rounded justify-center w-full py-4 text-base font-bold leading-none text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
                 <div class="p-3 mr-3 bg-white rounded-sm">
                     <i class="text-gray-800 fa-solid fa-cart-shopping"></i>
                     <i class="text-lg text-gray-800 fa-solid fa-circle-notch animate-spin" style="display: none"></i>

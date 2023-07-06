@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        return view('cart.index');
+    }
+
     public function store(Request $request)
     {
         $request->validate([

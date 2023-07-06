@@ -1,4 +1,4 @@
-<nav class="relative flex flex-wrap items-center justify-between w-full py-3 shadow-lg bg-neutral-900 text-neutral-200 lg:flex-wrap lg:justify-start"
+<nav class="relative flex flex-wrap items-center justify-between w-full py-3 shadow-lg bg-secondary-700 sm:border-b-[6px] border-primary-400 text-neutral-200 lg:flex-wrap lg:justify-start"
     data-te-navbar-ref>
     <div class="flex flex-wrap items-center justify-between w-full px-6 gap-y-2">
         <button
@@ -75,16 +75,32 @@
                         <span
                             class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 py-0 px-1.5 text-xs text-white {{ $cart_count ? 'inline' : 'hidden' }}">{{ $cart_count }}</span>
                     </a>
-                    <ul class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg  [&[data-te-dropdown-show]]:block"
+                    <ul class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base drop-shadow-xl shadow-xl  [&[data-te-dropdown-show]]:block"
                         aria-labelledby="dropdownMenuButton1" data-te-dropdown-menu-ref>
                         @if ($cart_count)
                             @foreach ($carts as $item)
-                                <li>
-                                    <a class="" href="" data-te-dropdown-item-ref>
-                                        <div class="flex h-48">
-                                            <div class="w-1/3 p-4">
-                                                <img class="object-cover object-center h-full"
+                                <li class="border-b border-b-secondary-300">
+                                    <a class="" href="{{ route('cart.index') }}" data-te-dropdown-item-ref>
+                                        <div class="flex h-48 pr-6">
+                                            <div class="p-4 h-fit">
+                                                <img class="object-cover object-center w-full h-36"
                                                     src="{{ asset('storage/' . $item->product->images[0]->image_url) }}">
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <div class="flex flex-col px-2 py-4 h-fit text-secondary-400">
+                                                    <span class="text-lg font-bold">{{ $item->product->name }}</span>
+                                                    <span class="">
+                                                        <i class="mr-3 fa-solid fa-palette"></i>{{ $item->color->name }}
+                                                    </span>
+                                                    <span class="">
+                                                        <i
+                                                            class="mr-3 fa-solid fa-ruler-combined"></i>{{ $item->size->name }}
+                                                    </span>
+                                                    <span class="">
+                                                        <i class="mr-3 fa-solid fa-bag-shopping"></i>{{ $item->quantity }}
+                                                    </span>
+                                                </div>
+                                                <span class="mt-4 underline text-secondary-400">Lihat di Keranjang</span>
                                             </div>
                                         </div>
                                     </a>
@@ -97,16 +113,6 @@
                         @endif
                     </ul>
                 </div>
-                {{-- <a class="mr-4 text-white opacity-60 hover:opacity-80 focus:opacity-80" href="#">
-                    <span class="[&>svg]:w-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                            <path
-                                d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                        </svg>
-                    </span>
-                    <span
-                        class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 py-0 px-1.5 text-xs text-white {{ $cart_count ? 'inline' : 'hidden' }}">{{ $cart_count }}</span>
-                </a> --}}
 
                 <div class="relative" data-te-dropdown-ref>
                     <a class="flex items-center transition duration-150 ease-in-out hidden-arrow whitespace-nowrap motion-reduce:transition-none"

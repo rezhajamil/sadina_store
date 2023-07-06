@@ -7,7 +7,7 @@
         </p>
         <hr class="w-full my-6 bg-gray-200" />
 
-        <div class="flex flex-wrap items-center justify-between gap-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-y-6 gap-x-4">
             <div class="flex gap-x-4">
                 <div id="btn-filter"
                     class="flex items-center justify-center space-x-3 text-gray-800 transition-all cursor-pointer hover:text-primary-500 ">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <p
-                class="text-base font-normal leading-4 text-gray-600 transition-all duration-100 cursor-pointer hover:underline hover:text-primary-500">
+                class="text-base font-normal leading-4 text-gray-400 transition-all duration-100 cursor-pointer hover:underline hover:text-primary-500">
                 Showing {{ count($products) }} products
             </p>
         </div>
