@@ -22,7 +22,8 @@
                             </h2>
                             <div class="flex items-end h-full pb-6">
                                 <h3 class="text-xl font-semibold leading-5 text-white lg:text-2xl lg:leading-6 ">
-                                    {{ $name }}</h3>
+                                    {{ $name }}
+                                </h3>
                             </div>
                         </div>
                     </div>

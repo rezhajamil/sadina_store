@@ -8,11 +8,16 @@
 
     <title>Sadina | Toko Butik Handal & Terpercaya</title>
 
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

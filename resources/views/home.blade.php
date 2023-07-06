@@ -1,10 +1,16 @@
 @extends('layouts.app')
 @section('body')
-    <div class="w-full bg-primary-400">
+    <div class="w-full bg-primary-300 navigation">
         <div class="sm:hidden">
             @include('components.quick-nav')
         </div>
     </div>
+    @include('section.banner')
+    @include('section.background')
+    @include('section.profile')
+    {{-- <div class="flex justify-center p-2 mx-auto mt-6 overflow-hidden rounded-full w-fit toggle-navigation">
+        <span class="font-semibold text-black underline cursor-pointer toggle-nav-link">Show Navigation</span>
+    </div> --}}
 @endsection
 @section('script')
     <script>
@@ -12,7 +18,6 @@
             var isScrolled = false;
             var navHeight = $(".navigation").height();
             console.log(navHeight);
-
             $(".toggle-nav-link").click(function() {
                 isScrolled = !isScrolled;
                 if (isScrolled) {
