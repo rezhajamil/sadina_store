@@ -37,8 +37,8 @@ Route::get('get_list_province', [RajaOngkirApiController::class, 'getListProvinc
 Route::get('get_list_city', [RajaOngkirApiController::class, 'getListCity'])->name('get_list_city');
 Route::get('get_cost', [RajaOngkirApiController::class, 'getCost'])->name('get_cost');
 
-Route::get('payment/finish', [PaymentController::class, 'midtransFinish']);
-Route::post('payment/success', [PaymentController::class, 'midtransNotif']);
+Route::get('payment/success', [PaymentController::class, 'midtransCallback']);
+Route::post('payment/success', [PaymentController::class, 'midtransCallback']);
 
 Route::middleware(['auth'])->group(
     function () {
