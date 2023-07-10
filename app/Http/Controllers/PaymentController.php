@@ -203,38 +203,38 @@ class PaymentController extends Controller
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'challenge'
                 $payment->payment_status = 'pending';
-                $order->payment_status = 'pending';
+                $order->status = 'pending';
             } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'success'
                 $payment->payment_status = 'paid';
-                $order->payment_status = 'paid';
+                $order->status = 'paid';
             }
         } else if ($transaction_status == 'cancel') {
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'failure'
                 $payment->payment_status = 'failed';
-                $order->payment_status = 'failed';
+                $order->status = 'failed';
             } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'failure'
                 $payment->payment_status = 'failed';
-                $order->payment_status = 'failed';
+                $order->status = 'failed';
             }
         } else if ($transaction_status == 'deny') {
             // TODO Set payment status in merchant's database to 'failure'
             $payment->payment_status = 'failed';
-            $order->payment_status = 'failed';
+            $order->status = 'failed';
         } else if ($transaction_status == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             $payment->payment_status = 'paid';
-            $order->payment_status = 'paid';
+            $order->status = 'paid';
         } else if ($transaction_status == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $payment->payment_status = 'pending';
-            $order->payment_status = 'pending';
+            $order->status = 'pending';
         } else if ($transaction_status == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
             $payment->payment_status = 'failed';
-            $order->payment_status = 'failed';
+            $order->status = 'failed';
         }
 
         $payment->payment_method = $payment_method;
