@@ -63,62 +63,76 @@
                     <p class="text-3xl font-black leading-9 text-gray-800 lg:text-4xl">Summary</p>
                     <div class="grid grid-cols-2 gap-3 mt-4">
                         <span class="font-semibold col-span-full">Kirim Ke</span>
-                        <input type="text" name="name" class="px-2 py-2" value="{{ $user->name }}"
-                            placeholder="Nama Penerima" required>
-                        @error('name')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                        <input type="number" name="phone" class="px-2 py-2"
-                            value="{{ $user->whatsapp ?? $user->phone }}" placeholder="Kontak Penerima" required>
-                        @error('phone')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                        <select name="province" id="province">
-                            <option value="" selected disabled province_id>Pilih Provinsi</option>
-                            @foreach ($province as $data)
-                                <option value="{{ $data->province }}" province_id={{ $data->province_id }}
-                                    {{ $data->province_id == $user->address->province_id ? 'selected' : '' }}>
-                                    {{ $data->province }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('province')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                        <select name="city" id="city">
-                            <option value="" selected disabled city_id>Pilih Kota</option>
-                            @foreach ($city as $data)
-                                <option value="{{ $data->city_name }}" city_id={{ $data->city_id }}
-                                    zip_code={{ $data->postal_code }}
-                                    {{ $data->city_id == $user->address->city_id ? 'selected' : '' }}>
-                                    {{ $data->city_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('city')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                        <input type="text" name="address" class="px-2 py-2 col-span-full"
-                            value="{{ $user->address->address }}" placeholder="Alamat Penerima" required>
-                        @error('address')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                        <input type="number" name="zip_code" class="px-2 py-2" id="zip_code"
-                            value="{{ $user->address->zip_code }}" placeholder="Kode Pos Penerima" required>
-                        @error('zip_code')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                        <select name="cost" id="cost">
-                            <option value="" selected disabled cost_id>Pilih Jenis Pengiriman</option>
-                            @foreach ($cost->costs as $key => $data)
-                                <option value="{{ $data->cost[0]->value }}" {{ $key == 0 ? 'selected' : '' }}>
-                                    JNE {{ $data->service }} | Estimasi : {{ $data->cost[0]->etd }} hari
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('cost')
-                            <span class="block text-sm text-red-600">{{ $message }}</span>
-                        @enderror
+                        <div class="flex flex-col">
+                            <input type="text" name="name" class="px-2 py-2" value="{{ $user->name }}"
+                                placeholder="Nama Penerima" required>
+                            @error('name')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col">
+                            <input type="number" name="phone" class="px-2 py-2"
+                                value="{{ $user->whatsapp ?? $user->phone }}" placeholder="Kontak Penerima" required>
+                            @error('phone')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col">
+                            <select name="province" id="province" required>
+                                <option value="" selected disabled province_id>Pilih Provinsi</option>
+                                @foreach ($province as $data)
+                                    <option value="{{ $data->province }}" province_id={{ $data->province_id }}
+                                        {{ $data->province_id == $user->address->province_id ? 'selected' : '' }}>
+                                        {{ $data->province }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('province')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col">
+                            <select name="city" id="city" required>
+                                <option value="" selected disabled city_id>Pilih Kota</option>
+                                @foreach ($city as $data)
+                                    <option value="{{ $data->city_name }}" city_id={{ $data->city_id }}
+                                        zip_code={{ $data->postal_code }}
+                                        {{ $data->city_id == $user->address->city_id ? 'selected' : '' }}>
+                                        {{ $data->city_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('city')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col col-span-full">
+                            <input type="text" name="address" class="px-2 py-2 col-span-full"
+                                value="{{ $user->address->address }}" placeholder="Alamat Penerima" required>
+                            @error('address')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col">
+                            <input type="number" name="zip_code" class="px-2 py-2" id="zip_code"
+                                value="{{ $user->address->zip_code }}" placeholder="Kode Pos Penerima" required>
+                            @error('zip_code')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col">
+                            <select name="cost" id="cost" required>
+                                <option value="" selected disabled cost_id>Pilih Jenis Pengiriman</option>
+                                @foreach ($cost->costs as $key => $data)
+                                    <option value="{{ $data->cost[0]->value }}" {{ $key == 0 ? 'selected' : '' }}>
+                                        JNE {{ $data->service }} | Estimasi : {{ $data->cost[0]->etd }} hari
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('cost')
+                                <span class="block text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="flex items-center justify-between pt-16">
                         <p class="text-base leading-none text-gray-800">Subtotal</p>
@@ -223,6 +237,13 @@
                             $('#cost').append(option);
                         });
 
+                        $("#shipping").text(0)
+                        $("#total").text(parseInt({{ $total }}).toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+
+                        $("input[name='shipping']").val(0);
+                        $("input[name='total_amount']").val(parseInt({{ $total }}));
+
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
@@ -237,7 +258,7 @@
 
                 $("input[name='shipping']").val($(this).val());
                 $("input[name='total_amount']").val((parseInt({{ $total }}) + parseInt($(this)
-                .val())));
+                    .val())));
             })
 
         })

@@ -101,6 +101,7 @@ class UserController extends Controller
             $address->city = $request->city;
             $address->city_id = $request->city_id;
             $address->address = $request->address;
+            $address->zip_code = $request->zip_code;
             $address->save();
 
             $address_id = $user->address_id;

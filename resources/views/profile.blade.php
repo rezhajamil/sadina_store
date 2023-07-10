@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="pt-4 mx-auto">
-                        <div class="container grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-4">
+                        <div class="container grid grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5">
                             <div class="flex flex-col col-span-full lg:col-span-1">
                                 <label for="name" class="pb-2 text-sm font-bold text-gray-800 ">Nama Lengkap</label>
                                 <input tabindex="0" type="text" id="name" name="name" required
@@ -148,7 +148,7 @@
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <input type="hidden" name="province_id" id="province_id">
+                            <input type="hidden" name="province_id" id="province_id" value="{{ $data->province_id }}">
                             <div class="flex flex-col">
                                 <label for="city" class="pb-2 text-sm font-bold text-gray-800 ">Kota</label>
                                 <select name="city" id="city"
@@ -159,7 +159,7 @@
                                     @if (old('province', $user->address->province) == $user->address->province)
                                         @foreach ($city as $item)
                                             <option value="{{ $item->city_name }}" city_id="{{ $item->city_id }}"
-                                                {{ old('province', $user->address->city) == $item->city_name ? 'selected' : '' }}>
+                                                {{ old('city', $user->address->city) == $item->city_name ? 'selected' : '' }}>
                                                 {{ $item->city_name }}
                                             </option>
                                         @endforeach
@@ -171,7 +171,7 @@
                                 @error('city_id')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
-                                <input type="hidden" name="city_id" id="city_id">
+                                <input type="hidden" name="city_id" id="city_id" value="{{ $item->city_id }}">
                                 {{-- <div class="flex flex-col"><label for="zip_code"
                                     class="pb-2 text-sm font-bold text-gray-800 ">Kode Pos</label>
                                 <input tabindex="0" type="text" name="zip_code" required id="zip_code" readonly
@@ -179,13 +179,22 @@
                                     placeholder="Kode Pos" />
                             </div> --}}
                             </div>
-                            <div class="flex flex-col col-span-full lg:col-span-1">
+                            <div class="flex flex-col">
                                 <label for="address" class="pb-2 text-sm font-bold text-gray-800 ">Alamat
                                     Lengkap</label>
                                 <input tabindex="0" type="text" id="address" name="address" required
                                     class="text-sm text-black placeholder-gray-500 bg-transparent border rounded shadow-sm border-primary-600 focus:outline-none focus:border-secondary-300"
                                     placeholder="" value="{{ old('address', $user->address->address) }}" />
                                 @error('address')
+                                    <span class="block text-sm text-red-600">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="zip_code" class="pb-2 text-sm font-bold text-gray-800 ">Kode Pos</label>
+                                <input tabindex="0" type="number" id="zip_code" name="zip_code" required
+                                    class="text-sm text-black placeholder-gray-500 bg-transparent border rounded shadow-sm border-primary-600 focus:outline-none focus:border-secondary-300"
+                                    placeholder="Kode Pos" value="{{ old('zip_code', $user->address->zip_code) }}" />
+                                @error('zip_code')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
                             </div>
