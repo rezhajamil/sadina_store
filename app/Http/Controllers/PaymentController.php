@@ -187,8 +187,8 @@ class PaymentController extends Controller
 
     public function midtransFinish(Request $request)
     {
-        $notif = Midtrans\Transaction::status($request->order_id);
-        ddd($notif);
+        // $notif = Midtrans\Transaction::status($request->order_id);
+        ddd($request);
         // return $notif;
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
