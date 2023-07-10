@@ -56,40 +56,58 @@
             @endforeach
         </div>
         <div class="w-full h-full bg-gray-200">
-            <form action="{{ route('checkout.store') }}" method="POST"
+            <form action="{{ route('payment.store') }}" method="POST"
                 class="flex flex-col justify-between h-auto px-4 py-6 overflow-y-auto lg:h-screen lg:px-8 md:px-7 lg:py-20 md:py-10">
                 @csrf
                 <div>
                     <p class="text-3xl font-black leading-9 text-gray-800 lg:text-4xl">Summary</p>
                     <div class="grid grid-cols-2 gap-3 mt-4">
                         <span class="font-semibold col-span-full">Kirim Ke</span>
-                        <input type="text" class="px-2 py-2" value="{{ $user->name }}" placeholder="Nama Penerima"
-                            required>
-                        <input type="number" class="px-2 py-2" value="{{ $user->whatsapp ?? $user->phone }}"
-                            placeholder="Kontak Penerima" required>
+                        <input type="text" name="name" class="px-2 py-2" value="{{ $user->name }}"
+                            placeholder="Nama Penerima" required>
+                        @error('name')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
+                        <input type="number" name="phone" class="px-2 py-2"
+                            value="{{ $user->whatsapp ?? $user->phone }}" placeholder="Kontak Penerima" required>
+                        @error('phone')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
                         <select name="province" id="province">
                             <option value="" selected disabled province_id>Pilih Provinsi</option>
                             @foreach ($province as $data)
-                                <option value="{{ $data->province_id }}" province_id={{ $data->province_id }}
+                                <option value="{{ $data->province }}" province_id={{ $data->province_id }}
                                     {{ $data->province_id == $user->address->province_id ? 'selected' : '' }}>
                                     {{ $data->province }}
                                 </option>
                             @endforeach
                         </select>
+                        @error('province')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
                         <select name="city" id="city">
                             <option value="" selected disabled city_id>Pilih Kota</option>
                             @foreach ($city as $data)
-                                <option value="{{ $data->city_id }}" city_id={{ $data->city_id }}
+                                <option value="{{ $data->city_name }}" city_id={{ $data->city_id }}
                                     zip_code={{ $data->postal_code }}
                                     {{ $data->city_id == $user->address->city_id ? 'selected' : '' }}>
                                     {{ $data->city_name }}
                                 </option>
                             @endforeach
                         </select>
-                        <input type="text" class="px-2 py-2 col-span-full" value="{{ $user->address->address }}"
-                            placeholder="Alamat Penerima" required>
-                        <input type="number" class="px-2 py-2" id="zip_code" value="{{ $user->address->zip_code }}"
-                            placeholder="Kode Pos Penerima" required>
+                        @error('city')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
+                        <input type="text" name="address" class="px-2 py-2 col-span-full"
+                            value="{{ $user->address->address }}" placeholder="Alamat Penerima" required>
+                        @error('address')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
+                        <input type="number" name="zip_code" class="px-2 py-2" id="zip_code"
+                            value="{{ $user->address->zip_code }}" placeholder="Kode Pos Penerima" required>
+                        @error('zip_code')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
                         <select name="cost" id="cost">
                             <option value="" selected disabled cost_id>Pilih Jenis Pengiriman</option>
                             @foreach ($cost->costs as $key => $data)
@@ -98,6 +116,9 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('cost')
+                            <span class="block text-sm text-red-600">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="flex items-center justify-between pt-16">
                         <p class="text-base leading-none text-gray-800">Subtotal</p>
@@ -119,7 +140,10 @@
                                 id="total">{{ number_format($total + $cost->costs[0]->cost[0]->value, 0, ',', '.') }}</span>
                         </p>
                     </div>
-                    <button onclick="checkoutHandler1(true)"
+                    <input type="hidden" name="subtotal" value="{{ $total }}">
+                    <input type="hidden" name="shipping" value="{{ $cost->costs[0]->cost[0]->value }}">
+                    <input type="hidden" name="total_amount" value="{{ $total + $cost->costs[0]->cost[0]->value }}">
+                    <button
                         class="w-full py-5 text-base leading-none text-white transition-all ease-in-out bg-gray-800 border border-gray-800 rounded hover:bg-gradient-to-br hover:from-gray-700 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">Checkout</button>
                 </div>
             </form>
@@ -210,6 +234,10 @@
                 $("#shipping").text($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
                 $("#total").text((parseInt({{ $total }}) + parseInt($(this).val())).toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+
+                $("input[name='shipping']").val($(this).val());
+                $("input[name='total_amount']").val((parseInt({{ $total }}) + parseInt($(this)
+                .val())));
             })
 
         })

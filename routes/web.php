@@ -10,6 +10,8 @@ use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RajaOngkirApiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,17 +39,20 @@ Route::get('get_cost', [RajaOngkirApiController::class, 'getCost'])->name('get_c
 
 Route::middleware(['auth'])->group(
     function () {
-        Route::get('profile', ([UserController::class, 'profile']))->name('profile');
-        Route::put('profile', ([UserController::class, 'update_profile']))->name('update_profile');
-
         Route::get('/admin', function () {
             redirect()->route('admin.dashboard');
         });
 
+        Route::get('profile', ([UserController::class, 'profile']))->name('profile');
+        Route::put('profile', ([UserController::class, 'update_profile']))->name('update_profile');
+
         Route::post('add_to_cart', [CartController::class, 'store'])->name('add_cart');
         Route::resource('cart', CartController::class);
+        Route::resource('payment', PaymentController::class);
+        Route::resource('order', OrderController::class);
 
-        Route::post('checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
+        Route::get('payment/success', [PaymentController::class, 'midtransCallback']);
+        Route::post('payment/success', [PaymentController::class, 'midtransCallback']);
 
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
