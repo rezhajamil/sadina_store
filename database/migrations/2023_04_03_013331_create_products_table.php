@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->string('material');
             $table->integer('weight');
-            $table->string('status');
+            $table->string('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
