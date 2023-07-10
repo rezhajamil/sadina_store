@@ -51,8 +51,8 @@ Route::middleware(['auth'])->group(
         Route::resource('payment', PaymentController::class);
         Route::resource('order', OrderController::class);
 
-        Route::get('payment/success', [PaymentController::class, 'midtransCallback']);
-        Route::post('payment/success', [PaymentController::class, 'midtransCallback']);
+        Route::get('payment/finish', [PaymentController::class, 'midtransFinish']);
+        Route::post('payment/success', [PaymentController::class, 'midtransNotif']);
 
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

@@ -40,6 +40,8 @@ class CartController extends Controller
             $province = RajaOngkirApiController::getListProvince();
             $city = RajaOngkirApiController::getListCity($request);
             $cost = RajaOngkirApiController::getCost($request);
+        } else {
+            return redirect()->route('browse.index');
         }
         // ddd($city);
 
