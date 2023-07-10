@@ -99,6 +99,8 @@ class PaymentController extends Controller
             'amount' => $order->total_amount,
         ]);
 
+        Cart::where('user_id', auth()->user()->id)->delete();
+
         $payment_url = $this->getSnapRedirect($payment);
 
         return redirect($payment_url);
