@@ -17,8 +17,11 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-            $table->integer('amount');
-            $table->string('status');
+            $table->bigInteger('amount');
+            $table->string('payment_method')->nullable();
+            $table->string('payment_status')->default('waiting');
+            $table->string('midtrans_url', 100)->nullable();
+            $table->string('midtrans_booking_code', 100)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

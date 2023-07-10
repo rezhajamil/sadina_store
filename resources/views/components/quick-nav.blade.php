@@ -1,5 +1,8 @@
 <div class="h-screen py-4">
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center gap-6 px-6">
+        <div class="p-3 px-5 bg-white rounded-full aspect-square">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Sadina" class="h-24 pt-4">
+        </div>
         <div class="flex flex-col gap-y-3 navigation">
             <a href="https://www.tiktok.com/@rafasadina0?is_from_webapp=1&sender_device=pc" target="_blank"
                 class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">

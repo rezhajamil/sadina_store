@@ -48,7 +48,7 @@
     <div>
         <div class="flex items-center space-x-2 text-gray-800">
             <i class="fa-solid fa-ruler"></i>
-            <p class="text-xl font-medium leading-5 lg:text-2xl lg:leading-6 ">Size</p>
+            <p class="text-xl font-medium leading-5 lg:text-2xl lg:leading-6 ">Ukuran</p>
         </div>
         <div class="grid flex-wrap grid-cols-3 mt-8 md:flex md:space-x-6 gap-y-8">
             @foreach ($sizes as $key => $size)
@@ -74,7 +74,7 @@
     <div>
         <div class="flex items-center space-x-2 text-gray-800">
             <i class="fa-solid fa-shirt"></i>
-            <p class="text-xl font-medium leading-5 lg:text-2xl lg:leading-6 ">Category</p>
+            <p class="text-xl font-medium leading-5 lg:text-2xl lg:leading-6 ">Kategori</p>
         </div>
         <div class="grid flex-wrap grid-cols-3 mt-8 md:flex md:space-x-6 gap-y-8">
             @foreach ($categories as $key => $category)

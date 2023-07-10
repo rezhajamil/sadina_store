@@ -58,6 +58,7 @@ class ProductController extends Controller
             'description' => ['string', 'nullable'],
             'price' => ['string', 'numeric'],
             'material' => ['required', 'string'],
+            'weight' => ['required', 'numeric'],
             'color' => ['required'],
             'size' => ['required'],
             'tag' => ['required'],
@@ -72,6 +73,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'material' => ucwords($request->material),
+            'weight' => $request->weight,
         ]);
 
         if ($product) {
@@ -172,6 +174,7 @@ class ProductController extends Controller
             'description' => ['string', 'nullable'],
             'price' => ['string', 'numeric'],
             'material' => ['required', 'string'],
+            'weight' => ['required', 'numeric'],
             'color' => ['required'],
             'size' => ['required'],
             'tag' => ['required'],
@@ -185,11 +188,12 @@ class ProductController extends Controller
             }
         }
 
-        $product->name = $request->name;
+        $product->name = ucfirst($request->name);
         $product->category_id = $request->category;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->material = $request->material;
+        $product->material = ucwords($request->material);
+        $product->weight = $request->weight;
         $product->save();
 
         ProductColor::where('product_id', $product->id)->delete();

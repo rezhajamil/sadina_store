@@ -35,6 +35,10 @@
                                     <td class="p-4 border">{{ $product->material }}</td>
                                 </tr>
                                 <tr>
+                                    <td class="p-4 font-bold border">Berat</td>
+                                    <td class="p-4 border">{{ number_format($product->weight, 0, ',', '.') }} gram</td>
+                                </tr>
+                                <tr>
                                     <td class="p-4 font-bold border">Harga</td>
                                     <td class="p-4 border">{{ number_format($product->price, 0, ',', '.') }}</td>
                                 </tr>

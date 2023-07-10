@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('price');
             $table->string('material');
+            $table->integer('weight');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();
