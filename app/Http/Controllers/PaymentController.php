@@ -185,10 +185,70 @@ class PaymentController extends Controller
         }
     }
 
-    public function midtransCallback(Request $request)
+    public function midtransFinish(Request $request)
     {
-        ddd($request);
-        $notif = $request->method() == 'POST' ? new Midtrans\Notification() : Midtrans\Transaction::status($request->order_id);
+        $notif = Midtrans\Transaction::status($request->order_id);
+        ddd($notif);
+        // return $notif;
+        $transaction_status = $notif->transaction_status;
+        $fraud = $notif->fraud_status;
+        $payment_method = $notif->payment_type;
+
+        $payment_id = explode('-', $notif->order_id)[1];
+        $payment = Payment::with(['user', 'order'])->find($payment_id);
+        $order = Order::find($payment->order_id);
+
+        // ddd($payment);
+
+        if ($transaction_status == 'capture') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'challenge'
+                $payment->payment_status = 'pending';
+                $order->status = 'pending';
+            } else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'success'
+                $payment->payment_status = 'paid';
+                $order->status = 'paid';
+            }
+        } else if ($transaction_status == 'cancel') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $payment->payment_status = 'failed';
+                $order->status = 'failed';
+            } else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $payment->payment_status = 'failed';
+                $order->status = 'failed';
+            }
+        } else if ($transaction_status == 'deny') {
+            // TODO Set payment status in merchant's database to 'failure'
+            $payment->payment_status = 'failed';
+            $order->status = 'failed';
+        } else if ($transaction_status == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            $payment->payment_status = 'paid';
+            $order->status = 'paid';
+        } else if ($transaction_status == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            $payment->payment_status = 'pending';
+            $order->status = 'pending';
+        } else if ($transaction_status == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            $payment->payment_status = 'failed';
+            $order->status = 'failed';
+        }
+
+        $payment->payment_method = $payment_method;
+        $payment->save();
+        $order->save();
+
+        return redirect()->route('browse.index')->with('success', 'Pembayaran Berhasil');
+    }
+
+    public function midtransNotif()
+    {
+        // ddd($request);
+        $notif = new Midtrans\Notification();
         // return $notif;
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
