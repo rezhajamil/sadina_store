@@ -52,6 +52,26 @@
                                             <span class="block text-sm italic text-red-600">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    <div class="flex flex-col">
+                                        <label class="block font-bold text-gray-700" for="weight">Berat Produk
+                                            (gram)</label>
+                                        <input type="number" step="any" name="weight" id="weight"
+                                            value="{{ old('weight', $product->weight) }}" placeholder="Harga">
+                                        @error('weight')
+                                            <span class="block text-sm italic text-red-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="flex flex-col justify-end">
+                                        <label
+                                            class="block px-3 py-2 font-semibold text-white transition-all rounded-md cursor-pointer hover:bg-primary-500 w-fit bg-primary-400"
+                                            for="image"><i class="mr-2 fa-solid fa-images"></i>Pilih Gambar
+                                            Produk</label>
+                                        <input type="file" name="image[]" id="image" multiple class="hidden"
+                                            accept="image/jpg, image/png, image/gif, image/jpeg">
+                                        @error('image')
+                                            <span class="block text-sm italic text-red-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     <div class="flex flex-col col-span-full">
                                         <label class="block text-gray-700" for="description">Deskripsi Produk</label>
                                         <input type="hidden" name="description" id="description"
@@ -126,17 +146,6 @@
                                             @endforeach
                                         </div>
                                         @error('price')
-                                            <span class="block text-sm italic text-red-600">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="flex flex-col col-span-full">
-                                        <label
-                                            class="block px-3 py-2 font-semibold text-white transition-all rounded-md cursor-pointer hover:bg-primary-500 w-fit bg-primary-400"
-                                            for="image"><i class="mr-2 fa-solid fa-images"></i>Tambah Gambar
-                                            Produk</label>
-                                        <input type="file" name="image[]" id="image" multiple class="hidden "
-                                            accept="image/jpg, image/png, image/gif, image/jpeg">
-                                        @error('image')
                                             <span class="block text-sm italic text-red-600">{{ $message }}</span>
                                         @enderror
                                     </div>

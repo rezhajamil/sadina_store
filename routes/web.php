@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RajaOngkirApiController;
 use App\Http\Controllers\UserController;
@@ -32,6 +33,7 @@ Route::get('show/browse/{id}', [BrowseController::class, 'show'])->name('browse.
 
 Route::get('get_list_province', [RajaOngkirApiController::class, 'getListProvince'])->name('get_list_province');
 Route::get('get_list_city', [RajaOngkirApiController::class, 'getListCity'])->name('get_list_city');
+Route::get('get_cost', [RajaOngkirApiController::class, 'getCost'])->name('get_cost');
 
 Route::middleware(['auth'])->group(
     function () {
@@ -44,6 +46,8 @@ Route::middleware(['auth'])->group(
 
         Route::post('add_to_cart', [CartController::class, 'store'])->name('add_cart');
         Route::resource('cart', CartController::class);
+
+        Route::post('checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
 
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
