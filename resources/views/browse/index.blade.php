@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('body')
-
+    @if (session('success'))
+        <x-alert type='success'>{{ session('success') }}</x-alert>
+    @endif
     <div class="px-4 py-6 lg:px-20 md:px-6">
         <p class="text-sm font-normal leading-3 text-gray-600">
             Cari Busana

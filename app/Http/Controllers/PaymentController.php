@@ -193,6 +193,7 @@ class PaymentController extends Controller
 
         $payment_id = explode('-', $notif->order_id)[1];
         $payment = Payment::with(['user', 'order'])->find($payment_id);
+        $order = Order::find($payment->order_id);
 
         // ddd($payment);
 
@@ -200,44 +201,44 @@ class PaymentController extends Controller
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'challenge'
                 $payment->payment_status = 'pending';
+                $order->payment_status = 'pending';
             } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'success'
                 $payment->payment_status = 'paid';
+                $order->payment_status = 'paid';
             }
         } else if ($transaction_status == 'cancel') {
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'failure'
                 $payment->payment_status = 'failed';
+                $order->payment_status = 'failed';
             } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'failure'
                 $payment->payment_status = 'failed';
+                $order->payment_status = 'failed';
             }
         } else if ($transaction_status == 'deny') {
             // TODO Set payment status in merchant's database to 'failure'
             $payment->payment_status = 'failed';
+            $order->payment_status = 'failed';
         } else if ($transaction_status == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             $payment->payment_status = 'paid';
+            $order->payment_status = 'paid';
         } else if ($transaction_status == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $payment->payment_status = 'pending';
+            $order->payment_status = 'pending';
         } else if ($transaction_status == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
             $payment->payment_status = 'failed';
+            $order->payment_status = 'failed';
         }
 
         $payment->payment_method = $payment_method;
         $payment->save();
-        // ddd($nama);
-        // ddd($transaction);
+        $order->save();
 
-        // $last_transaction = Kas::orderBy('tanggal', 'desc')->first();
-        // if ($last_transaction) {
-        //     $last_balance = $last_transaction->balance;
-        // } else {
-        //     $last_balance = 0;
-        // }
-
-        return redirect()->route('browse.index')->with('success', 'Payment Berhasil');
+        return redirect()->route('browse.index')->with('success', 'Pembayaran Berhasil');
     }
 }
