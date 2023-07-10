@@ -50,6 +50,11 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $payment = Payment::with(['user', 'order'])->find(1);
+        // $payment->payment_method = 'qris';
+        // $payment->save()
+        // ddd($payment);
         $request->validate([
             'name' => 'required|string',
             'phone' => ['required', 'numeric', 'starts_with:8'],
@@ -184,11 +189,12 @@ class PaymentController extends Controller
         // return $notif;
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
+        $payment_method = $notif->payment_type;
 
         $payment_id = explode('-', $notif->order_id)[1];
         $payment = Payment::with(['user', 'order'])->find($payment_id);
 
-        ddd($payment);
+        // ddd($payment);
 
         if ($transaction_status == 'capture') {
             if ($fraud == 'challenge') {
@@ -220,6 +226,7 @@ class PaymentController extends Controller
             $payment->payment_status = 'failed';
         }
 
+        $payment->payment_method = $payment_method;
         $payment->save();
         // ddd($nama);
         // ddd($transaction);
