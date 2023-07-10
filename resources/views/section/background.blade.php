@@ -9,30 +9,13 @@
                     </h1>
                     <div class="flex flex-col">
                         <p class="max-w-full mx-4 mb-8 text-base text-justify text-gray-600">
-                            Kisah berawal dari bisnis repacking jilbab yang pada akhirnya mengalami kendala stok saat
-                            produk
-                            tersebut sedang booming. Maka, Sadina memutuskan untuk membuat produk jilbab sendiri di
-                            rumah
-                            untuk menciptakan trennya sendiri. Dari situlah bisnis ini berkembang menjadi pembuatan
-                            produk
-                            fashion muslim, mukena, dan bedding set. Selama perjalanan bisnisnya, Sadina telah
-                            mengunjungi
-                            berbagai kota seperti Lampung, Palembang, Bengkulu, Jambi, dan Medan. Hal ini membuat Sadina
-                            dikenal luas dan memiliki banyak referensi serta pengalaman dari pelanggan di setiap kota
-                            tersebut.
-                        </p>
-                        <p class="max-w-full mx-4 mb-8 text-base text-justify text-gray-600">
-                            Keunikan dari produk Sadina adalah kemampuannya untuk dimodifikasi dan disesuaikan sesuai
-                            dengan
-                            selera dan kebutuhan konsumen. Tetapi, hal ini tidak mengabaikan keindahan dan seni dari
-                            setiap
-                            produk yang diciptakan. Nama <span class="font-semibold">Sadina</span> sendiri diambil dari
-                            nama belakang ketiga anak pemilik
-                            bisnis ini dan juga kata dalam Bahasa Sanskerta yang memiliki makna
-                            <span class="font-semibold">Pemilik Kebaikan</span>.
-                            Harapan
-                            besar Sadina adalah bahwa usaha yang mereka jalani dapat memberikan dampak yang baik bagi
-                            keluarga, para pekerja, dan masyarakat yang membutuhkan.
+                            Kami memulai bisnis repacking jilbab, namun menghadapi masalah stok habis saat booming.
+                            Untuk mengatasi itu, kami membuat produk sendiri dan berkembang menjadi fashion muslim,
+                            mukena, dan bedding set. Dengan pengalaman dari berbagai kota, produk kami unik dan dapat
+                            disesuaikan dengan selera konsumen. Nama <span class="font-semibold">Sadina</span> diambil
+                            dari bahasa Sanskerta yang berarti
+                            <span class="font-semibold">Pemilik Kebaikan</span>. Harapan kami adalah memberikan dampak
+                            baik bagi keluarga, karyawan, dan masyarakat yang membutuhkan.
                         </p>
                     </div>
                 </div>

@@ -54,4 +54,40 @@ class RajaOngkirApiController extends Controller
 
         return $city;
     }
+
+    public static function getCost(Request $request)
+    {
+        $destination = $request->input('destination');
+        $weight = $request->input('weight');
+
+        $curl = curl_init();
+        $api_key = env('RAJAONGKIR_API_KEY');
+        $origin = env('RAJAONGKIR_ORIGIN');
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=$origin&destination=$destination&weight=$weight&courier=jne",
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
+                "key: $api_key"
+            ),
+        ));
+
+        $cost = curl_exec($curl);
+        $cost = json_decode($cost);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $cost = $cost->rajaongkir->results[0];
+        // ddd($cost);
+
+        return $cost;
+    }
 }

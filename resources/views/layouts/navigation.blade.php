@@ -87,7 +87,7 @@
                                                     src="{{ asset('storage/' . $item->product->images[0]->image_url) }}">
                                             </div>
                                             <div class="flex flex-col">
-                                                <div class="flex flex-col px-2 py-4 h-fit text-secondary-400">
+                                                <div class="flex flex-col px-2 py-4 h-fit text-secondary-800">
                                                     <span class="text-lg font-bold">{{ $item->product->name }}</span>
                                                     <span class="">
                                                         <i class="mr-3 fa-solid fa-palette"></i>{{ $item->color->name }}

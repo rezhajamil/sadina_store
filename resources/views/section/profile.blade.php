@@ -186,7 +186,7 @@
             <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
                 <div class="mt-10 lg:mt-0">
                     <h2 class="mb-8 text-3xl font-bold text-dark sm:text-4xl">
-                        VISI & MISI
+                        Profil Kami
                     </h2>
                     <span class="block mt-2 text-lg font-semibold text-primary-600">
                         Visi
@@ -201,6 +201,24 @@
                     <p class="mb-8 text-base text-justify text-gray-800">
                         Menjadi pilihan dan penyedia produk fashion yang bisa mewujudkan keinginan fashion style
                         konsumen dengan produk yang berkualitas dan harga yang kompetitif
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                <div class="mb-8 rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
+                    <div
+                        class="mb-8 flex h-[70px] w-[70px] items-center text-white justify-center rounded-2xl bg-primary">
+                        <i class="fa-solid fa-users-line"></i>
+                    </div>
+                    <h4 class="mb-3 text-xl font-semibold text-dark">
+                        Refreshing Design
+                    </h4>
+                    <p class="text-body-color">
+                        We dejoy working with discerning clients, people for whom
+                        qualuty, service, integrity & aesthetics.
                     </p>
                 </div>
             </div>
