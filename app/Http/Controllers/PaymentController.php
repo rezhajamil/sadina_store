@@ -187,7 +187,6 @@ class PaymentController extends Controller
 
     public function midtransCallback(Request $request)
     {
-        ddd($request);
         $notif = $request->method() == 'POST' ? new Midtrans\Notification() : Midtrans\Transaction::status($request->order_id);
         // return $notif;
         $transaction_status = $notif->transaction_status;
@@ -198,7 +197,7 @@ class PaymentController extends Controller
         $payment = Payment::with(['user', 'order'])->find($payment_id);
         $order = Order::find($payment->order_id);
 
-        ddd($payment);
+        // ddd($payment);
 
         if ($transaction_status == 'capture') {
             if ($fraud == 'challenge') {
