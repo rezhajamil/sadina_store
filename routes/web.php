@@ -37,6 +37,8 @@ Route::get('get_list_province', [RajaOngkirApiController::class, 'getListProvinc
 Route::get('get_list_city', [RajaOngkirApiController::class, 'getListCity'])->name('get_list_city');
 Route::get('get_cost', [RajaOngkirApiController::class, 'getCost'])->name('get_cost');
 
+Route::get('payment/success', [PaymentController::class, 'midtransCallback']);
+Route::post('payment/success', [PaymentController::class, 'midtransCallback']);
 Route::middleware(['auth'])->group(
     function () {
         Route::get('/admin', function () {
@@ -51,8 +53,6 @@ Route::middleware(['auth'])->group(
         Route::resource('payment', PaymentController::class);
         Route::resource('order', OrderController::class);
 
-        Route::get('payment/success', [PaymentController::class, 'midtransCallback']);
-        Route::post('payment/success', [PaymentController::class, 'midtransCallback']);
 
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

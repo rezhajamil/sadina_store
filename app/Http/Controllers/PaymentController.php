@@ -194,7 +194,7 @@ class PaymentController extends Controller
         $payment_id = explode('-', $notif->order_id)[1];
         $payment = Payment::with(['user', 'order'])->find($payment_id);
 
-        ddd($payment);
+        // ddd($payment);
 
         if ($transaction_status == 'capture') {
             if ($fraud == 'challenge') {
