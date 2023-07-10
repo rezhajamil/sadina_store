@@ -197,7 +197,7 @@ class PaymentController extends Controller
         $payment = Payment::with(['user', 'order'])->find($payment_id);
         $order = Order::find($payment->order_id);
 
-        // ddd($payment);
+        ddd($payment);
 
         if ($transaction_status == 'capture') {
             if ($fraud == 'challenge') {
