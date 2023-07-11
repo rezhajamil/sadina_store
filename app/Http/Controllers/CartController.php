@@ -38,7 +38,7 @@ class CartController extends Controller
             ]);
 
             $province = RajaOngkirApiController::getListProvince();
-            $city = RajaOngkirApiController::getListCity($request);
+            // $city = RajaOngkirApiController::getListCity($request);
             $cost = RajaOngkirApiController::getCost($request);
         } else {
             return redirect()->route('browse.index');
@@ -46,7 +46,7 @@ class CartController extends Controller
         // ddd($city);
 
         // ddd($carts[0]->product);
-        return view('cart.index', compact('carts', 'user', 'categories', 'total', 'weight', 'province', 'city', 'cost'));
+        return view('cart.index', compact('carts', 'user', 'categories', 'total', 'weight', 'province', 'cost'));
     }
 
     public function store(Request $request)

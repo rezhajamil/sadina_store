@@ -54,7 +54,7 @@ class PaymentController extends Controller
         // $payment = Payment::with(['user', 'order'])->find(1);
         // $payment->payment_method = 'qris';
         // $payment->save()
-        // ddd($payment);
+        ddd($request);
         $request->validate([
             'name' => 'required|string',
             'phone' => ['required', 'numeric', 'starts_with:8'],
@@ -98,8 +98,6 @@ class PaymentController extends Controller
             'order_id' => $order->id,
             'amount' => $order->total_amount,
         ]);
-
-        Cart::where('user_id', auth()->user()->id)->delete();
 
         $payment_url = $this->getSnapRedirect($payment);
 
@@ -241,6 +239,8 @@ class PaymentController extends Controller
         $payment->payment_method = $payment_method;
         $payment->save();
         $order->save();
+
+        Cart::where('user_id', $payment->user->id)->delete();
 
         return redirect()->route('browse.index')->with('success', 'Pembayaran Berhasil');
     }

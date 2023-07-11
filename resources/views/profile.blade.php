@@ -171,20 +171,17 @@
                                 @error('city_id')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
-                                <input type="hidden" name="city_id" id="city_id" value="{{ $item->city_id }}">
-                                {{-- <div class="flex flex-col"><label for="zip_code"
-                                    class="pb-2 text-sm font-bold text-gray-800 ">Kode Pos</label>
-                                <input tabindex="0" type="text" name="zip_code" required id="zip_code" readonly
-                                    class="py-3 pl-3 text-sm text-black placeholder-gray-500 bg-transparent border border-red-400 rounded shadow-sm focus:outline-none focus:border-secondary-300"
-                                    placeholder="Kode Pos" />
-                            </div> --}}
+                                @if (old('province', $user->address->province) == $user->address->province)
+                                    <input type="hidden" name="city_id" id="city_id"
+                                        value="{{ $user->address->city_id }}">
+                                @endif
                             </div>
                             <div class="flex flex-col">
                                 <label for="address" class="pb-2 text-sm font-bold text-gray-800 ">Alamat
                                     Lengkap</label>
                                 <input tabindex="0" type="text" id="address" name="address" required
                                     class="text-sm text-black placeholder-gray-500 bg-transparent border rounded shadow-sm border-primary-600 focus:outline-none focus:border-secondary-300"
-                                    placeholder="" value="{{ old('address', $user->address->address) }}" />
+                                    placeholder="Alamat Lengkap" value="{{ old('address', $user->address->address) }}" />
                                 @error('address')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror
@@ -193,7 +190,8 @@
                                 <label for="zip_code" class="pb-2 text-sm font-bold text-gray-800 ">Kode Pos</label>
                                 <input tabindex="0" type="number" id="zip_code" name="zip_code" required
                                     class="text-sm text-black placeholder-gray-500 bg-transparent border rounded shadow-sm border-primary-600 focus:outline-none focus:border-secondary-300"
-                                    placeholder="Kode Pos" value="{{ old('zip_code', $user->address->zip_code) }}" />
+                                    placeholder="Kode Pos"
+                                    value="{{ old('zip_code', $user->address->zip_code ?? '') }}" />
                                 @error('zip_code')
                                     <span class="block text-sm text-red-600">{{ $message }}</span>
                                 @enderror

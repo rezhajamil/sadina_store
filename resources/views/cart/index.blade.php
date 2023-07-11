@@ -19,7 +19,7 @@
                             class="object-cover object-center w-full h-full md:hidden" /> --}}
                             </div>
                             <div class="flex flex-col justify-center gap-y-4 md:pl-3 md:w-8/12 2xl:w-3/4">
-                                <div class="flex items-center justify-between w-full pt-1">
+                                <div class="flex items-center w-full pt-1">
                                     <a href="{{ route('browse.show', $cart->product->id) }}"
                                         class="text-base font-black leading-none text-gray-800 transition-all hover:text-primary-600">{{ $cart->product->name }}
                                     </a>
@@ -56,51 +56,67 @@
             @endforeach
         </div>
         <div class="w-full h-full bg-gray-200">
+            <input type="hidden" name="json_province" value="{{ json_encode($province) }}">
             <form action="{{ route('payment.store') }}" method="POST"
-                class="flex flex-col justify-between h-auto px-4 py-6 overflow-y-auto lg:h-screen lg:px-8 md:px-7 lg:py-20 md:py-10">
+                class="flex flex-col h-auto px-4 py-6 overflow-y-auto lg:h-screen lg:px-8 md:px-7 lg:py-20 md:py-10">
                 @csrf
-                <div>
-                    <p class="text-3xl font-black leading-9 text-gray-800 lg:text-4xl">Summary</p>
-                    <div class="grid grid-cols-2 gap-3 mt-4">
-                        <span class="font-semibold col-span-full">Kirim Ke</span>
+                <p class="text-3xl font-black leading-9 text-gray-800 lg:text-4xl">Summary</p>
+                <div id="shipping-container">
+                    <div class="grid grid-cols-2 gap-3 mt-4" id="shipping-form">
+                        <div class="flex items-end mb-2 gap-x-1 col-span-full">
+                            <span class="font-semibold col-span-full">Kirim Ke</span>
+                            <select name="select_address" id="select_address"
+                                class="inline p-0 pr-8 underline bg-transparent border-0">
+                                <option value="main" class="">Alamat Utama</option>
+                                <option value="other" class="">Alamat Lain</option>
+                            </select>
+                        </div>
                         <div class="flex flex-col">
-                            <input type="text" name="name" class="px-2 py-2" value="{{ $user->name }}"
-                                placeholder="Nama Penerima" required>
+                            <input type="text" name="name" id="name" class="px-2 py-2"
+                                value="{{ $user->name }}" placeholder="Nama Penerima" readonly required>
                             @error('name')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="flex flex-col">
                             <input type="number" name="phone" class="px-2 py-2"
-                                value="{{ $user->whatsapp ?? $user->phone }}" placeholder="Kontak Penerima" required>
+                                value="{{ $user->whatsapp ?? $user->phone }}" placeholder="Kontak Penerima" readonly
+                                required>
                             @error('phone')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="flex flex-col">
-                            <select name="province" id="province" required>
+                            <select name="province" id="province" readonly required>
                                 <option value="" selected disabled province_id>Pilih Provinsi</option>
-                                @foreach ($province as $data)
+                                <option value="{{ $user->address->province }}"
+                                    province_id={{ $user->address->province_id }} selected>
+                                    {{ $user->address->province }}
+                                </option>
+                                {{-- @foreach ($province as $data)
                                     <option value="{{ $data->province }}" province_id={{ $data->province_id }}
                                         {{ $data->province_id == $user->address->province_id ? 'selected' : '' }}>
                                         {{ $data->province }}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             @error('province')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="flex flex-col">
-                            <select name="city" id="city" required>
+                            <select name="city" id="city" readonly required>
                                 <option value="" selected disabled city_id>Pilih Kota</option>
-                                @foreach ($city as $data)
+                                <option value="{{ $user->address->city }}" city_id={{ $user->address->city_id }} selected>
+                                    {{ $user->address->city }}
+                                </option>
+                                {{-- @foreach ($city as $data)
                                     <option value="{{ $data->city_name }}" city_id={{ $data->city_id }}
                                         zip_code={{ $data->postal_code }}
                                         {{ $data->city_id == $user->address->city_id ? 'selected' : '' }}>
                                         {{ $data->city_name }}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             @error('city')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
@@ -108,7 +124,7 @@
                         </div>
                         <div class="flex flex-col col-span-full">
                             <input type="text" name="address" class="px-2 py-2 col-span-full"
-                                value="{{ $user->address->address }}" placeholder="Alamat Penerima" required>
+                                value="{{ $user->address->address }}" placeholder="Alamat Penerima" readonly required>
                             @error('address')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
@@ -134,6 +150,8 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+                <div class="">
                     <div class="flex items-center justify-between pt-16">
                         <p class="text-base leading-none text-gray-800">Subtotal</p>
                         <p class="text-base leading-none text-gray-800">Rp {{ number_format($total, 0, ',', '.') }}</p>
@@ -169,8 +187,11 @@
 @section('script')
     <script>
         $(document).ready(function() {
-
-            $("#province").change(function() {
+            const form = $("#shipping-container").html();
+            const new_form = $("#shipping-form").clone();
+            const list_province = JSON.parse($("input[name=json_province]").val());
+            // console.log(list_province);
+            $(document).on('change', "#province", function() {
                 let province_id = $(this).find('option:selected').attr('province_id');
                 const url = 'https://api.rajaongkir.com/starter/city';
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -207,7 +228,7 @@
                 });
             })
 
-            $("#city").change(function() {
+            $(document).on('change', "#city", function() {
                 let city_id = $(this).find('option:selected').attr('city_id');
                 let zip_code = $(this).find('option:selected').attr('zip_code');
 
@@ -251,7 +272,7 @@
                 });
             })
 
-            $("#cost").change(function() {
+            $(document).on('change', "#cost", function() {
                 $("#shipping").text($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
                 $("#total").text((parseInt({{ $total }}) + parseInt($(this).val())).toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, "."))
@@ -259,6 +280,44 @@
                 $("input[name='shipping']").val($(this).val());
                 $("input[name='total_amount']").val((parseInt({{ $total }}) + parseInt($(this)
                     .val())));
+            })
+
+            $(document).on('change', '#select_address', function() {
+                let value = $(this).val();
+                let container = $('#shipping-container');
+
+                // console.log({
+                //     form,
+                // });
+                if (value == 'main') {
+                    container.html(form);
+                    // console.log({
+                    //     form: form.find('#name').val(),
+                    // });
+                } else if (value == 'other') {
+                    let html_province = '';
+
+                    new_form.find('#select_address option[value=other]').attr('selected', true);
+                    new_form.find('input').attr('readonly', false).val('');
+                    new_form.find('select').attr('readonly', false);
+                    new_form.find('#city').html(`<option selected disabled>Pilih Kota</option>`);
+
+                    list_province.map((province, idx) => {
+                        html_province += `
+                        <option value="${province.province}" province_id=${province.province_id}>
+                            ${province.province}
+                        </option>
+                        `;
+                    })
+
+                    new_form.find('#province').html(`<option selected disabled>Pilih Provinsi</option>` +
+                        html_province);
+                    container.html(new_form)
+                    // console.log({
+                    //     form: form.find('#name').val(),
+                    //     new_form: new_form.find('#name').val()
+                    // });
+                }
             })
 
         })
