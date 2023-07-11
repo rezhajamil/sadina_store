@@ -54,7 +54,7 @@ class PaymentController extends Controller
         // $payment = Payment::with(['user', 'order'])->find(1);
         // $payment->payment_method = 'qris';
         // $payment->save()
-        ddd($request);
+        // ddd($request);
         $request->validate([
             'name' => 'required|string',
             'phone' => ['required', 'numeric', 'starts_with:8'],

@@ -67,21 +67,26 @@
                             <span class="font-semibold col-span-full">Kirim Ke</span>
                             <select name="select_address" id="select_address"
                                 class="inline p-0 pr-8 underline bg-transparent border-0">
-                                <option value="main" class="">Alamat Utama</option>
-                                <option value="other" class="">Alamat Lain</option>
+                                <option value="main" {{ old('select_address') == 'main' ? 'selected' : '' }}
+                                    class="">
+                                    Alamat Utama</option>
+                                <option value="other" {{ old('select_address') == 'other' ? 'selected' : '' }}
+                                    class="">
+                                    Alamat Lain</option>
                             </select>
                         </div>
                         <div class="flex flex-col">
                             <input type="text" name="name" id="name" class="px-2 py-2"
-                                value="{{ $user->name }}" placeholder="Nama Penerima" readonly required>
+                                value="{{ old('name', $user->name) }}" placeholder="Nama Penerima"
+                                {{ old('select_address') == 'main' ? 'readonly' : '' }} required>
                             @error('name')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="flex flex-col">
                             <input type="number" name="phone" class="px-2 py-2"
-                                value="{{ $user->whatsapp ?? $user->phone }}" placeholder="Kontak Penerima" readonly
-                                required>
+                                value="{{ old('phone', $user->whatsapp ?? $user->phone) }}" placeholder="Kontak Penerima"
+                                {{ old('select_address') == 'main' ? 'readonly' : '' }} required>
                             @error('phone')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
@@ -89,16 +94,19 @@
                         <div class="flex flex-col">
                             <select name="province" id="province" readonly required>
                                 <option value="" selected disabled province_id>Pilih Provinsi</option>
-                                <option value="{{ $user->address->province }}"
-                                    province_id={{ $user->address->province_id }} selected>
-                                    {{ $user->address->province }}
-                                </option>
-                                {{-- @foreach ($province as $data)
-                                    <option value="{{ $data->province }}" province_id={{ $data->province_id }}
-                                        {{ $data->province_id == $user->address->province_id ? 'selected' : '' }}>
-                                        {{ $data->province }}
+                                @if (old('select_address') != 'other')
+                                    <option value="{{ $user->address->province }}"
+                                        province_id={{ $user->address->province_id }} selected>
+                                        {{ $user->address->province }}
                                     </option>
-                                @endforeach --}}
+                                @else
+                                    @foreach ($province as $data)
+                                        <option value="{{ $data->province }}" province_id={{ $data->province_id }}
+                                            {{ $data->province == old('province') ? 'selected' : '' }}>
+                                            {{ $data->province }}
+                                        </option>
+                                    @endforeach
+                                @endif
                             </select>
                             @error('province')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
@@ -124,7 +132,8 @@
                         </div>
                         <div class="flex flex-col col-span-full">
                             <input type="text" name="address" class="px-2 py-2 col-span-full"
-                                value="{{ $user->address->address }}" placeholder="Alamat Penerima" readonly required>
+                                value="{{ $user->address->address }}" placeholder="Alamat Penerima"
+                                {{ old('select_address') == 'main' ? 'readonly' : '' }} required>
                             @error('address')
                                 <span class="block text-sm text-red-600">{{ $message }}</span>
                             @enderror
@@ -206,7 +215,7 @@
                         provinceId: province_id
                     },
                     success: function(response) {
-                        // console.log(response);
+                        console.log(response);
                         $('#city').html(
                             "<option value='' city_id selected disabled> Pilih Kota </option>"
                         );
@@ -243,7 +252,7 @@
                         weight: {{ $weight }},
                     },
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         $('#cost').html(
                             "<option value='' cost_id selected disabled> Pilih Jenis Pengiriman </option>"
                         );
