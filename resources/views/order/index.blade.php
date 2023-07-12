@@ -6,48 +6,69 @@
     <div class="px-6 py-8">
         <span class="text-3xl font-bold text-secondary-700">Pesanan Saya</span>
     </div>
-    <div class="flex flex-col w-full gap-3 px-1 bg-gray-100">
-        <div class="w-full bg-white rounded">
-            <div class="py-8 border-t md:flex items-strech md:py-10 lg:py-8 border-gray-50">
-                <div class="w-full md:w-4/12 2xl:w-1/4">
-                    <img src="{{ asset('storage/' . $cart->product->images[0]->image_url) }}" alt="{{ $cart->product->name }}"
-                        class="object-cover object-center w-3/4 mx-auto h-52 md:mx-0 md:w-full md:block" />
+    <div class="flex flex-col w-full gap-3 px-2 bg-gray-100 gap-y-6">
+        @foreach ($orders as $order)
+            <div class="flex flex-col w-full px-4 pt-4 pb-3 bg-white rounded gap-y-4">
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">{{ date('d-m-Y', strtotime($order->created_at)) }}</span>
+                    @include('components.payment-status', ['status' => $order->status])
                 </div>
-                <div class="flex flex-col justify-center gap-y-4 md:pl-3 md:w-8/12 2xl:w-3/4">
-                    <div class="flex items-center w-full pt-1">
-                        <a href="{{ route('browse.show', $cart->product->id) }}"
-                            class="text-base font-black leading-none text-gray-800 transition-all hover:text-primary-600">{{ $cart->product->name }}
-                        </a>
+                <div class="flex gap-2 border-t items-strech border-gray-50">
+                    <div class="w-2/5 border rounded md:w-4/12 2xl:w-1/4">
+                        <img src="{{ asset('storage/' . $order->orderItem[0]->product->images[0]->image_url) }}"
+                            alt="{{ $order->orderItem[0]->product->name }}"
+                            class="object-cover object-center w-full rounded h-52 md:mx-0 md:w-full md:block" />
                     </div>
-                    <p class="pt-2 text-xs leading-3 text-gray-600">Bahan: {{ $cart->product->material }}</p>
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs leading-3 text-gray-600">Warna:
-                            {{ $cart->color->name }}
-                        </p>
-                        <div class="inline-block w-3 h-3 border border-gray-400"
-                            style="background-color: {{ $cart->color->hex }}">
+                    <div class="flex flex-col justify-center py-1 gap-y-2">
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Kode</span>
+                            <span class="">:</span>
+                            <span class="">{{ $order->payment_number ?? '-' }}</span>
+                        </div>
+                        @if ($order->shipping_receipt)
+                            <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                                <span class="">No. Resi</span>
+                                <span class="">:</span>
+                                <span class="">{{ $order->shipping_receipt }}</span>
+                            </div>
+                        @endif
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Jumlah Produk</span>
+                            <span class="">:</span>
+                            <span class="">{{ count($order->orderItem) }}</span>
+                        </div>
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Belanja</span>
+                            <span class="">:</span>
+                            <span class="">Rp. {{ number_format($order->subtotal, 0, ',', '.') }}</span>
+                        </div>
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Ongkir</span>
+                            <span class="">:</span>
+                            <span class="">Rp. {{ number_format($order->shipping, 0, ',', '.') }}</span>
                         </div>
                     </div>
-                    <p class="text-xs leading-3 text-gray-600 w-96">Ukuran: {{ $cart->size->name }}
-                    </p>
-                    <p class="text-xs font-semibold leading-3 text-gray-600 w-96">Jumlah: {{ $cart->quantity }}
-                    </p>
-                    <div class="flex items-center justify-between pt-3">
-                        <div class="flex itemms-center">
-                            <form action="{{ route('cart.destroy', $cart->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit"
-                                    class="text-xs leading-3 text-red-500 underline cursor-pointer">Remove</button>
-                            </form>
-                        </div>
-                        <p class="text-base font-black leading-none text-gray-800">
-                            Rp {{ number_format($cart->product->price, 0, ',', '.') }}</p>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2">
+                    <div class="flex gap-x-2">
+                        @if ($order->status == 'waiting')
+                            <a href="{{ $order->payment->midtrans_url }}"
+                                class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-tertiary-600 border-tertiary-600 hover:text-white hover:bg-tertiary-600">Bayar
+                                Pesanan</a>
+                        @endif
+                        <a href="{{ route('order.show', $order->id) }}"
+                            class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-secondary-600 border-secondary-600 hover:text-white hover:bg-secondary-600">Detail
+                            Pesanan</a>
+                    </div>
+                    <div class="space-x-4 text-base sm:text-xl text-secondary-600">
+                        <span class="">Total : </span>
+                        <span class="">Rp. {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
+    {{ $orders->links('components.pagination', ['data' => $orders]) }}
 @endsection
 @section('script')
     <script>

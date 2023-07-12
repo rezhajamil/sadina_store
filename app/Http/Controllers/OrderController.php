@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['payment'])->where('user_id', auth()->user()->id)->paginate(10);
+        $orders = Order::with(['payment', 'orderItem'])->where('user_id', auth()->user()->id)->paginate(10);
 
         return view('order.index', compact('orders'));
     }
@@ -48,7 +48,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::with(['payment', 'orderItem'])->find($id);
+
+        return view('order.show', compact('order'));
     }
 
     /**
@@ -83,5 +85,15 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function change_status(Request $request, Order $order)
+    {
+        $status = $request->status;
+        // ddd([$status, $id]);
+        $order->status = 'cancel';
+        $order->save();
+
+        return back()->with('success', 'Pesanan Dibatalkan');
     }
 }

@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(
         Route::resource('payment', PaymentController::class);
         Route::resource('order', OrderController::class);
 
+        Route::put('order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change_status');
 
         Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

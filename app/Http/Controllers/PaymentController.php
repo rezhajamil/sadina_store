@@ -64,6 +64,7 @@ class PaymentController extends Controller
             'zip_code' => 'required|numeric',
             'subtotal' => 'required|numeric',
             'shipping' => 'required|numeric',
+            'shipping_method' => 'required|string',
             'total_amount' => 'required|numeric',
             'cost' => 'required|numeric',
         ]);
@@ -78,6 +79,7 @@ class PaymentController extends Controller
             'receiver_zip_code' => $request->zip_code,
             'subtotal' => $request->subtotal,
             'shipping' => $request->shipping,
+            'shipping_method' => $request->shipping_method,
             'total_amount' => $request->total_amount,
             'status' => 'waiting',
         ]);
@@ -243,6 +245,6 @@ class PaymentController extends Controller
 
         Cart::where('user_id', $payment->user->id)->delete();
 
-        return redirect()->route('browse.index')->with('success', 'Pembayaran Berhasil');
+        return redirect()->route('order.show', $order->id)->with('success', 'Pembayaran Berhasil');
     }
 }

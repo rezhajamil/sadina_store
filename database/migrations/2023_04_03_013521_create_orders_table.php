@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->integer('shipping');
             $table->integer('total_amount');
             $table->string('shipping_receipt')->nullable();
+            $table->string('shipping_method');
             $table->string('status');
             $table->timestamps();
 

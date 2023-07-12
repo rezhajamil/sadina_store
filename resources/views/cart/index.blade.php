@@ -147,7 +147,8 @@
                             <select name="cost" id="cost" required>
                                 <option value="" selected disabled cost_id>Pilih Jenis Pengiriman</option>
                                 @foreach ($cost->costs as $key => $data)
-                                    <option value="{{ $data->cost[0]->value }}" {{ $key == 0 ? 'selected' : '' }}>
+                                    <option value="{{ $data->cost[0]->value }}" method="JNE {{ $data->service }}"
+                                        {{ $key == 0 ? 'selected' : '' }}>
                                         JNE {{ $data->service }} | Estimasi : {{ $data->cost[0]->etd }} hari
                                     </option>
                                 @endforeach
@@ -181,6 +182,8 @@
                     </div>
                     <input type="hidden" name="subtotal" value="{{ $total }}">
                     <input type="hidden" name="shipping" value="{{ $cost->costs[0]->cost[0]->value }}">
+                    <input type="hidden" name="shipping_method" id="shipping_method"
+                        value="JNE {{ $cost->costs[0]->service }}">
                     <input type="hidden" name="total_amount" value="{{ $total + $cost->costs[0]->cost[0]->value }}">
                     <button
                         class="w-full py-5 text-base leading-none text-white transition-all ease-in-out bg-gray-800 border border-gray-800 rounded hover:bg-gradient-to-br hover:from-gray-700 hover:to-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">Checkout</button>
@@ -260,7 +263,7 @@
                             // Set the text of the option element to the cost name
                             option.text(
                                 `JNE ${cost.service} | Estimasi : ${cost.cost[0].etd} hari`
-                            );
+                            ).attr('method', `JNE ${cost.service}`);
                             // Add the option element to the #cost select element
                             $('#cost').append(option);
                         });
@@ -268,6 +271,8 @@
                         $("#shipping").text(0)
                         $("#total").text(parseInt({{ $total }}).toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+                        $("#shipping_method").val($(this).find('option:selected').attr(
+                            'method'))
 
                         $("input[name='shipping']").val(0);
                         $("input[name='total_amount']").val(parseInt({{ $total }}));
@@ -283,6 +288,7 @@
                 $("#shipping").text($(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
                 $("#total").text((parseInt({{ $total }}) + parseInt($(this).val())).toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+                $("#shipping_method").val($(this).find('option:selected').attr('method'))
 
                 $("input[name='shipping']").val($(this).val());
                 $("input[name='total_amount']").val((parseInt({{ $total }}) + parseInt($(this)
