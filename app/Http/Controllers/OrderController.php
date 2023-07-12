@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with(['payment'])->where('user_id', auth()->user()->id)->paginate(10);
+
+        return view('order.index', compact('orders'));
     }
 
     /**

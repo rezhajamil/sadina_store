@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('order_number')->nullable();
+            $table->string('payment_number')->nullable();
             $table->string('receiver_name');
             $table->string('receiver_phone');
             $table->string('receiver_province');
@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->integer('subtotal');
             $table->integer('shipping');
             $table->integer('total_amount');
+            $table->string('shipping_receipt')->nullable();
             $table->string('status');
             $table->timestamps();
 

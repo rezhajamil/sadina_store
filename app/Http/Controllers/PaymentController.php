@@ -237,6 +237,7 @@ class PaymentController extends Controller
         }
 
         $payment->payment_method = $payment_method;
+        $order->payment_number = $notif->order_id;
         $payment->save();
         $order->save();
 

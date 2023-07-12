@@ -15,8 +15,6 @@
                                 <img src="{{ asset('storage/' . $cart->product->images[0]->image_url) }}"
                                     alt="{{ $cart->product->name }}"
                                     class="object-cover object-center w-3/4 mx-auto h-52 md:mx-0 md:w-full md:block" />
-                                {{-- <img src="https://i.ibb.co/g9xsdCM/Rectangle-37.pngg" alt="Black Leather Bag"
-                            class="object-cover object-center w-full h-full md:hidden" /> --}}
                             </div>
                             <div class="flex flex-col justify-center gap-y-4 md:pl-3 md:w-8/12 2xl:w-3/4">
                                 <div class="flex items-center w-full pt-1">

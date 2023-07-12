@@ -126,13 +126,17 @@
                         aria-labelledby="dropdownMenuButton2" data-te-dropdown-menu-ref>
                         <li>
                             <a class="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
+                                href="{{ route('order.index') }}" data-te-dropdown-item-ref>Pesanan Saya</a>
+                        </li>
+                        <li>
+                            <a class="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
                                 href="{{ route('profile') }}" data-te-dropdown-item-ref>Edit Profile</a>
                         </li>
                         <li>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button
-                                    class="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
+                                    class="block w-full px-4 py-2 text-sm font-normal text-left bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
                                     data-te-dropdown-item-ref>Logout</button>
                             </form>
                         </li>
