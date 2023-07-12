@@ -2,14 +2,16 @@
 
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\NotifController as AdminNotifController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RajaOngkirApiController;
@@ -53,6 +55,7 @@ Route::middleware(['auth'])->group(
         Route::resource('cart', CartController::class);
         Route::resource('payment', PaymentController::class);
         Route::resource('order', OrderController::class);
+        Route::resource('notif', NotificationController::class);
 
         Route::put('order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change_status');
 
@@ -63,6 +66,10 @@ Route::middleware(['auth'])->group(
             Route::resource('color', ColorController::class);
             Route::resource('size', SizeController::class);
             Route::resource('tag', TagController::class);
+            Route::resource('notif', AdminNotifController::class);
+            Route::resource('order', AdminOrderController::class);
+
+            Route::put('admin/order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
 
             Route::put('change_cover/product/{id}', [ProductController::class, 'changeCover'])->name('product.change_cover');
         });

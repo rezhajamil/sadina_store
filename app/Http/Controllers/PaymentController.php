@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
@@ -83,6 +84,24 @@ class PaymentController extends Controller
             'total_amount' => $request->total_amount,
             'status' => 'waiting',
         ]);
+
+        Notification::create(
+            [
+                'user_id' => auth()->user()->id,
+                'order_id' => $order->id,
+                'target' => 'user',
+                'message' => "Pesanan anda telah diterima. Silahkan lakukan pembayaran agar pesanan segera diproses."
+            ],
+        );
+
+        Notification::create(
+            [
+                'user_id' => auth()->user()->id,
+                'order_id' => $order->id,
+                'target' => 'admin',
+                'message' => auth()->user()->name . " telah melakukan pemesanan."
+            ],
+        );
 
         $carts = Cart::with(['user', 'product.images', 'product.category', 'product.colors', 'product.sizes', 'size', 'color'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
 

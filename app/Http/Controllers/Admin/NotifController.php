@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Notification;
-use App\Models\Order;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class NotifController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'payment', 'orderItem'])->where('user_id', auth()->user()->id)->where('target', 'user')->paginate(10);
-        $admin = User::where('email', 'admin@sadina.store')->first();
-
-        return view('order.index', compact('orders', 'admin'));
+        //
     }
 
     /**
@@ -49,20 +44,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $order = Order::with(['payment', 'orderItem'])->find($id);
-        $admin = User::where('email', 'admin@sadina.store')->first();
-
-        if ($request->notif) {
-            $notif = Notification::find($request->notif);
-            if (!$notif->is_read) {
-                $notif->is_read = 1;
-                $notif->save();
-            }
-        }
-
-        return view('order.show', compact('order', 'admin'));
+        //
     }
 
     /**
@@ -97,22 +81,5 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function change_status(Request $request, Order $order)
-    {
-        $status = $request->status;
-        // ddd([$status, $id]);
-        $order->status = $status;
-        $order->save();
-
-        switch ($status) {
-            case 'cancel':
-                return back()->with('success', 'Pesanan Dibatalkan');
-                break;
-            default:
-                return back()->with('success', 'Status Pesanan Diubah');
-                break;
-        }
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,10 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'payment', 'orderItem'])->where('user_id', auth()->user()->id)->where('target', 'user')->paginate(10);
-        $admin = User::where('email', 'admin@sadina.store')->first();
+        $orders = Order::with(['user', 'payment', 'orderItem'])->where('target', 'admin')->paginate(10);
 
-        return view('order.index', compact('orders', 'admin'));
+        return view('dashboard.order.index', compact('orders'));
     }
 
     /**
@@ -52,7 +51,6 @@ class OrderController extends Controller
     public function show(Request $request, $id)
     {
         $order = Order::with(['payment', 'orderItem'])->find($id);
-        $admin = User::where('email', 'admin@sadina.store')->first();
 
         if ($request->notif) {
             $notif = Notification::find($request->notif);
@@ -62,7 +60,7 @@ class OrderController extends Controller
             }
         }
 
-        return view('order.show', compact('order', 'admin'));
+        return view('dashboard.order.show', compact('order'));
     }
 
     /**

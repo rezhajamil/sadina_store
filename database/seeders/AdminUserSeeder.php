@@ -17,8 +17,8 @@ class AdminUserSeeder extends Seeder
         $data = [
             'name' => 'Admin',
             'email' => 'admin@sadina.store',
-            'phone' => '811727200',
-            'whatsapp' => '811727200',
+            'phone' => '85357260666',
+            'whatsapp' => '85357260666',
             'password' => bcrypt('Sadina#81'),
             'role' => 'admin',
         ];

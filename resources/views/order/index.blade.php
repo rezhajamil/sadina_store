@@ -60,7 +60,7 @@
                             class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-secondary-600 border-secondary-600 hover:text-white hover:bg-secondary-600">Detail
                             Pesanan</a>
                     </div>
-                    <div class="space-x-4 text-base sm:text-xl text-secondary-600">
+                    <div class="space-x-4 text-base font-bold sm:text-xl text-secondary-600">
                         <span class="">Total : </span>
                         <span class="">Rp. {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                     </div>

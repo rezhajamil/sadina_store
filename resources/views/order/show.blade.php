@@ -3,6 +3,12 @@
     @if (session('success'))
         <x-alert type='success'>{{ session('success') }}</x-alert>
     @endif
+    <div class="px-4 py-6 my-2">
+        <a href="{{ url()->previous() }}"
+            class="px-4 py-2 transition-all border-2 rounded-full hover:bg-secondary-800 hover:text-white border-secondary-800"><i
+                class="mr-2 fa-solid fa-arrow-left"></i>Kembali
+        </a>
+    </div>
     <div class="flex flex-col w-full px-4 pt-4 pb-3 bg-white rounded gap-y-4">
         <div class="flex justify-between">
             <span class="text-sm text-gray-500">{{ date('d-m-Y', strtotime($order->created_at)) }}</span>
@@ -46,7 +52,7 @@
         </div>
         <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2">
             <div class="flex gap-x-2">
-                <a
+                <a href="https://wa.me/62{{ $admin->whatsapp }}" target="_blank"
                     class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-emerald-600 border-emerald-600 hover:text-white hover:bg-emerald-600">Hubungi
                     Penjual</a>
                 @if ($order->status == 'waiting')
@@ -60,7 +66,7 @@
                     </form>
                 @endif
             </div>
-            <div class="space-x-4 text-base sm:text-xl text-secondary-600">
+            <div class="space-x-4 text-base font-bold sm:text-xl text-secondary-600">
                 <span class="">Total : </span>
                 <span class="">Rp. {{ number_format($order->total_amount, 0, ',', '.') }}</span>
             </div>

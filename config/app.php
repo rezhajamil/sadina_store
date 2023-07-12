@@ -177,6 +177,7 @@ return [
 
         // MarcioJunior\UmlGenerator\Providers\UmlGeneratorServiceProvider::class
         App\Providers\CartServiceProvider::class,
+        App\Providers\NotifServiceProvider::class,
 
     ],
 

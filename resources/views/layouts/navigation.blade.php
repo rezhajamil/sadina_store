@@ -31,10 +31,11 @@
         <div class="relative flex items-center">
             <!-- Icon -->
             @auth
+
+                {{-- Notif --}}
                 <div class="relative" data-te-dropdown-ref>
                     <a class="flex items-center mr-4 text-white hidden-arrow opacity-60 hover:opacity-80 focus:opacity-80"
-                        href="#" id="dropdownMenuButton1" role="button" data-te-dropdown-toggle-ref
-                        aria-expanded="false">
+                        href="#" id="drop-notif" role="button" data-te-dropdown-toggle-ref aria-expanded="false">
                         <span class="[&>svg]:w-5">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                                 <path fill-rule="evenodd"
@@ -42,30 +43,42 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </span>
-                        <span class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 py-0 px-1.5 text-xs text-white">1</span>
+                        <span
+                            class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 py-0 px-1.5 text-xs text-white {{ $notif_count ? 'inline' : 'hidden' }}">{{ $notif_count }}</span>
                     </a>
-                    <ul class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg  [&[data-te-dropdown-show]]:block"
-                        aria-labelledby="dropdownMenuButton1" data-te-dropdown-menu-ref>
-                        <li>
-                            <a class="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
-                                href="#" data-te-dropdown-item-ref>Action</a>
-                        </li>
-                        <li>
-                            <a class="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
-                                href="#" data-te-dropdown-item-ref>Another action</a>
-                        </li>
-                        <li>
-                            <a class="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 "
-                                href="#" data-te-dropdown-item-ref>Something else here</a>
-                        </li>
+                    <ul class="absolute right-0 z-[1000] float-left m-0 mt-1 hidden w-64 list-none overflow-hidden rounded border-none bg-white bg-clip-padding text-left text-base drop-shadow-xl shadow-xl  [&[data-te-dropdown-show]]:block"
+                        aria-labelledby="drop-notif" data-te-dropdown-menu-ref>
+                        @if (count($notif))
+                            @foreach ($notif as $item)
+                                <li class="border-b border-b-secondary-300">
+                                    <a href="{{ route('order.show', $item->order_id) }}?notif={{ $item->id }}"
+                                        class="{{ $item->is_read ? 'bg-white' : 'bg-primary-300' }} hover:bg-tersier transition-all text-gray-800 px-3 py-3 text-sm flex flex-col border-b-2"
+                                        data-te-dropdown-item-ref>
+                                        <span
+                                            class="mb-1 text-xs text-gray-500">{{ date('d-m-Y', strtotime($item->created_at)) }}</span>
+                                        <span class="">{{ $item->message }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                            <li class="border-b border-b-secondary-300">
+                                <a href="{{ route('notif.index') }}"
+                                    class="inline-block w-full px-3 py-1 text-sm text-center text-gray-800 transition-all bg-white border-b-2 hover:bg-tersier"
+                                    data-te-dropdown-item-ref>
+                                    <span class="underline">Lihat Semua Notifikasi</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="p-4">
+                                <span class="italic font-medium text-neutral-700">Tidak Ada Notifikasi</span>
+                            </li>
+                        @endif
                     </ul>
                 </div>
 
                 {{-- Cart --}}
                 <div class="relative" data-te-dropdown-ref>
                     <a class="flex items-center mr-4 text-white hidden-arrow opacity-60 hover:opacity-80 focus:opacity-80"
-                        href="#" id="dropdownMenuButton1" role="button" data-te-dropdown-toggle-ref
-                        aria-expanded="false">
+                        href="#" id="drop-cart" role="button" data-te-dropdown-toggle-ref aria-expanded="false">
                         <span class="[&>svg]:w-5">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                                 <path
@@ -75,8 +88,8 @@
                         <span
                             class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 py-0 px-1.5 text-xs text-white {{ $cart_count ? 'inline' : 'hidden' }}">{{ $cart_count }}</span>
                     </a>
-                    <ul class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base drop-shadow-xl shadow-xl  [&[data-te-dropdown-show]]:block"
-                        aria-labelledby="dropdownMenuButton1" data-te-dropdown-menu-ref>
+                    <ul class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded border-none bg-white bg-clip-padding text-left text-base drop-shadow-xl shadow-xl  [&[data-te-dropdown-show]]:block"
+                        aria-labelledby="drop-cart" data-te-dropdown-menu-ref>
                         @if ($cart_count)
                             @foreach ($carts as $item)
                                 <li class="border-b border-b-secondary-300">

@@ -113,6 +113,7 @@ class UserController extends Controller
                 'city' => $request->city,
                 'city_id' => $request->city_id,
                 'address' => $request->address,
+                'zip_code' => $request->zip_code,
             ]);
 
             // ddd('$address');
