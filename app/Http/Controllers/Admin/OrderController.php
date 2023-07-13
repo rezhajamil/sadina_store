@@ -14,9 +14,19 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with(['user', 'payment', 'orderItem'])->where('target', 'admin')->paginate(10);
+        $orders = Order::with(['user', 'payment', 'orderItem']);
+
+        if ($request->start_date) {
+            $orders->where('created_at', '>=', date('Y-m-d 23:59:59', strtotime($request->start_date)));
+        }
+
+        if ($request->end_date) {
+            $orders->where('created_at', '<=', date('Y-m-d 23:59:59', strtotime($request->end_date)));
+        }
+
+        $orders = $orders->paginate(50);
 
         return view('dashboard.order.index', compact('orders'));
     }
@@ -50,8 +60,8 @@ class OrderController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $order = Order::with(['payment', 'orderItem'])->find($id);
-
+        $order = Order::with(['user', 'payment', 'orderItem.cart'])->find($id);
+        // ddd($order->orderItem[0]->cart);
         if ($request->notif) {
             $notif = Notification::find($request->notif);
             if (!$notif->is_read) {
@@ -105,12 +115,49 @@ class OrderController extends Controller
         $order->save();
 
         switch ($status) {
+            case 'waiting':
+                $message = 'Pesanan anda telah diterima. Silahkan lakukan pembayaran agar pesanan segera diproses.';
+                $success = 'Status Pesanan Diubah';
+                break;
+            case 'paid':
+                $message = 'Pesanan anda telah berhasil dibayar.';
+                $success = 'Status Pesanan Diubah';
+                break;
+            case 'prepare':
+                $message = 'Pesanan anda sedang disiapkan oleh penjual.';
+                $success = 'Status Pesanan Diubah';
+                break;
+            case 'deliver':
+                $message = 'Pesanan anda sedang dikirim oleh jasa pengiriman.';
+                $success = 'Status Pesanan Diubah';
+                break;
+            case 'deliver':
+                $message = 'Pesanan anda sedang dikirim oleh jasa pengiriman.';
+                $success = 'Status Pesanan Diubah';
+                break;
             case 'cancel':
-                return back()->with('success', 'Pesanan Dibatalkan');
+                $message = 'Pesanan anda telah dibatalkan.';
+                $success = 'Pesanan Dibatalkan';
+                break;
+            case 'finish':
+                $message = 'Pesanan anda telah selesai.';
+                $success = 'Pesanan Selesai';
                 break;
             default:
-                return back()->with('success', 'Status Pesanan Diubah');
+                $message = 'Status Pesanan anda telah berubah';
+                $success = 'Status Pesanan Diubah';
                 break;
         }
+
+        Notification::create(
+            [
+                'user_id' => $order->user_id,
+                'order_id' => $order->id,
+                'target' => 'user',
+                'message' => $message
+            ],
+        );
+
+        return back()->with('success', $success);
     }
 }

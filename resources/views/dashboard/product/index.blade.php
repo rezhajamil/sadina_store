@@ -52,7 +52,7 @@
                                     <td class="p-3 font-bold text-gray-700 nama">{{ $product->name }}</td>
                                     <td class="p-3 font-bold text-gray-700 kategori">{{ $product->category->name }}</td>
                                     <td class="p-3 font-bold text-gray-700 harga">
-                                        {{ number_format($product->price, 0, '.', '.') }}
+                                        {{ number_format($product->price, 0, ',', '.') }}
                                     </td>
                                     <td class="p-3 font-bold text-gray-700 bahan">{{ $product->material }}</td>
                                     <td class="p-3 text-gray-700 deskripsi">{!! $product->description !!}</td>

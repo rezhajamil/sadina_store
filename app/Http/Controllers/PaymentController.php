@@ -108,7 +108,7 @@ class PaymentController extends Controller
         foreach ($carts as $key => $cart) {
             $order_items = OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => $cart->product->id,
+                'cart_id' => $cart->id,
                 'quantity' => $cart->quantity,
                 'price' => $cart->product->price,
             ]);
@@ -118,6 +118,10 @@ class PaymentController extends Controller
             'user_id' => auth()->user()->id,
             'order_id' => $order->id,
             'amount' => $order->total_amount,
+        ]);
+
+        Cart::where('user_id', auth()->user()->id)->update([
+            'status' => 0,
         ]);
 
         $payment_url = $this->getSnapRedirect($payment);
@@ -262,7 +266,23 @@ class PaymentController extends Controller
         $payment->save();
         $order->save();
 
-        Cart::where('user_id', $payment->user->id)->delete();
+        Notification::create(
+            [
+                'user_id' => $payment->user->id,
+                'order_id' => $order->id,
+                'target' => 'user',
+                'message' => "Pembayaran berhasil. Pesanan anda segera disiapkan oleh penjual."
+            ],
+        );
+
+        Notification::create(
+            [
+                'user_id' => $payment->user->id,
+                'order_id' => $order->id,
+                'target' => 'admin',
+                'message' => $payment->user->name . " telah membayar pesanan."
+            ],
+        );
 
         return redirect()->route('order.show', $order->id)->with('success', 'Pembayaran Berhasil');
     }

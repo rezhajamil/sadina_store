@@ -11,7 +11,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $carts = Cart::with(['user', 'product.images', 'product.category', 'product.colors', 'product.sizes', 'size', 'color'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        $carts = Cart::with(['user', 'product.images', 'product.category', 'product.colors', 'product.sizes', 'size', 'color'])->where('user_id', auth()->user()->id)->where('status', 1)->orderBy('created_at', 'DESC')->get();
         $user = User::with(['address'])->find(auth()->user()->id);
 
         $categories = [];
@@ -21,7 +21,7 @@ class CartController extends Controller
         $weight = 0;
         $cost = 0;
 
-        if ($carts) {
+        if (count($carts)) {
             foreach ($carts as $c => $cart) {
                 if (!in_array($cart->product->category->name, $categories)) {
                     // ddd($cart->product->category->name);

@@ -14,11 +14,15 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notif = Notification::where('user_id', auth()->user()->id)->paginate(25);
+        $notif = Notification::where('user_id', auth()->user()->id)->where('target', 'user')->paginate(25);
 
-        Notification::where('user_id', auth()->user()->id)->update(['is_read' => 1]);
+        $new = Notification::select('id')->where('user_id', auth()->user()->id)->where('target', 'user')->where('is_read', 0)->get();
+        $new = json_decode(json_encode($new->pluck('id')), true);
+        // ddd(json_decode(json_encode($new), true));
+        // ddd(in_array(7, $new));
+        Notification::where('user_id', auth()->user()->id)->where('target', 'user')->update(['is_read' => 1]);
 
-        return view('notification.index', compact('notif'));
+        return view('notification.index', compact('notif', 'new'));
     }
 
     /**

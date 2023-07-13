@@ -16,9 +16,9 @@
         </div>
         <div class="flex gap-2 border-t items-strech border-gray-50">
             <div class="w-2/5 border rounded md:w-4/12 2xl:w-1/4">
-                <img src="{{ asset('storage/' . $order->orderItem[0]->product->images[0]->image_url) }}"
-                    alt="{{ $order->orderItem[0]->product->name }}"
-                    class="object-cover object-center w-full rounded h-52 md:mx-0 md:w-full md:block" />
+                <img src="{{ asset('storage/' . $order->orderItem[0]->cart->product->images[0]->image_url) }}"
+                    alt="{{ $order->orderItem[0]->cart->product->name }}"
+                    class="object-cover object-center w-full rounded h-96 md:mx-0 md:w-full md:block" />
             </div>
             <div class="flex flex-col justify-center py-1 gap-y-2">
                 <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
@@ -50,23 +50,26 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2">
-            <div class="flex gap-x-2">
+        <div class="flex flex-col flex-wrap justify-between gap-2 pt-2 border-t-2 sm:items-center sm:flex-row">
+            <div class="flex flex-col sm:flex-row gap-x-2 gap-y-2">
                 <a href="https://wa.me/62{{ $admin->whatsapp }}" target="_blank"
-                    class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-emerald-600 border-emerald-600 hover:text-white hover:bg-emerald-600">Hubungi
+                    class="px-3 py-2 text-sm font-semibold text-center transition-all bg-transparent border rounded sm:text-left sm:text-base text-emerald-600 border-emerald-600 hover:text-white hover:bg-emerald-600">Hubungi
                     Penjual</a>
                 @if ($order->status == 'waiting')
+                    <a href="{{ $order->payment->midtrans_url }}"
+                        class="px-3 py-2 text-sm font-semibold text-center text-white transition-all bg-indigo-600 border rounded sm:text-left sm:text-base hover:bg-indigo-800">Bayar
+                        Pesanan</a>
                     <form action="{{ route('order.change_status', $order->id) }}" method="post">
                         @csrf
                         @method('put')
                         <input type="hidden" name="status" value="cancel">
                         <button type="submit"
-                            class="px-3 py-2 text-sm font-semibold text-white transition-all bg-red-600 border rounded sm:text-base hover:bg-red-800">Batalkan
+                            class="w-full px-3 py-2 text-sm font-semibold text-center text-white transition-all bg-red-600 border rounded sm:text-left sm:text-base hover:bg-red-800">Batalkan
                             Pesanan</button>
                     </form>
                 @endif
             </div>
-            <div class="space-x-4 text-base font-bold sm:text-xl text-secondary-600">
+            <div class="space-x-4 text-base font-bold text-left sm:text-xl text-secondary-600">
                 <span class="">Total : </span>
                 <span class="">Rp. {{ number_format($order->total_amount, 0, ',', '.') }}</span>
             </div>

@@ -16,8 +16,8 @@ class CartServiceProvider extends ServiceProvider
     {
         $this->app->view->composer('layouts.app', function ($view) {
             if (auth()->user()) {
-                $carts = Cart::with(['user', 'product.images', 'size', 'color'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->limit(5)->get();
-                $cart_count = Cart::where('user_id', auth()->user()->id)->sum('quantity');
+                $carts = Cart::with(['user', 'product.images', 'size', 'color'])->where('user_id', auth()->user()->id)->where('status', 1)->orderBy('created_at', 'DESC')->limit(5)->get();
+                $cart_count = Cart::where('user_id', auth()->user()->id)->where('status', 1)->sum('quantity');
             } else {
                 $carts = [];
                 $cart_count = [];

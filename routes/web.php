@@ -45,7 +45,11 @@ Route::post('payment/success', [PaymentController::class, 'midtransCallback']);
 Route::middleware(['auth'])->group(
     function () {
         Route::get('/admin', function () {
-            redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard');
+        });
+
+        Route::get('/dashboard', function () {
+            return redirect()->route('admin.dashboard');
         });
 
         Route::get('profile', ([UserController::class, 'profile']))->name('profile');
@@ -59,7 +63,7 @@ Route::middleware(['auth'])->group(
 
         Route::put('order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change_status');
 
-        Route::name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+        Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('product', ProductController::class);
             Route::resource('category', ProductCategoryController::class);
@@ -69,7 +73,7 @@ Route::middleware(['auth'])->group(
             Route::resource('notif', AdminNotifController::class);
             Route::resource('order', AdminOrderController::class);
 
-            Route::put('admin/order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
+            Route::put('order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
 
             Route::put('change_cover/product/{id}', [ProductController::class, 'changeCover'])->name('product.change_cover');
         });

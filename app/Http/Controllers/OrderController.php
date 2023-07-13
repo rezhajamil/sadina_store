@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'payment', 'orderItem'])->where('user_id', auth()->user()->id)->where('target', 'user')->paginate(10);
+        $orders = Order::with(['user', 'payment', 'orderItem'])->where('user_id', auth()->user()->id)->paginate(10);
         $admin = User::where('email', 'admin@sadina.store')->first();
 
         return view('order.index', compact('orders', 'admin'));
@@ -51,9 +51,9 @@ class OrderController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $order = Order::with(['payment', 'orderItem'])->find($id);
+        $order = Order::with(['payment', 'orderItem.cart.product.images'])->find($id);
         $admin = User::where('email', 'admin@sadina.store')->first();
-
+        // ddd($order);
         if ($request->notif) {
             $notif = Notification::find($request->notif);
             if (!$notif->is_read) {

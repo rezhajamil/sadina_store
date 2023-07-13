@@ -20,6 +20,7 @@ class CreateCartsTable extends Migration
             $table->unsignedBigInteger('size_id');
             $table->unsignedBigInteger('color_id');
             $table->integer('quantity');
+            $table->boolean('status')->default(1);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

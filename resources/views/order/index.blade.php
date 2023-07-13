@@ -15,8 +15,8 @@
                 </div>
                 <div class="flex gap-2 border-t items-strech border-gray-50">
                     <div class="w-2/5 border rounded md:w-4/12 2xl:w-1/4">
-                        <img src="{{ asset('storage/' . $order->orderItem[0]->product->images[0]->image_url) }}"
-                            alt="{{ $order->orderItem[0]->product->name }}"
+                        <img src="{{ asset('storage/' . $order->orderItem[0]->cart->product->images[0]->image_url) }}"
+                            alt="{{ $order->orderItem[0]->cart->product->name }}"
                             class="object-cover object-center w-full rounded h-52 md:mx-0 md:w-full md:block" />
                     </div>
                     <div class="flex flex-col justify-center py-1 gap-y-2">
