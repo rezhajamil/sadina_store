@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class NotifController extends Controller
@@ -14,7 +15,13 @@ class NotifController extends Controller
      */
     public function index()
     {
-        //
+        $notif = Notification::with(['user', 'order'])->where('target', 'admin')->paginate(25);
+
+        $new = Notification::select('id')->where('target', 'admin')->where('is_read', 0)->get();
+        $new = json_decode(json_encode($new->pluck('id')), true);
+        Notification::where('user_id', auth()->user()->id)->where('target', 'user')->update(['is_read' => 1]);
+
+        return view('dashboard.notification.index', compact('notif', 'new'));
     }
 
     /**

@@ -18,12 +18,16 @@ class CheckUserRole
     public function handle(Request $request, Closure $next, $role)
     {
         $user = Auth::user();
-        // ddd($request);
+        // ddd($user);
 
-        if ($user && $user->role == $role) {
-            return $next($request);
+        if ($user) {
+            if ($user && $user->role == $role) {
+                return $next($request);
+            } else {
+                abort(403);
+            }
         } else {
-            abort(403);
+            return redirect()->route('admin.login');
         }
 
         // return redirect()->route('home')->with('error', 'Unauthorized Access!');
