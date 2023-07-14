@@ -11,6 +11,7 @@
     {{-- <div class="flex justify-center p-2 mx-auto mt-6 overflow-hidden rounded-full w-fit toggle-navigation">
         <span class="font-semibold text-black underline cursor-pointer toggle-nav-link">Show Navigation</span>
     </div> --}}
+    @include('layouts.footer')
 @endsection
 @section('script')
     <script>

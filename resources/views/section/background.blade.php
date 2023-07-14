@@ -1,4 +1,4 @@
-<section id="hero" class="relative bg-white pt-[30px] sm:pt-[80px] pb-[110px] sm:px-6">
+<section id="background" class="relative bg-white pt-[30px] sm:pt-[80px] pb-[110px] sm:px-6">
     <div class="container mx-auto">
         <div class="flex flex-wrap -mx-4">
             <div class="w-full sm:px-4 lg:w-6/12">

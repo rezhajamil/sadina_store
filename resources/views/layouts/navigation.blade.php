@@ -17,10 +17,18 @@
             id="navbarSupportedContent4" data-te-collapse-item>
             <a class="pr-2 mr-4 text-xl font-semibold text-white" href="{{ route('home') }}">SADINA STORE</a>
             <!-- Left links -->
-            <ul class="flex flex-col pl-0 mr-auto list-style-none lg:flex-row" data-te-navbar-nav-ref>
+            <ul class="flex flex-col pl-0 mr-auto gap-x-3 gap-y-1 list-style-none lg:flex-row" data-te-navbar-nav-ref>
                 <li class="w-full py-2 underline" data-te-nav-item-ref>
-                    <a class="text-white disabled:text-black/30 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                    <a class="text-white hover:text-tertiary-600 transition-all disabled:text-black/30 [&.active]:text-black/90 whitespace-nowrap "
                         href="{{ route('browse.index') }}" data-te-nav-link-ref>Cari Busana</a>
+                </li>
+                <li class="w-full py-2 " data-te-nav-item-ref>
+                    <a class="text-white hover:text-tertiary-600 transition-all disabled:text-black/30 [&.active]:text-black/90 whitespace-nowrap "
+                        href="{{ route('home') }}#background" data-te-nav-link-ref>Cerita Kami</a>
+                </li>
+                <li class="w-full py-2 " data-te-nav-item-ref>
+                    <a class="text-white hover:text-tertiary-600 transition-all disabled:text-black/30 [&.active]:text-black/90 whitespace-nowrap "
+                        href="{{ route('home') }}#profile" data-te-nav-link-ref>Profil</a>
                 </li>
             </ul>
             <!-- Left links -->

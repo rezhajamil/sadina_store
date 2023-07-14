@@ -38,7 +38,7 @@ class BrowseController extends Controller
             $products->whereIn('category_id', $request->category);
         }
 
-        $products = $products->get();
+        $products = $products->paginate(30);
 
         // ddd($products);
 

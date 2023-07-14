@@ -47,13 +47,14 @@
             <h1 class="w-full mx-auto mt-4 text-xl font-bold text-center text-gray-500">Tidak Ada Produk Tersedia</h1>
         @endif
 
-        @if (count($products) >= 20)
-            <div class="flex items-center justify-center">
+        @if (count($products) >= 30)
+            {{ $products->links('components.pagination', ['data' => $products]) }}
+            {{-- <div class="flex items-center justify-center">
                 <button
                     class="w-full py-5 mt-10 text-base font-medium leading-4 text-white bg-primary-800 hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-800 md:px-16 md:w-auto lg:mt-28 md:mt-12">
                     Load More
                 </button>
-            </div>
+            </div> --}}
         @endif
     </div>
 @endsection

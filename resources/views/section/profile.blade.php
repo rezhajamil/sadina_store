@@ -206,19 +206,46 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap -mx-4">
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+        <div class="grid grid-cols-1 gap-4 my-4 -mx-4 md:grid-cols-3">
+            <div class="w-full px-4 mx-auto sm:w-1/2 md:w-full">
                 <div class="mb-8 rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
                     <div
-                        class="mb-8 flex h-[70px] w-[70px] items-center text-white justify-center rounded-2xl bg-primary">
+                        class="mb-8 flex h-[70px] w-[70px] items-center text-white text-2xl mx-auto justify-center rounded-2xl bg-primary-600">
                         <i class="fa-solid fa-users-line"></i>
                     </div>
-                    <h4 class="mb-3 text-xl font-semibold text-dark">
-                        Refreshing Design
+                    <h4 class="mb-3 text-xl font-semibold text-center text-dark">
+                        4 Orang
                     </h4>
-                    <p class="text-body-color">
-                        We dejoy working with discerning clients, people for whom
-                        qualuty, service, integrity & aesthetics.
+                    <p class="text-center text-gray-600">
+                        Karyawan terlatih
+                    </p>
+                </div>
+            </div>
+            <div class="w-full px-4 mx-auto sm:w-1/2 md:w-full">
+                <div class="mb-8 rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
+                    <div
+                        class="mb-8 flex h-[70px] w-[70px] items-center text-white text-2xl mx-auto justify-center rounded-2xl bg-secondary-600">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h4 class="mb-3 text-xl font-semibold text-center text-dark">
+                        8 Unit
+                    </h4>
+                    <p class="text-center text-gray-600">
+                        Mesin Alat Produksi
+                    </p>
+                </div>
+            </div>
+            <div class="w-full px-4 mx-auto sm:w-1/2 md:w-full">
+                <div class="mb-8 rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
+                    <div
+                        class="mb-8 flex h-[70px] w-[70px] items-center text-white text-2xl mx-auto justify-center rounded-2xl bg-tertiary-600">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+                    <h4 class="mb-3 text-xl font-semibold text-center text-dark">
+                        250 pcs per bulan
+                    </h4>
+                    <p class="text-center text-gray-600">
+                        Kemampuan Produksi
                     </p>
                 </div>
             </div>
