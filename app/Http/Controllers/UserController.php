@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Laravel\Socialite\Facades\Socialite;
-use PhpParser\Node\Expr\Cast\Object_;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -24,6 +24,24 @@ class UserController extends Controller
         // $users = User::with(['address'])->where('role', 'member')->orderBy('name')->paginate(50);
 
         return view('dashboard.user.show', compact('user'));
+    }
+
+    public function edit_password()
+    {
+        return view('dashboard.user.edit_password');
+    }
+
+    public function update_password(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return back()->with('success', 'Berhasil Mengubah Password');
     }
 
     public function login()

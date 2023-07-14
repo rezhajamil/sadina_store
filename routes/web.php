@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(
 
             Route::get('/user', [UserController::class, 'index'])->name('user.index');
             Route::get('/user/show/{user}', [UserController::class, 'show'])->name('user.show');
+            Route::get('/user/edit_password', [UserController::class, 'edit_password'])->name('user.edit_password');
+            Route::put('/user/update_password', [UserController::class, 'update_password'])->name('user.update_password');
 
             Route::put('order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
 

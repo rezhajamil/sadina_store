@@ -26,7 +26,7 @@ class OrderController extends Controller
             $orders->where('created_at', '<=', date('Y-m-d 23:59:59', strtotime($request->end_date)));
         }
 
-        $orders = $orders->paginate(50);
+        $orders = $orders->paginate(150);
 
         return view('dashboard.order.index', compact('orders'));
     }

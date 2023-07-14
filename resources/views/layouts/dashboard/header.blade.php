@@ -39,7 +39,7 @@
                 @if (count($notif))
                     @foreach ($notif as $item)
                         <a href="{{ route('admin.order.show', $item->order_id) }}?notif={{ $item->id }}"
-                            class="flex items-center px-4 py-3 -mx-2 text-gray-600 bg-gray-300 hover:text-white hover:bg-secondary-600">
+                            class="flex items-center px-4 py-3 -mx-2 text-gray-600 {{ $item->is_read ? 'bg-white' : 'bg-gray-300 ' }} hover:text-white hover:bg-secondary-600">
                             <img class="object-cover w-8 h-8 mx-1 rounded-full" src="{{ $item->user->avatar }}"
                                 alt="avatar" onerror="this.onerror=null;this.src='{{ asset('images/avatar.png') }}';">
                             <p class="mx-2 text-sm">
@@ -75,8 +75,9 @@
 
             <div x-cloak x-show="dropdownOpen"
                 class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl">
-                <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary-600 hover:text-white">Profile</a>
+                <a href="{{ route('admin.user.edit_password') }}"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary-600 hover:text-white">Ganti
+                    Password</a>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button type="submit"
