@@ -73,6 +73,9 @@ Route::middleware(['auth'])->group(
             Route::resource('notif', AdminNotifController::class);
             Route::resource('order', AdminOrderController::class);
 
+            Route::get('/user', [UserController::class, 'index'])->name('user.index');
+            Route::get('/user/show/{user}', [UserController::class, 'show'])->name('user.show');
+
             Route::put('order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
 
             Route::put('change_cover/product/{id}', [ProductController::class, 'changeCover'])->name('product.change_cover');

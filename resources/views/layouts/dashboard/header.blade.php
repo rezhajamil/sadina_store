@@ -35,7 +35,7 @@
 
             <div x-cloak x-show="notificationOpen"
                 class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-lg shadow-xl w-80"
-                style="width:20rem;">
+                style="width:20rem; display: hidden">
                 @if (count($notif))
                     @foreach ($notif as $item)
                         <a href="{{ route('admin.order.show', $item->order_id) }}?notif={{ $item->id }}"

@@ -53,6 +53,11 @@
                 <span class="inline-block px-2 py-3">Tag Produk</span>
             </a>
         </div>
+        <a href="{{ route('admin.user.index') }}"
+            class="flex items-center px-6 py-2 mt-4 text-white transition-all cursor-pointer hover:bg-slate-800 hover:bg-opacity-25 hover:text-gray-100">
+            <i class="fa-solid fa-user"></i>
+            <span class="mx-3 text-white select-none">Pengguna</span>
+        </a>
         <a href="{{ route('admin.order.index') }}"
             class="flex items-center px-6 py-2 mt-4 text-white transition-all cursor-pointer hover:bg-slate-800 hover:bg-opacity-25 hover:text-gray-100">
             <i class="fa-solid fa-cart-shopping"></i>

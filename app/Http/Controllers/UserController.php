@@ -12,6 +12,20 @@ use PhpParser\Node\Expr\Cast\Object_;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::with(['address', 'order'])->where('role', 'member')->orderBy('name')->paginate(50);
+
+        return view('dashboard.user.index', compact('users'));
+    }
+
+    public function show(User $user)
+    {
+        // $users = User::with(['address'])->where('role', 'member')->orderBy('name')->paginate(50);
+
+        return view('dashboard.user.show', compact('user'));
+    }
+
     public function login()
     {
         return Socialite::driver('google')->redirect();
