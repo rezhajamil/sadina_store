@@ -2,8 +2,9 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Sadina" class="h-24 mx-auto my-6">
                 {{-- <x-application-logo class="w-20 h-20 text-gray-500 fill-current" /> --}}
-                <span class="text-2xl font-bold text-seconday-600">SADINA STORE</span>
+                <span class="text-2xl font-bold text-seconday-500">SADINA STORE</span>
             </a>
         </x-slot>
 
@@ -20,8 +21,8 @@
             <div>
                 <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required
-                    autofocus />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')"
+                    required autofocus />
             </div>
 
             <!-- Password -->

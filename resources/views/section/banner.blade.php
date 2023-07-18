@@ -1,5 +1,5 @@
 <!-- banner -->
-<div class="relative bg-top bg-no-repeat bg-cover py-36"
+<div id="banner" class="relative bg-top bg-no-repeat bg-cover py-36"
     style="background-image: url('{{ asset('images/banner2.jpg') }}')">
     <div class="absolute inset-0 w-full h-full bg-slate-800/60"></div>
     <div class="container relative z-10 px-6">

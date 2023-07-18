@@ -1,4 +1,4 @@
-<div class="rounded overflow-hidden shadow-md card pb-2">
+<div class="pb-2 overflow-hidden rounded shadow-md card">
     <div class="relative">
         <div class="relative transition-all group">
             <div
@@ -14,8 +14,8 @@
             @endif
         @endforeach
         @if ($no_cover)
-            <img class="object-cover h-96" src="{{ asset('storage/' . $product->images[0]->image_url) }}"
-                alt="{{ $product->name }}" />
+            <img class="object-cover w-full object-center h-[450px]"
+                src="{{ asset('storage/' . $product->images[0]->image_url) }}" alt="{{ $product->name }}" />
         @endif
         <div class="absolute bottom-0 w-full p-8 opacity-0 group-hover:opacity-100">
             <a href="{{ route('browse.show', $product->id) }}"
@@ -24,10 +24,10 @@
             </a>
         </div>
     </div>
-    <p class="mt-4 px-3 text-xl font-bold leading-5 text-gray-800 md:mt-6">
+    <p class="px-3 mt-4 text-xl font-bold leading-5 text-gray-800 md:mt-6">
         {{ $product->name }}
     </p>
-    <p class="mt-4 px-3 text-lg font-semibold leading-5 text-gray-800">
+    <p class="px-3 mt-4 text-lg font-semibold leading-5 text-gray-800">
         <span class="text-base font-light text-gray-600 price"
             price="{{ $product->price }}">Rp</span>{{ number_format($product->price, 0, ',', '.') }}
     </p>

@@ -61,6 +61,7 @@ class CartController extends Controller
             ->where('product_id', $request->product)
             ->where('size_id', $request->size)
             ->where('color_id', $request->color)
+            ->where('status', 1)
             ->first();
 
         if ($itemInCart) {

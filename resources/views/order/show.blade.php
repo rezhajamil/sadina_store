@@ -14,43 +14,47 @@
             <span class="text-sm text-gray-500">{{ date('d-m-Y', strtotime($order->created_at)) }}</span>
             @include('components.payment-status', ['status' => $order->status])
         </div>
-        <div class="flex gap-2 border-t items-strech border-gray-50">
-            <div class="w-2/5 border rounded md:w-4/12 2xl:w-1/4">
-                <img src="{{ asset('storage/' . $order->orderItem[0]->cart->product->images[0]->image_url) }}"
-                    alt="{{ $order->orderItem[0]->cart->product->name }}"
-                    class="object-cover object-center w-full rounded h-96 md:mx-0 md:w-full md:block" />
-            </div>
-            <div class="flex flex-col justify-center py-1 gap-y-2">
-                <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
-                    <span class="">Kode</span>
-                    <span class="">:</span>
-                    <span class="">{{ $order->payment_number ?? '-' }}</span>
-                </div>
-                @if ($order->shipping_receipt)
-                    <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
-                        <span class="">No. Resi</span>
-                        <span class="">:</span>
-                        <span class="">{{ $order->shipping_receipt }}</span>
+        <div class="grid grid-cols-1 gap-4 xl:grid-cols-3">
+            @foreach ($order->orderItem as $item)
+                <div class="flex justify-between gap-2 border border-t rounded items-strech">
+                    <div class="w-2/5 border rounded md:w-1/3 xl:w-1/2">
+                        <img src="{{ asset('storage/' . $item->cart->product->images[0]->image_url) }}"
+                            alt="{{ $item->cart->product->name }}"
+                            class="object-cover object-center w-full rounded h-96 sm:h-[450px] md:mx-0 md:w-full md:block" />
                     </div>
-                @endif
-                <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
-                    <span class="">Jumlah Produk</span>
-                    <span class="">:</span>
-                    <span class="">{{ count($order->orderItem) }}</span>
+                    <div class="flex flex-col justify-center px-3 py-1 gap-y-2">
+                        <a href="{{ route('admin.product.show', $item->cart->product->id) }}"
+                            class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Nama</span>
+                            <span class="">:</span>
+                            <span class="">{{ $item->cart->product->name }}</span>
+                        </a>
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Warna</span>
+                            <span class="">:</span>
+                            <span class="">{{ $item->cart->color->name }}</span>
+                        </div>
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Ukuran</span>
+                            <span class="">:</span>
+                            <span class="">{{ $item->cart->size->name }}</span>
+                        </div>
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Jumlah Produk</span>
+                            <span class="">:</span>
+                            <span class="">{{ $item->cart->quantity }}</span>
+                        </div>
+                        <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
+                            <span class="">Harga</span>
+                            <span class="">:</span>
+                            <span class="">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
-                    <span class="">Belanja</span>
-                    <span class="">:</span>
-                    <span class="">Rp. {{ number_format($order->subtotal, 0, ',', '.') }}</span>
-                </div>
-                <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
-                    <span class="">Ongkir</span>
-                    <span class="">:</span>
-                    <span class="">Rp. {{ number_format($order->shipping, 0, ',', '.') }}</span>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <div class="flex flex-col flex-wrap justify-between gap-2 pt-2 border-t-2 sm:items-center sm:flex-row">
+        <div
+            class="flex flex-col flex-wrap justify-between gap-2 pt-2 border-t-2 border-t-secondary-600 sm:items-center sm:flex-row">
             <div class="flex flex-col sm:flex-row gap-x-2 gap-y-2">
                 <a href="https://wa.me/62{{ $admin->whatsapp }}" target="_blank"
                     class="px-3 py-2 text-sm font-semibold text-center transition-all bg-transparent border rounded sm:text-left sm:text-base text-emerald-600 border-emerald-600 hover:text-white hover:bg-emerald-600">Hubungi
