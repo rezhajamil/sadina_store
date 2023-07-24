@@ -1296,6 +1296,9 @@ select {
 .min-h-screen {
   min-height: 100vh;
 }
+.min-h-full {
+  min-height: 100%;
+}
 .w-0 {
   width: 0px;
 }
@@ -1428,9 +1431,6 @@ select {
 }
 .w-screen {
   width: 100vw;
-}
-.w-24 {
-  width: 6rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -5000,6 +5000,10 @@ body {
 
   .sm\:h-\[450px\] {
     height: 450px;
+  }
+
+  .sm\:h-full {
+    height: 100%;
   }
 
   .sm\:max-h-\[500px\] {
