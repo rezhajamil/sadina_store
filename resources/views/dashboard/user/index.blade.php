@@ -42,9 +42,9 @@
                                         </div>
                                     </td>
                                     <td class="p-3 text-gray-700 phone">{{ $data->phone }}</td>
-                                    <td class="p-3 text-gray-700 province">{{ $data->address->province }}</td>
-                                    <td class="p-3 text-gray-700 city">{{ $data->address->city }}</td>
-                                    <td class="p-3 text-gray-700 address">{{ $data->address->address }}</td>
+                                    <td class="p-3 text-gray-700 province">{{ $data->address->province ?? '-' }}</td>
+                                    <td class="p-3 text-gray-700 city">{{ $data->address->city ?? '-' }}</td>
+                                    <td class="p-3 text-gray-700 address">{{ $data->address->address ?? '-' }}</td>
                                     <td class="py-3 text-gray-700">
                                         <a href="https://wa.me/62{{ $data->whatsapp }}" target="_blank"
                                             class="text-2xl text-green-600 cursor-pointer hover:text-green-700"><i
