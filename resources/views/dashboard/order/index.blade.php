@@ -48,6 +48,9 @@
                                     class="px-4 py-2 font-bold text-white transition bg-gray-600 rounded-lg hover:bg-gray-800"><i
                                         class="mr-2 fa-solid fa-circle-xmark"></i>Reset</a>
                             @endif
+                            <button
+                                class="px-4 py-2 font-bold text-white transition rounded-lg bg-tertiary-600 hover:bg-tertiary-800"
+                                id="btn-print"><i class="mr-2 fa-solid fa-file-pdf"></i>Laporan</button>
                         </div>
                     </form>
                 </div>
@@ -56,7 +59,7 @@
                     class="inline-block px-4 py-2 my-2 font-bold text-white transition-all rounded-md bg-secondary-500 hover:bg-secondary-700"><i
                         class="mr-2 fa-solid fa-plus"></i> Data Produk Baru</a> --}}
 
-                <div class="overflow-auto bg-white rounded-md shadow w-fit">
+                <div class="overflow-auto bg-white rounded-md shadow w-fit" id="table-container">
                     <table class="overflow-auto text-left border-collapse w-fit">
                         <thead class="border-b">
                             <tr>
@@ -69,7 +72,8 @@
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Total</th>
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">No. Resi</th>
                                 <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Status</th>
-                                <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600">Action</th>
+                                <th class="p-3 text-sm font-medium text-gray-100 uppercase bg-primary-600 action">Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,7 +91,7 @@
                                     <td class="p-3 text-gray-700">
                                         @include('components.payment-status', ['status' => $order->status])
                                     </td>
-                                    <td class="p-3 text-gray-700">
+                                    <td class="p-3 text-gray-700 action">
                                         <a href="{{ route('admin.order.show', $order->id) }}"
                                             class="block my-1 text-base font-semibold text-indigo-600 transition whitespace-nowrap hover:text-indigo-800">Lihat
                                             Detail</a>
@@ -134,6 +138,55 @@
     </div>
 @endsection
 @section('script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js">
+    </script>
+    <script>
+        function createPDF() {
+            var table = document.getElementById('table-container').innerHTML;
+            var start_date = document.getElementById('start_date').value;
+            var end_date = document.getElementById('end_date').value;
+            // console.log({
+            //     start_date,
+            //     end_date
+            // });
+
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table.resume, th.resume, td.resume {border: solid 1px #A7706E; border-collapse: collapse;}";
+            style = style + "table, th, td {border: solid 1px #ccc; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;  margin-top:12px;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head> ');
+            win.document.write(
+                `<title>Daftar Pesanan</title>`
+            ); // <title> FOR PDF HEADER.
+            win.document.write(style); // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(`<body><h4>Daftar Pesanan</h4>`);
+            if (start_date) {
+                win.document.write(
+                `<span class='time'>Dari : ${start_date}</span>`); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            }
+            win.document.write('<br/>');
+            if (end_date) {
+                win.document.write(
+                `<span class='time'>Sampai : ${end_date}</span>`); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            }
+            // win.document.write('<br style="margin-bottom:4px"/>');
+            win.document.write(table);
+            win.document.write('</body> </html > ');
+
+            win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+            win.print(); // PRINT THE CONTENTS.
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $("#search").on("input", function() {
@@ -191,6 +244,15 @@
 
             $("#cancel").on("click", function() {
                 $("#modal-status").hide();
+            })
+
+            $("#btn-print").on("click", function(event) {
+                event.preventDefault();
+                $(".action").hide();
+                $(".pagination").hide();
+                createPDF();
+                $(".action").show();
+                $(".pagination").show();
             })
         })
     </script>

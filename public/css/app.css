@@ -3714,6 +3714,11 @@ body {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-tertiary-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(131 40 32 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-opacity-25:hover {
   --tw-bg-opacity: 0.25;
 }

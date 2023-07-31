@@ -1,4 +1,4 @@
-<div class="flex justify-center w-full p-2">
+<div class="flex justify-center w-full p-2 pagination">
     <nav class="inline-flex -space-x-px rounded-md shadow-sm isolate" aria-label="Pagination">
         @if (!$data->onFirstPage())
             <a href="{{ $data->previousPageUrl() }}"
