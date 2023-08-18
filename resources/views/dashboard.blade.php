@@ -4,7 +4,7 @@
     <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
     <div class="mt-4">
         <div class="flex gap-3 -mx-6 flex-wrap ">
-            <div class="w-full px-6 sm:w-1/2 xl:w-1/4">
+            <div class="w-full sm:w-1/2 xl:w-[30%] px-3">
                 <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
                     <div class="w-12 h-12 p-3 text-xl text-center bg-opacity-75 rounded-full bg-primary-600 aspect-square">
                         <i class="text-white fa-solid fa-users"></i>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-6 sm:w-1/2 xl:w-1/4">
+            <div class="w-full sm:w-1/2 xl:w-[30%] px-3">
                 <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
                     <div
                         class="w-12 h-12 p-3 text-xl text-center bg-opacity-75 rounded-full bg-secondary-600 aspect-square">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full px-6 sm:w-1/2 xl:w-1/4">
+            <div class="w-full sm:w-1/2 xl:w-[30%] px-3">
                 <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
                     <div class="w-12 h-12 p-3 text-xl text-center bg-opacity-75 rounded-full bg-tertiary-600 aspect-square">
                         <i class="text-white fa-solid fa-bag-shopping"></i>

@@ -50,12 +50,11 @@
                             </p>
                         </a>
                     @endforeach
-                    <a href="{{ route('admin.order.index') }}"
+                    <a href="{{ route('admin.notif.index') }}"
                         class="flex items-center justify-center px-4 py-3 -mx-2 text-gray-600 group hover:text-white hover:bg-secondary-600">
                         <p class="mx-2 text-sm">
                             <span class="font-semibold underline text-secondary-600 group-hover:text-white"
-                                href="#">Lihat Semua
-                                Notifikasi
+                                href="#">Lihat Semua Notifikasi
                             </span>
                         </p>
                     </a>

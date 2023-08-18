@@ -19,7 +19,8 @@ class NotifController extends Controller
 
         $new = Notification::select('id')->where('target', 'admin')->where('is_read', 0)->get();
         $new = json_decode(json_encode($new->pluck('id')), true);
-        Notification::where('user_id', auth()->user()->id)->where('target', 'user')->update(['is_read' => 1]);
+        // ddd($new);
+        Notification::whereIn('id', $new)->where('target', 'admin')->update(['is_read' => 1]);
 
         return view('dashboard.notification.index', compact('notif', 'new'));
     }
