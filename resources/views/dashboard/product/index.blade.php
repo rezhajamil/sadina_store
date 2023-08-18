@@ -5,7 +5,7 @@
             <div class="mt-4">
                 <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Produk</h4>
 
-                <div class="flex flex-wrap items-end mb-2 gap-x-4">
+                <div class="flex flex-wrap items-end my-2 gap-4">
                     <input type="text" name="search" id="search" placeholder="Search..." class="px-4 rounded-lg">
                     <div class="flex flex-col">
                         <span class="font-bold text-gray-600">Berdasarkan</span>

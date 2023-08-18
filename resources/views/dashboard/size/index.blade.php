@@ -10,7 +10,7 @@
                     class="inline-block px-4 py-2 my-2 font-bold text-white transition-all rounded-md bg-secondary-500 hover:bg-secondary-700"><i
                         class="mr-2 fa-solid fa-plus"></i> Data Ukuran Baru</a>
 
-                <div class="flex flex-wrap items-end mb-2 gap-x-4">
+                <div class="flex flex-wrap items-end my-2 gap-4">
                     <input type="text" name="search" id="search" placeholder="Search..." class="px-4 rounded-lg">
                     <div class="flex flex-col">
                         <span class="font-bold text-gray-600">Berdasarkan</span>

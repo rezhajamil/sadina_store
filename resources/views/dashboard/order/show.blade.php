@@ -6,9 +6,9 @@
     <div class="w-full mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
-                <div class="flex items-center gap-x-3 ">
+                <div class="flex flex-wrap items-center gap-3 ">
                     <a href="{{ url()->previous() }}"
-                        class="inline-block px-4 py-2 font-bold text-white transition-all rounded-md bg-secondary-300 hover:bg-secondary-400">
+                        class="inline-block px-4 py-2 font-bold whitespace-nowrap text-white transition-all rounded-md bg-secondary-300 hover:bg-secondary-400">
                         <i class="mr-2 fa-solid fa-arrow-left"></i> Kembali
                     </a>
                     <h4 class="text-xl font-bold text-gray-600 align-baseline">Detail Pesanan</h4>

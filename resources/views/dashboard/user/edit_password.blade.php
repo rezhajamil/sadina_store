@@ -12,7 +12,7 @@
                     <form action="{{ route('admin.user.update_password') }}" method="POST" class="">
                         @csrf
                         @method('put')
-                        <div class="grid grid-cols-2 gap-6 mt-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
                             <div class="flex flex-col">
                                 <label class="block text-gray-700" for="password">Password Baru</label>
                                 <input type="password" name="password" id="password" placeholder="Password Baru">

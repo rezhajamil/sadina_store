@@ -5,7 +5,7 @@
             <div class="mt-4">
                 <h4 class="text-xl font-bold text-gray-600 align-baseline">Daftar Pesanan</h4>
 
-                <div class="flex flex-wrap items-end mb-2 gap-x-4">
+                <div class="flex flex-wrap items-end my-2 gap-4">
                     <input type="text" name="search" id="search" placeholder="Search..." class="px-4 rounded-lg">
                     <div class="flex flex-col">
                         <span class="font-bold text-gray-600">Berdasarkan</span>
@@ -171,12 +171,12 @@
             win.document.write(`<body><h4>Daftar Pesanan</h4>`);
             if (start_date) {
                 win.document.write(
-                `<span class='time'>Dari : ${start_date}</span>`); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+                    `<span class='time'>Dari : ${start_date}</span>`); // THE TABLE CONTENTS INSIDE THE BODY TAG.
             }
             win.document.write('<br/>');
             if (end_date) {
                 win.document.write(
-                `<span class='time'>Sampai : ${end_date}</span>`); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+                    `<span class='time'>Sampai : ${end_date}</span>`); // THE TABLE CONTENTS INSIDE THE BODY TAG.
             }
             // win.document.write('<br style="margin-bottom:4px"/>');
             win.document.write(table);
