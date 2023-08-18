@@ -824,6 +824,9 @@ select {
 .-right-5 {
   right: -1.25rem;
 }
+.-right-10 {
+  right: -2.5rem;
+}
 .isolate {
   isolation: isolate;
 }

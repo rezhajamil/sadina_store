@@ -34,7 +34,7 @@
                 class="fixed inset-0 z-10 w-full h-full"></div>
 
             <div x-cloak x-show="notificationOpen"
-                class="absolute sm:right-0 -right-5 z-10 mt-2 overflow-hidden bg-white rounded-lg shadow-xl w-80"
+                class="absolute sm:right-0 -right-10 z-10 mt-2 overflow-hidden bg-white rounded-lg shadow-xl w-80"
                 style="width:20rem; display: hidden">
                 @if (count($notif))
                     @foreach ($notif as $item)
