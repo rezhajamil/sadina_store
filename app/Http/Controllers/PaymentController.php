@@ -103,8 +103,8 @@ class PaymentController extends Controller
             ],
         );
 
-        $carts = Cart::with(['user', 'product.images', 'product.category', 'product.colors', 'product.sizes', 'size', 'color'])->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
-        ddd($carts);
+        $carts = Cart::with(['user', 'product.images', 'product.category', 'product.colors', 'product.sizes', 'size', 'color'])->where('user_id', auth()->user()->id)->where('status', '1')->orderBy('created_at', 'DESC')->get();
+        // ddd($carts);
         foreach ($carts as $key => $cart) {
             $order_items = OrderItem::create([
                 'order_id' => $order->id,
