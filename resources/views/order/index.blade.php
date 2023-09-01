@@ -56,7 +56,7 @@
                                 class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-tertiary-600 border-tertiary-600 hover:text-white hover:bg-tertiary-600">Bayar
                                 Pesanan</a>
                         @endif
-                        <a href="{{ route('order.show', $order->id) }}"
+                        <a href="{{ route('browse.show', $order->id) }}"
                             class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-secondary-600 border-secondary-600 hover:text-white hover:bg-secondary-600">Detail
                             Pesanan</a>
                     </div>
