@@ -8,10 +8,10 @@
     <meta name="referrer" content="always">
     {{-- <link rel="canonical" href="{{ $page->getUrl() }}"> --}}
 
-    <meta name="description" content="DASHBOARD YOUTH JAWARA">
+    <meta name="description" content="DASHBOARD SADINA">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'DASHBOARD YOUTH JAWARA' }}</title>
+    <title>{{ $title ?? 'DASHBOARD SADINA' }}</title>
 
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -69,7 +69,7 @@
                 @include('layouts.dashboard.header')
 
                 <main class="flex-1 overflow-auto bg-gray-200">
-                    <div class="sm:px-6 px-1 py-4 mx-auto">
+                    <div class="px-1 py-4 mx-auto sm:px-6">
                         @yield('body')
                     </div>
                 </main>
