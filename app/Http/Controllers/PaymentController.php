@@ -212,7 +212,7 @@ class PaymentController extends Controller
     {
         // ddd($request);
         $notif = $request->method() == 'POST' ? new Midtrans\Notification() : Midtrans\Transaction::status($request->order_id);
-        // return $notif;
+        return 'haha';
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
         $payment_method = $notif->payment_type;
