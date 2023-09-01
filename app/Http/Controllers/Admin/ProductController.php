@@ -62,7 +62,7 @@ class ProductController extends Controller
             'color' => ['required'],
             'size' => ['required'],
             'tag' => ['required'],
-            'image' => ['required'],
+            'image' => ['required', 'max:4096'],
             // 'cover' => ['required'],
         ]);
 
@@ -183,7 +183,7 @@ class ProductController extends Controller
         if ($request->delete_image) {
             if (count($request->delete_image) >= count($product->images)) {
                 $request->validate([
-                    'image' => ['required'],
+                    'image' => ['required', 'max:4096'],
                 ]);
             }
         }
