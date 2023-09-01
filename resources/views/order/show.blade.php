@@ -23,7 +23,7 @@
                             class="object-cover object-center w-full rounded h-96 sm:h-[450px] md:mx-0 md:w-full md:block" />
                     </div>
                     <div class="flex flex-col justify-center px-3 py-1 gap-y-2">
-                        <a href="{{ route('admin.product.show', $item->cart->product->id) }}"
+                        <a href="{{ route('browse.show', $item->cart->product->id) }}"
                             class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
                             <span class="">Nama</span>
                             <span class="">:</span>
