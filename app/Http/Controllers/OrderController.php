@@ -19,6 +19,8 @@ class OrderController extends Controller
         $orders = Order::with(['user', 'payment', 'orderItem'])->where('user_id', auth()->user()->id)->paginate(10);
         $admin = User::where('email', 'admin@sadina.store')->first();
 
+        ddd($orders);
+
         return view('order.index', compact('orders', 'admin'));
     }
 
