@@ -43,7 +43,7 @@ class CartController extends Controller
         } else {
             return redirect()->route('browse.index');
         }
-        ddd($carts);
+        // ddd($carts);
 
         // ddd($carts[0]->product);
         return view('cart.index', compact('carts', 'user', 'categories', 'total', 'weight', 'province', 'cost'));
