@@ -4,7 +4,7 @@
         <x-alert type='success'>{{ session('success') }}</x-alert>
     @endif
     <div class="px-4 py-6 my-2">
-        <a href="{{ url()->previous() }}"
+        <a href="{{ route('order.index') }}"
             class="px-4 py-2 transition-all border-2 rounded-full hover:bg-secondary-800 hover:text-white border-secondary-800"><i
                 class="mr-2 fa-solid fa-arrow-left"></i>Kembali
         </a>
