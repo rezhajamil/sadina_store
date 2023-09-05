@@ -51,7 +51,7 @@
                 </div>
                 <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2">
                     <div class="flex gap-x-2">
-                        @if ($order->status == 'waiting')
+                        @if ($order->status == 'waiting' || $order->status == 'pending')
                             <a href="{{ $order->payment->midtrans_url }}"
                                 class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-tertiary-600 border-tertiary-600 hover:text-white hover:bg-tertiary-600">Bayar
                                 Pesanan</a>

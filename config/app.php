@@ -179,6 +179,7 @@ return [
         App\Providers\CartServiceProvider::class,
         App\Providers\NotifServiceProvider::class,
 
+
     ],
 
     /*

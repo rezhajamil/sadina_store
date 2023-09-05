@@ -1,5 +1,5 @@
 @switch($status)
-    @case('waiting')
+    @case('waiting' || 'pending')
         <div class="flex items-center justify-center px-3 py-1 rounded-full bg-yellow-400/80">
             <span class="text-sm font-semibold text-yellow-700 whitespace-nowrap status" status="{{ $status }}">
                 Menunggu Pembayaran
