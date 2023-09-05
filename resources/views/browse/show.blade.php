@@ -85,13 +85,13 @@
                     <div class="py-4 border-t border-b border-gray-200 mt-7">
                         <div data-menu class="flex items-center justify-between cursor-pointer select-none">
                             <p class="text-base leading-4 text-gray-800">Tag</p>
-                            <button
+                            <span
                                 class="rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                                 role="button" aria-label="show or hide">
                                 <img class="transform"
                                     src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail3-svg4.svg"
                                     alt="dropdown">
-                            </button>
+                            </span>
                         </div>
                         <div class="hidden gap-3 pt-4 mt-4 text-base leading-normal text-gray-600 " id="sect">
                             @foreach ($product->tags as $tag)

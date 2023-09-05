@@ -86,9 +86,8 @@
                             @csrf
                             @method('put')
                             @foreach ($product->images as $image)
-                                <label for="image{{ $image->id }}"
-                                    class="relative h-56 overflow-hidden border-2 rounded">
-                                    <img src="{{ asset("storage/$image->image_url") }}" />
+                                <label for="image{{ $image->id }}" class="relative border-2 rounded h-72 w-fit">
+                                    <img src="{{ asset("storage/$image->image_url") }}" class="object-contain h-full" />
                                     <input type="radio" name="cover" id="image{{ $image->id }}" class="hidden peer"
                                         value="{{ $image->id }}" {{ $image->is_cover ? 'checked' : '' }}>
                                     <div

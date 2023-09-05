@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Product;
@@ -66,6 +67,12 @@ class ProductController extends Controller
             // 'cover' => ['required'],
         ]);
 
+        if ($request->image) {
+            # code...
+            // ddd($request->image);
+        } else {
+            ddd('a');
+        }
 
         $product = Product::create([
             'name' => ucfirst($request->name),

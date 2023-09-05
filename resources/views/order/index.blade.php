@@ -8,16 +8,16 @@
     </div>
     <div class="flex flex-col w-full gap-3 px-2 bg-gray-100 gap-y-6">
         @foreach ($orders as $order)
-            <div class="flex flex-col w-full px-4 pt-4 pb-3 bg-white rounded gap-y-4">
+            <div class="flex flex-col w-full px-4 pt-4 pb-3 mx-auto bg-white rounded sm:w-2/3 gap-y-4">
                 <div class="flex justify-between">
                     <span class="text-sm text-gray-500">{{ date('d-m-Y', strtotime($order->created_at)) }}</span>
                     @include('components.payment-status', ['status' => $order->status])
                 </div>
                 <div class="flex gap-2 border-t items-strech border-gray-50">
-                    <div class="w-2/5 border rounded md:w-4/12 2xl:w-1/4">
+                    <div class="border rounded w-fit">
                         <img src="{{ asset('storage/' . $order->orderItem[0]->cart->product->images[0]->image_url) }}"
                             alt="{{ $order->orderItem[0]->cart->product->name }}"
-                            class="object-cover object-center w-full rounded h-52 md:mx-0 md:w-full md:block" />
+                            class="object-contain object-center w-full rounded h-52 md:h-72 md:mx-0 md:w-full md:block" />
                     </div>
                     <div class="flex flex-col justify-center py-1 gap-y-2">
                         <div class="flex text-sm text-gray-600 sm:text-lg gap-x-2">
@@ -58,7 +58,8 @@
                         @endif
                         <a href="{{ route('order.show', $order->id) }}"
                             class="px-3 py-2 text-sm font-semibold transition-all bg-transparent border rounded sm:text-base text-secondary-600 border-secondary-600 hover:text-white hover:bg-secondary-600">Detail
-                            Pesanan</a>
+                            Pesanan
+                        </a>
                     </div>
                     <div class="space-x-4 text-base font-bold sm:text-xl text-secondary-600">
                         <span class="">Total : </span>

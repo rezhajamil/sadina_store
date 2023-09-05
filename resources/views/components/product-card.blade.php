@@ -5,18 +5,16 @@
                 class="absolute top-0 left-0 flex items-center justify-center w-full h-full transition-all opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50">
             </div>
             @foreach ($product->images as $key => $image)
-                @php $no_cover = true @endphp
                 @if ($image->is_cover)
                     <img class="object-cover w-full h-[450px]" src="{{ asset("storage/$image->image_url") }}"
                         alt="{{ $product->name }}" />
-                    @php $no_cover = false @endphp
                 @break
             @endif
         @endforeach
-        @if ($no_cover)
+        @isset($no_cover)
             <img class="object-cover w-full object-center h-[450px]"
                 src="{{ asset('storage/' . $product->images[0]->image_url) }}" alt="{{ $product->name }}" />
-        @endif
+        @endisset
         <div class="absolute bottom-0 w-full p-8 opacity-0 group-hover:opacity-100">
             <a href="{{ route('browse.show', $product->id) }}"
                 class="inline-block w-full py-3 mt-2 text-base font-bold leading-4 text-center text-white transition-all bg-transparent border-2 border-white hover:bg-primary-600">

@@ -1281,6 +1281,9 @@ select {
 .h-screen {
   height: 100vh;
 }
+.h-72 {
+  height: 18rem;
+}
 .max-h-96 {
   max-height: 24rem;
 }
@@ -1432,6 +1435,9 @@ select {
 .w-screen {
   width: 100vw;
 }
+.w-2\/3 {
+  width: 66.666667%;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1569,6 +1575,14 @@ select {
 }
 .rotate-90 {
   --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-rotate-180 {
+  --tw-rotate: -180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-rotate-90 {
+  --tw-rotate: -90deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-0 {
@@ -5015,6 +5029,10 @@ body {
     height: 100%;
   }
 
+  .sm\:h-72 {
+    height: 18rem;
+  }
+
   .sm\:max-h-\[500px\] {
     max-height: 500px;
   }
@@ -5207,6 +5225,10 @@ body {
 
   .md\:hidden {
     display: none;
+  }
+
+  .md\:h-72 {
+    height: 18rem;
   }
 
   .md\:w-1\/2 {

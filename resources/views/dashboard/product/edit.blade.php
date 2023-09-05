@@ -164,11 +164,10 @@
                         <span class="text-sm italic text-red-600" id="choose">Hapus Gambar</span>
                         <div class="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2" id="image-grid">
                             @foreach ($product->images as $image)
-                                <label for="image{{ $image->id }}"
-                                    class="relative h-56 overflow-hidden border-2 rounded">
-                                    <img src="{{ asset("storage/$image->image_url") }}" />
+                                <label for="image{{ $image->id }}" class="relative border-2 rounded h-72 w-fit">
+                                    <img src="{{ asset("storage/$image->image_url") }}" class="object-contain h-full" />
                                     <input type="checkbox" name="delete_image[]" id="image{{ $image->id }}"
-                                        class="hidden peer" value="{{ $image->id }}">
+                                        class="hidden peer " value="{{ $image->id }}">
                                     <div
                                         class="absolute inset-0 hidden w-full h-full border-4 border-red-600 rounded border-spacing-3 peer-checked:block">
                                     </div>
@@ -209,8 +208,8 @@
                         // console.log(e.target.result);
                         // console.log(input.files);
                         preview.append(
-                            `<label for="cover${cover}" class="relative h-56 overflow-hidden border-2 rounded">
-                                <img src="${e.target.result}"/>
+                            `<label for="cover${cover}" class="relative overflow-hidden border-2 rounded w-fit h-72">
+                                <img src="${e.target.result}" class='object-contain h-full'/>
                                 
                             </label>`
                         );
