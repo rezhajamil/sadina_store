@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/form/{url}', ([HomeController::class, 'url_form']))->name('url_form');
+
 Route::get('/', ([HomeController::class, 'index']))->name('home');
 Route::get('login', ([UserController::class, 'login']))->name('login');
 Route::get('login/callback', ([UserController::class, 'login_callback']))->name('login_callback');
