@@ -8,7 +8,7 @@ class RajaOngkirApiController extends Controller
 {
     public static function getListProvince()
     {
-        $url_province = 'https://api.rajaongkir.com/starter/province';
+        $url_province = env('RAJAONGKIR_API_HOST') . '/api/v1/destination/province';
 
         // $proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         // $fullUrl = $proxyUrl . $url;
@@ -36,7 +36,8 @@ class RajaOngkirApiController extends Controller
     {
         // ddd($request);
         $provinceId = $request->input('provinceId');
-        $url_city = "https://api.rajaongkir.com/starter/city?province=$provinceId";
+        // $url_city = "https://api.rajaongkir.com/starter/city?province=$provinceId";
+        $url_city =  env('RAJAONGKIR_API_HOST') . '/api/v1/destination/city/' . $provinceId;
 
         $ch = curl_init();
         $api_key = env('RAJAONGKIR_API_KEY');
@@ -64,8 +65,10 @@ class RajaOngkirApiController extends Controller
         $api_key = env('RAJAONGKIR_API_KEY');
         $origin = env('RAJAONGKIR_ORIGIN');
 
+        $url = env('RAJAONGKIR_API_HOST') . '/api/v1/calculate/district/domestic-cost';
+
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

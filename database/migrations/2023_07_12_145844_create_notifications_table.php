@@ -17,7 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('order_id')->nullable();
-            $table->string('target')->nullable();
+            $table->unsignedBigInteger('target_id')->nullable();
             $table->string('message');
             $table->boolean('is_read')->default(0);
             $table->timestamps();

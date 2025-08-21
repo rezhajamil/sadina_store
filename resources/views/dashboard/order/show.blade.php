@@ -6,9 +6,9 @@
     <div class="w-full mx-4">
         <div class="flex flex-col">
             <div class="mt-4">
-                <div class="flex flex-wrap items-center gap-3 ">
+                <div class="flex flex-wrap items-center gap-3">
                     <a href="{{ url()->previous() }}"
-                        class="inline-block px-4 py-2 font-bold whitespace-nowrap text-white transition-all rounded-md bg-secondary-300 hover:bg-secondary-400">
+                        class="inline-block px-4 py-2 font-bold text-white transition-all rounded-md whitespace-nowrap bg-secondary-300 hover:bg-secondary-400">
                         <i class="mr-2 fa-solid fa-arrow-left"></i> Kembali
                     </a>
                     <h4 class="text-xl font-bold text-gray-600 align-baseline">Detail Pesanan</h4>
@@ -16,7 +16,7 @@
                         class="block p-2 my-1 text-base font-semibold text-white transition-all bg-green-600 rounded whitespace-nowrap hover:bg-green-800">Hubungi
                         Pembeli</a>
                     <button
-                        class="block p-2 my-1 text-base font-semibold text-left text-white transition-all bg-orange-600 rounded whitespace-nowrap hover:bg-orange-800 btn-status"
+                        class="block p-2 my-1 text-base font-semibold text-left text-white transition-all bg-orange-600 rounded btn-status whitespace-nowrap hover:bg-orange-800"
                         data-id="{{ $order->id }}" status="{{ $order->status }}">
                         Ubah Status
                     </button>
@@ -24,25 +24,25 @@
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div
-                        class="w-full px-2 py-4 mt-4 overflow-auto bg-white rounded-md shadow sm:px-6 col-span-full sm:col-span-1 sm:mx-0">
+                        class="w-full px-2 py-4 mt-4 overflow-auto bg-white rounded-md shadow col-span-full sm:col-span-1 sm:mx-0 sm:px-6">
                         <div>
                             <div class="flex flex-col gap-2 my-3">
                                 <span class="text-lg font-bold">Pembeli</span>
                                 <table class="w-full border-2 rounded-md">
                                     <tr>
-                                        <td class="p-2 font-semibold border">Nama Pengguna</td>
+                                        <td class="p-2 font-semibold bg-gray-500 border">Nama Pengguna</td>
                                         <td class="p-2 border">{{ $order->user->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2 font-semibold border">Nama Pembeli</td>
+                                        <td class="p-2 font-semibold bg-gray-500 border">Nama Pembeli</td>
                                         <td class="p-2 border">{{ $order->receiver_name }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2 font-semibold border">Telepon Pembeli</td>
+                                        <td class="p-2 font-semibold bg-gray-500 border">Telepon Pembeli</td>
                                         <td class="p-2 border">{{ $order->receiver_phone }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2 font-semibold border">Alamat Pembeli</td>
+                                        <td class="p-2 font-semibold bg-gray-500 border">Alamat Pembeli</td>
                                         <td class="p-2 border">{{ $order->receiver_province }} |
                                             {{ $order->receiver_city }} | {{ $order->receiver_address }} |
                                             {{ $order->receiver_zip_code }}
@@ -55,7 +55,7 @@
                                 <table class="w-full border-2 rounded-md">
                                     <tr>
                                         <td class="p-2 font-semibold border">Tanggal</td>
-                                        <td class="p-2 border">{{ date('d-m-Y H:i', strtotime($order->created_at)) }}</td>
+                                        <td class="p-2 border">{{ date('d M Y H:i', strtotime($order->created_at)) }}</td>
                                     </tr>
                                     <tr>
                                         <td class="p-2 font-semibold border">Jumlah Produk</td>
