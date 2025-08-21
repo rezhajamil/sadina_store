@@ -26,8 +26,10 @@ class RajaOngkirApiController extends Controller
         $province = json_decode($province);
         curl_close($ch);
 
+
         // ddd($province);
-        $province = $province->rajaongkir->results;
+        // $province = $province->rajaongkir->results;
+        $province = $province->data;
 
         return $province;
     }
@@ -51,7 +53,8 @@ class RajaOngkirApiController extends Controller
         $city = json_decode($city);
         curl_close($ch);
 
-        $city = $city->rajaongkir->results;
+        $city = $city->data;
+        // $city = $city->rajaongkir->results;
 
         return $city;
     }
@@ -88,7 +91,7 @@ class RajaOngkirApiController extends Controller
 
         curl_close($curl);
 
-        $cost = $cost->rajaongkir->results[0];
+        $cost = $cost->data;
         // ddd($cost);
 
         return $cost;
