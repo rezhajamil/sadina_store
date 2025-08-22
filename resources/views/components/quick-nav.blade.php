@@ -4,27 +4,20 @@
             <img src="{{ asset('images/logo.png') }}" alt="Logo Sadina" class="h-24 pt-4">
         </div>
         <div class="flex flex-col gap-y-3 navigation">
-            <a href="https://www.tiktok.com/@rafasadina0?is_from_webapp=1&sender_device=pc" target="_blank"
+            <a href="https://www.tiktok.com/@sadinafashiondesign?_t=8lmbSK7Co4n&_r=1" target="_blank"
                 class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">
                 <i class="mr-4 fa-brands fa-tiktok"></i> Sadina TikTok
             </a>
-            {{-- <a href="https://drive.google.com/drive/folders/12XWCEmJi2rqmHwY314G9UefewPCZaYvY" target="_blank"
+            
+            <a href="https://www.instagram.com/sadinafashiondesign?igsh=aHZobjJ4dDhmcnQz" target="_blank"
                 class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">
-                <i class="mr-4 fa-solid fa-book"></i> Katalog Sadina
-            </a> --}}
-            <a href="{{ route('browse.index') }}" target="_blank"
-                class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">
-                <i class="mr-4 fa-solid fa-book"></i> Katalog Sadina
+                <i class="mr-4 fa-brands fa-instagram"></i> Sadina Intagram
             </a>
-            <a href="https://www.facebook.com/silvia.noviani.7/videos" target="_blank"
+            {{-- <a href="https://www.instagram.com/sadinafashiondesign?igsh=aHZobjJ4dDhmcnQz" target="_blank"
                 class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">
-                <i class="mr-4 fa-brands fa-facebook"></i> Sadina Facebook
-            </a>
-            {{-- <a href="https://www.facebook.com/silvia.noviani.7/videos" target="_blank"
-                class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">
-                <i class="mr-4 fa-brands fa-facebook"></i> Update Produk di Facebook
+                <i class="mr-4 fa-brands fa-intagram"></i> Cek kami di Instagram
             </a> --}}
-            <a href="https://goo.gl/maps/VdG99X3wE9C7RK4RA" target="_blank"
+            <a href="https://www.google.com/maps/dir/3.5928798,98.675995/SADINA,+Jl+Bunga+Pariama+Komplek+Puri+Adam+malik+Blok+B+22%2F23,+Baru+Ladang+Bambu,+Medan+Tuntutungan,+Kota+Medan,+Sumatera+Utara+20138,+Indonesia/@3.5432699,98.5541807,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x303125a651d7643f:0x6c8d1f5c3077e7f0!2m2!1d98.5967378!2d3.4970151?entry=ttu" target="_blank"
                 class="px-6 py-4 overflow-hidden text-lg font-bold transition-all duration-300 ease-in-out border-4 rounded-lg shadow-md hover:shadow-xl sm:px-14 nav-link">
                 <i class="mr-4 fa-solid fa-map-location-dot"></i> Lokasi Sadina
             </a>

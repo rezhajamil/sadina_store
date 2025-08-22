@@ -9,11 +9,6 @@
                     </a>
                     <p class="text-base mb-7 text-body-color">
                         Jl. Bunga Pariama, Puri Adam Malik B22/23 - Ladang Bambu Medan Tuntungan, Kota Medan
-                    </p>
-                    <p class="flex items-center text-sm font-medium text-dark">
-                        <i class="mr-3 fa-solid fa-phone text-primary-600"></i>
-                        <span>08535726066</span>
-                    </p>
                     <p class="flex items-center mt-2 text-sm font-medium text-dark">
                         <i class="mr-3 fa-solid fa-envelope-open-text text-primary-600"></i>
                         <span>divacoints2005@gmail.com</span>
@@ -49,21 +44,27 @@
                 <div class="w-full mb-10">
                     <h4 class="text-lg font-semibold mb-9 text-dark">Ikuti Kami</h4>
                     <div class="flex items-center mb-6">
-                        <a href="https://www.facebook.com/silvia.noviani.7" target="_blank"
+                        
+                        <a href="https://wa.me/+6285357260666" target="_blank"
                             class="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] text-dark hover:border-primary-600 hover:bg-primary-600 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4">
-                            <svg width="8" height="16" viewBox="0 0 8 16" class="fill-current">
-                                <path
-                                    d="M7.43902 6.4H6.19918H5.75639V5.88387V4.28387V3.76774H6.19918H7.12906C7.3726 3.76774 7.57186 3.56129 7.57186 3.25161V0.516129C7.57186 0.232258 7.39474 0 7.12906 0H5.51285C3.76379 0 2.54609 1.44516 2.54609 3.5871V5.83226V6.34839H2.10329H0.597778C0.287819 6.34839 0 6.63226 0 7.04516V8.90323C0 9.26452 0.243539 9.6 0.597778 9.6H2.05902H2.50181V10.1161V15.3032C2.50181 15.6645 2.74535 16 3.09959 16H5.18075C5.31359 16 5.42429 15.9226 5.51285 15.8194C5.60141 15.7161 5.66783 15.5355 5.66783 15.3806V10.1419V9.62581H6.13276H7.12906C7.41688 9.62581 7.63828 9.41935 7.68256 9.10968V9.08387V9.05806L7.99252 7.27742C8.01466 7.09677 7.99252 6.89032 7.85968 6.68387C7.8154 6.55484 7.61614 6.42581 7.43902 6.4Z" />
-                            </svg>
+                            <i class="fa-brands fa-whatsapp"></i>
                         </a>
-                        <a href="https://www.instagram.com/kerudungcantikunik/" target="_blank"
+                     
+                        <a href="https://www.instagram.com/sadinafashiondesign" target="_blank"
                             class="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] text-dark hover:border-primary-600 hover:bg-primary-600 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@rafasadina0?is_from_webapp=1&sender_device=pc" target="_blank"
+                        <a href="https://www.tiktok.com/@sadinafashiondesign?_t=8lmbSK7Co4n&_r=1" target="_blank"
                             class="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] text-dark hover:border-primary-600 hover:bg-primary-600 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
+                        <a href="https://www.google.com/maps/dir//Jl+Bunga+Pariama+Komplek+Puri+Adam+malik+Blok+B+22%2F23,+Baru+Ladang+Bambu,+Medan+Tuntutungan,+Kota+Medan,+Sumatera+Utara+20138/@3.4970115,98.5143358,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x303125a651d7643f:0x6c8d1f5c3077e7f0!2m2!1d98.5967378!2d3.4970151?hl=en-GB&entry=ttu" target="_blank"
+                            class="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] text-dark hover:border-primary-600 hover:bg-primary-600 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </a>
+                        
+                        
+                        
                         {{-- <a href="https://www.youtube.com/@alazharcentresumut1872" target="_blank"
                             class="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] text-dark hover:border-primary-600 hover:bg-primary-600 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4">
                             <svg width="16" height="12" viewBox="0 0 16 12" class="fill-current">

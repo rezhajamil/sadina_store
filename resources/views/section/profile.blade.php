@@ -1,4 +1,5 @@
-<section id="profile" class="px-1 pt-12 pb-10 overflow-hidden bg-gray-100 sm:px-6">
+<section id="profile" class="px-1 pt-12 pb-10 overflow-hidden bg-grey-100 sm:px-6">
+    
     <div class="container mx-auto">
         <div class="flex flex-wrap items-center justify-between -mx-4">
             <div class="w-full px-4 lg:w-6/12">
@@ -186,21 +187,29 @@
             <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
                 <div class="mt-10 lg:mt-0">
                     <h2 class="mb-8 text-3xl font-bold text-dark sm:text-4xl">
-                        Profil Kami
+                     Our Profile
                     </h2>
                     <span class="block mt-2 text-lg font-semibold text-primary-600">
-                        Visi
+                    Core Strengths    
                     </span>
+                    
+
                     <p class="mb-8 text-base text-justify text-gray-800">
-                        Menjadi Salah satu UMKM di Medan yang mampu menyerap tenaga kerja dan mampu membantu
-                        perekonomian masyarakat yang kurang mampu
+                        Sadina’s products combine functional design with artistic touches. 
+                        Silvia Noviani, the lead designer at Sadina, merges local Indonesian heritage with modern design to create "modern ethnic wear". 
+                        Her designs are not only stylish but also tell the story and values of Indonesian culture through every detail, 
+                        including the use of eco-print and locally sourced materials. Sadina also holds a trademark certificate from the Indonesian Intellectual Property Rights (HAKI), 
+                        further establishing its commitment to authenticity and originality.
+
                     </p>
                     <span class="block mt-2 text-lg font-semibold text-primary-600">
-                        Misi
+                        Unique Production Process
                     </span>
                     <p class="mb-8 text-base text-justify text-gray-800">
-                        Menjadi pilihan dan penyedia produk fashion yang bisa mewujudkan keinginan fashion style
-                        konsumen dengan produk yang berkualitas dan harga yang kompetitif
+                        Sadina proudly utilizes local heritage materials combined with modern design innovations. 
+                        We create "modern ethnic wear" by employing traditional fabrics and eco-printing techniques developed in-house. 
+                        Our products are not only stylish but also carry deep cultural significance.
+
                     </p>
                 </div>
             </div>
@@ -214,7 +223,7 @@
                         <i class="fa-solid fa-users-line"></i>
                     </div>
                     <h4 class="mb-3 text-xl font-semibold text-center text-dark">
-                        4 Orang
+                        8 Orang
                     </h4>
                     <p class="text-center text-gray-600">
                         Karyawan terlatih
@@ -228,7 +237,7 @@
                         <i class="fa-solid fa-gears"></i>
                     </div>
                     <h4 class="mb-3 text-xl font-semibold text-center text-dark">
-                        8 Unit
+                        10 Unit
                     </h4>
                     <p class="text-center text-gray-600">
                         Mesin Alat Produksi

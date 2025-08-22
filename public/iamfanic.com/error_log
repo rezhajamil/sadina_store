@@ -1,0 +1,5 @@
+[11-Jul-2025 08:50:35 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/mysb6761/iamfanic/app/Models/Customer.php on line 3
+[11-Jul-2025 08:51:27 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/mysb6761/iamfanic/app/Models/Customer.php on line 3
+[11-Jul-2025 08:52:06 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/mysb6761/iamfanic/app/Models/Customer.php on line 3
+[11-Jul-2025 08:54:21 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/mysb6761/iamfanic/app/Models/Customer.php on line 3
+[11-Jul-2025 08:54:44 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/mysb6761/iamfanic/app/Models/Customer.php on line 3

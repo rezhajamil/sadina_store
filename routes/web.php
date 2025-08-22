@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\Admin\ColorController;
@@ -17,6 +18,12 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RajaOngkirApiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +81,7 @@ Route::middleware(['auth'])->group(
             Route::resource('tag', TagController::class);
             Route::resource('notif', AdminNotifController::class);
             Route::resource('order', AdminOrderController::class);
+            
 
             Route::get('/user', [UserController::class, 'index'])->name('user.index');
             Route::get('/user/show/{user}', [UserController::class, 'show'])->name('user.show');
@@ -83,6 +91,10 @@ Route::middleware(['auth'])->group(
             Route::put('order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
 
             Route::put('change_cover/product/{id}', [ProductController::class, 'changeCover'])->name('product.change_cover');
+            
+
+
+
         });
     }
 );
