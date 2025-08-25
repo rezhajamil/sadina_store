@@ -7,7 +7,9 @@
         </div>
     </div>
 
-    @include('section.news')
+    @if ($news->count() > 0)
+        @include('section.news')
+    @endif
     @include('section.background')
     @include('section.event')
     @include('section.testimony')
