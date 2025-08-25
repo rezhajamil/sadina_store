@@ -62,13 +62,13 @@
     @if (isset($plain))
         @yield('body')
     @else
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
+        <div x-data="{ sidebarOpen: false }" class="flex h-screen font-roboto bg-secondary-300">
             @include('layouts.dashboard.sidebar')
 
-            <div class="flex flex-col flex-1 overflow-hidden">
+            <div class="flex overflow-hidden flex-col flex-1">
                 @include('layouts.dashboard.header')
 
-                <main class="flex-1 overflow-auto bg-gray-200">
+                <main class="overflow-auto flex-1 bg-gray-200">
                     <div class="px-1 py-4 mx-auto sm:px-6">
                         @yield('body')
                     </div>

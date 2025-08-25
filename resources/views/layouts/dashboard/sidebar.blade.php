@@ -1,6 +1,5 @@
 <nav class="mt-10" x-data="{ product: false }">
-    <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-opacity-25 bg-secondary-800"
-        href="{{ URL::to('/dashboard') }}">
+    <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-secondary-800" href="{{ URL::to('/dashboard') }}">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
@@ -17,8 +16,8 @@
         <i class="inline-block ml-auto text-white transition-transform transform fa-solid fa-angle-right"
             :class="{ 'rotate-90': product, 'rotate-0': !product }"></i>
     </a>
-    <div class="flex overflow-hidden flex-col mx-6 mt-2 ml-auto w-3/4 bg-opacity-25 rounded-md bg-slate-800"
-        x-show="product" x-transition>
+    <div class="flex overflow-hidden flex-col mx-6 mt-2 ml-auto w-3/4 rounded-md bg-slate-800" x-show="product"
+        x-transition>
         <a href="{{ route('admin.product.index') }}"
             class="text-white whitespace-nowrap border-b transition-all border-b-slate-400 hover:bg-white hover:text-slate-800">
             <span class="inline-block px-2 py-3">Daftar Produk</span>
