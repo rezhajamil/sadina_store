@@ -1,18 +1,19 @@
 @extends('layouts.app')
 @section('body')
     @include('section.banner')
-    <div class="w-full bg-primary-300 navigation">
+    <div class="w-full navigation bg-primary-300">
         <div class="sm:hidden">
             @include('components.quick-nav')
         </div>
     </div>
 
+    @include('section.news')
     @include('section.background')
     @include('section.event')
     @include('section.testimony')
     @include('section.profile')
 
-    {{-- <div class="flex justify-center p-2 mx-auto mt-6 overflow-hidden rounded-full w-fit toggle-navigation">
+    {{-- <div class="flex overflow-hidden justify-center p-2 mx-auto mt-6 rounded-full w-fit toggle-navigation">
         <span class="font-semibold text-black underline cursor-pointer toggle-nav-link">Show Navigation</span>
     </div> --}}
     @include('layouts.footer')

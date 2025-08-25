@@ -68,12 +68,12 @@ class ProductController extends Controller
             // 'cover' => ['required'],
         ]);
 
-        if ($request->image) {
-            # code...
-            // ddd($request->image);
-        } else {
-            ddd('a');
-        }
+        // if ($request->image) {
+        //     # code...
+        //     // ddd($request->image);
+        // } else {
+        //     ddd('a');
+        // }
 
         $product = Product::create([
             'name' => ucfirst($request->name),

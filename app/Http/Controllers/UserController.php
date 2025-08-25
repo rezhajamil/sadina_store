@@ -61,13 +61,15 @@ class UserController extends Controller
             'email_verified_at' => date('Y-m-d H:i:s')
         ];
 
+
         $user = User::firstOrCreate(['email' => $data['email']], $data);
         Auth::login($user, true);
 
         if ($user->phone && $user->whatsapp && $user->address_id) {
             return redirect()->intended();
         } else {
-            return redirect(route('profile'))->with('warning');
+            // return redirect(route('profile'))->with('warning');
+            return redirect('/');
         }
     }
 

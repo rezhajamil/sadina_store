@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\NotifController as AdminNotifController;
 use App\Http\Controllers\Admin\ProductCategoryController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -64,11 +66,14 @@ Route::middleware(['auth'])->group(
         Route::get('profile', ([UserController::class, 'profile']))->name('profile');
         Route::put('profile', ([UserController::class, 'update_profile']))->name('update_profile');
 
+        // Route::get('news')
+
         Route::post('add_to_cart', [CartController::class, 'store'])->name('add_cart');
         Route::resource('cart', CartController::class);
         Route::resource('payment', PaymentController::class);
         Route::resource('order', OrderController::class);
         Route::resource('notif', NotificationController::class);
+        Route::resource('news', NewsController::class);
 
         Route::put('order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change_status');
 
@@ -81,7 +86,8 @@ Route::middleware(['auth'])->group(
             Route::resource('tag', TagController::class);
             Route::resource('notif', AdminNotifController::class);
             Route::resource('order', AdminOrderController::class);
-            
+            Route::resource('news', AdminNewsController::class);
+
 
             Route::get('/user', [UserController::class, 'index'])->name('user.index');
             Route::get('/user/show/{user}', [UserController::class, 'show'])->name('user.show');
@@ -91,10 +97,6 @@ Route::middleware(['auth'])->group(
             Route::put('order/change_status/{order}', [AdminOrderController::class, 'change_status'])->name('order.change_status');
 
             Route::put('change_cover/product/{id}', [ProductController::class, 'changeCover'])->name('product.change_cover');
-            
-
-
-
         });
     }
 );

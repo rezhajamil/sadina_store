@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $news = News::latest()->limit(3)->get();
+        // dd(Auth::user());
+        return view('home', compact('news'));
     }
 
     public function url_form($url)
